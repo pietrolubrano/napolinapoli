@@ -43,10 +43,11 @@ export default async function Page({
     if(arrivalDate && departureDate && guests){
       data = await checkAvailability(arrivalDate as string, departureDate as string, guests as string)
       response = await data.json()
+      console.log(response)
     }
 
     return (
-        <main>
+        <main className="bg-black/70">
 
           <div className="container mx-auto flex justify-center p-8">
             <SearchForm
