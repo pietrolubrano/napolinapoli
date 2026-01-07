@@ -1,8 +1,16 @@
 @import "tailwindcss";
+@plugin './hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist';
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --background: rgb(0, 160, 213);
+  --custom-blue-alpha: rgba(0, 160, 213, 0.4);
+  --custom-orange: #feb259;
+  --custom-orange-alpha: rgba(254, 178, 89, 0.8);
 }
 
 @theme inline {
@@ -12,15 +20,16 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
