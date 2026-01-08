@@ -1,5 +1,7 @@
 import SearchForm from "./(components)/SearchForm"
 import RoomCard from "./(components)/RoomCard"
+import { Suspense } from "react"
+import Loading from "../loading"
 
 export type SmoobuAvailabilityResponseData = {
   availableApartments: number[]
@@ -38,13 +40,6 @@ export default async function Page({
 }) {
 
     const { arrivalDate, departureDate, guests = '3' } = await searchParams
-    let data
-    let response
-    if(arrivalDate && departureDate && guests){
-      data = await checkAvailability(arrivalDate as string, departureDate as string, guests as string)
-      response = await data.json()
-      console.log(response)
-    }
 
     return (
         <main className="bg-black/70">
@@ -57,15 +52,44 @@ export default async function Page({
             />
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 p-8 gap-8">
-            {response?.availableApartments?.map((apartmentId: number) => 
-              apartmentId !== 260797 &&
-                <div key={apartmentId}>
-                  <RoomCard apartmentId={apartmentId} response={response}></RoomCard>
-                </div>
-              )}
-          </div>
+          <Suspense fallback={<Loading></Loading>}>
+            <CardWrapper
+              arrivalDate={arrivalDate as string}
+              departureDate={departureDate as string}
+              guests={guests as string}
+            />
+          </Suspense>
 
         </main>
+
     )
+}
+
+async function CardWrapper({ 
+  arrivalDate,
+  departureDate,
+  guests
+ }: {
+  arrivalDate: string
+  departureDate: string
+  guests: string
+  }) {
+
+  let data
+  let response
+  if(arrivalDate && departureDate && guests){
+    data = await checkAvailability(arrivalDate as string, departureDate as string, guests as string)
+    response = await data.json()
+  }
+
+  return (
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 p-8 gap-8">
+      {response?.availableApartments?.map((apartmentId: number) => 
+        apartmentId !== 260797 &&
+          <div key={apartmentId}>
+            <RoomCard apartmentId={apartmentId} response={response}></RoomCard>
+          </div>
+        )}
+    </div>
+  )
 }
