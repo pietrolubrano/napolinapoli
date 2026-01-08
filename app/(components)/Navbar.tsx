@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 
 const navigation = [
@@ -49,6 +49,39 @@ export default function Navbar() {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
+
+                <Menu as="div" className="relative inline-block">
+                  <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-white hover:bg-white/20">
+                    ROOMS
+                    <ChevronDownIcon aria-hidden="true" className="-mr-1 size-5 text-white" />
+                  </MenuButton>
+
+                  <MenuItems
+                    transition
+                    className="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-background outline-1 -outline-offset-1 outline-white/10 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <div className="py-1">
+                      {
+                        [
+                          {name: 'San Biagio', uri: '/room/san-biagio'},
+                          {name: 'Maiorani', uri: '/room/maiorani'},
+                          {name: 'Divino Amore', uri: '/room/divino-amore'}
+                        ].map(room => 
+                          <MenuItem key={room.name}>
+                            <Link
+                              href={room.uri}
+                              className="block px-4 py-2 text-sm text-white data-focus:bg-white/5 data-focus:text-white data-focus:outline-hidden"
+                            >
+                              {room.name}
+                            </Link>
+                          </MenuItem>
+                        )
+                      }
+                      
+                    </div>
+                  </MenuItems>
+                </Menu>
+
                 {navigation.map((item) => (
                   <a
                     key={item.name}

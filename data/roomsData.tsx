@@ -1,42 +1,55 @@
+import { JSX } from "react"
+import { 
+    FaWifi,
+    FaSnowflake,
+    FaSun,
+    FaKitchenSet,
+    FaTv,
+    FaMapLocationDot,
+    FaPaw,
+    FaBaby,
+    FaSuitcase
+} from "react-icons/fa6"
+
 const services = [
     {
-        icon: 'fa-solid fa-wifi',
+        icon: <FaWifi />,
         description: { it: 'Wi-Fi', en: 'Wi-Fi'}
     },
     {
-        icon: 'fa-solid fa-snowflake',
+        icon: <FaSnowflake />,
         description: { it: 'Aria condizionata', en: 'ENG - Aria condizionata'}
     },
     {
-        icon: 'fa-solid fa-sun',
+        icon: <FaSun />,
         description: { it: 'Riscaldamento', en: 'ENG - Riscaldamento'}
     },
     {
-        icon: 'fa-solid fa-kitchen-set',
+        icon: <FaKitchenSet/>,
         description: { it: 'Angolo cottura', en: 'ENG - Angolo cottura'}
     },
     {
-        icon:'fa-solid fa-kitchen-set',
+        icon:<FaKitchenSet/>,
         description: { it: 'Cucina in comune', en: 'ENG - Cucina in comune' }
     },
     {
-        icon: 'fa-solid fa-tv',
+        icon: <FaTv/>,
         description: { it: 'Smart TV', en: 'Smart TV'}
     },
     {
-        icon: 'fa-solid fa-map-location-dot',
+        icon: <FaMapLocationDot />,
         description: { it: 'In pieno centro storico', en: 'ENG - In pieno centro storico' }
     },
     {
-        icon: 'fa-solid fa-paw',
+        icon: <FaPaw />,
         description: { it: 'Animali accettati', en: 'ENG - Animali accettati' }
     },
     {
-        icon:"fa-solid fa-baby",
+        icon: <FaBaby />,
         description: { it: 'Culla e seggiolone per neonati', en: 'ENG - Culla e seggiolone per neonati' }
     },
     {
-        icon:"fa-solid fa-suitcase",
+        icon: <FaSuitcase />,
         description: { it: 'Deposito bagagli gratuito', en: 'ENG - Deposito bagagli gratuito' }
     }
 ]
@@ -49,7 +62,7 @@ export type Room = {
         carouselData: string[]
         description: string
         services: {
-            icon: string;
+            icon: JSX.Element;
             description: {
                 it: string;
                 en: string;
