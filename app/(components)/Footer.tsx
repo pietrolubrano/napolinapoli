@@ -17,7 +17,7 @@ export default function Footer() {
                         Vico Maiorani, 29 <br />80138 - Napoli (NA)
                     </p>
                 </Link>
-                <Link href={'https://maps.app.goo.gl/JiRPB1kuNRNkfqVPA'} target="_blank" className="flex items-center">
+                <Link href={'#'} target="_blank" className="flex items-center">
                     <IoLogoWhatsapp size={'1.5em'} />
                     <p className="ms-2">
                         +39 333 4444555

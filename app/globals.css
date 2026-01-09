@@ -48,3 +48,17 @@ main {
   align-self: flex-end;
   margin-top: auto;
  }
+
+ button {
+  cursor: pointer !important;
+ }
+
+span[data-selection-start="true"] {
+  background-color: rgb(0, 160, 213);
+  color: white;
+}
+
+span[data-selection-end="true"] {
+  background-color: rgb(0, 160, 213);
+  color: white;
+}

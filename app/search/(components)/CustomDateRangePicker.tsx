@@ -18,9 +18,6 @@ export default function CustomDateRangePicker({
       <DateRangePicker
         aria-label="date-range-picker"
         className="col-span-5 md:col-span-3"
-        classNames={{
-          inputWrapper: 'bg-white'
-        }}
         value={value}
         onChange={setValueAction as ((value: RangeValue<CalendarDate> | null) => void) | undefined}
         label="Durata del soggiorno"

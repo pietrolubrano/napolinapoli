@@ -1,7 +1,7 @@
 "use client"
 
 import {Button} from "@heroui/button";
-
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import {parseDate} from "@internationalized/date";
 import CustomDateRangePicker from '@/app/search/(components)/CustomDateRangePicker'
 import { useState } from 'react'
@@ -18,6 +18,15 @@ export default function SearchForm({
     guests?: string
 }) {
 
+    const handleGuestsValueChange = (action:string) => {
+        if(action === 'add'){
+            setGuestsValue(prevState => (+prevState + 1).toString())
+        }
+        if(action === 'remove' && +guestsValue > 1){
+            setGuestsValue(prevState => (+prevState - 1).toString())
+        }
+    }
+
     const [value, setValue] = useState({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
         end: parseDate(departureDate ? departureDate : new Date().toISOString().substring(0,10)),
@@ -33,13 +42,24 @@ export default function SearchForm({
             />
 
             <div className="col-span-5 md:col-span-2 grid grid-cols-3">
-                <Input
-                    className="col-span-1 w-full"
-                    value={guestsValue}
-                    onChange={(event) => setGuestsValue(event.target.value)}
-                    label="Ospiti"
-                    type="number"
-                />
+                <div className="flex">
+                    <Input
+                        className="col-span-1 w-full"
+                        value={guestsValue}
+                        onChange={(event) => setGuestsValue(event.target.value)}
+                        label="Ospiti"
+                        type="number"
+                    />
+                    <div className="flex flex-col w-10 ">
+                        <Button onPress={() => handleGuestsValueChange('add')} className="px-2 min-w-0.5 h-full bg-gray-100">
+                            <FaPlus></FaPlus>
+                        </Button>
+                        <Button onPress={() => handleGuestsValueChange('remove')} className="px-2 min-w-0.5 h-full bg-gray-100">
+                            <FaMinus></FaMinus>
+                        </Button>
+                    </div>
+                    
+                </div>
                 <Link href={{ 
                     pathname: '/search',
                     query: {

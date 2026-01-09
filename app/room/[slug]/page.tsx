@@ -2,7 +2,8 @@ import { FaKitchenSet, FaPerson } from "react-icons/fa6";
 
 import { rooms } from "@/data/roomsData"
 import { notFound } from 'next/navigation';
-import { Button } from "@headlessui/react";
+import { Button } from "@heroui/button";
+
 import Link from "next/link";
 
 const MaxOccupancy = ({ maxOccupancy } : { maxOccupancy: number }) => {
