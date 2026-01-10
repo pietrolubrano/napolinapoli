@@ -87,7 +87,13 @@ async function CardWrapper({
       {response?.availableApartments?.map((apartmentId: number) => 
         apartmentId !== 260797 &&
           <div key={apartmentId}>
-            <RoomCard apartmentId={apartmentId} response={response}></RoomCard>
+            <RoomCard
+              apartmentId={apartmentId}
+              response={response}
+              arrivalDate={arrivalDate as string}
+              departureDate={departureDate as string}
+              guests={guests as string}
+            ></RoomCard>
           </div>
         )}
     </div>

@@ -59,7 +59,7 @@ export type Room = {
         name: string
         slug: string
         maxOccupancy: number
-        carouselData: string[]
+        images: string[]
         description: string
         services: {
             icon: JSX.Element;
@@ -76,13 +76,16 @@ export const rooms : Room = {
         name: 'San Biagio',
         slug: 'san-biagio',
         maxOccupancy: 4,
-        carouselData: [
-            '/images/sanbiagio/sanbiagio-0033.jpg',
-            '/images/sanbiagio/sanbiagio-0043.jpg',
-            '/images/sanbiagio/sanbiagio-0045.jpg',
-            '/images/sanbiagio/sanbiagio-0050.jpg',
-            '/images/sanbiagio/sanbiagio-0054.jpg',
-            '/images/sanbiagio/sanbiagio-0059.jpg'
+        images: [
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07056-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07062-HDR_1.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07068-HDR_1.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07071-HDR_1.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07083-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07086-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07143-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07158-HDR_1.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07161-HDR_1.jpg'
         ],
         description: 'Camera da 50mq con balcone che affaccia su Spaccanapoli, utilizzabile da singola a quadrupla',
         services: services.filter(service => service.description['it'] !== 'Cucina in comune')
@@ -91,13 +94,14 @@ export const rooms : Room = {
         name: 'Maiorani',
         slug: 'maiorani',
         maxOccupancy: 4,
-        carouselData: [
-            '/images/maiorani/maiorani-0001.jpg',
-            '/images/maiorani/maiorani-0004.jpg',
-            '/images/maiorani/maiorani-0014.jpg',
-            '/images/maiorani/maiorani-0016.jpg',
-            '/images/maiorani/maiorani-0019.jpg',
-            '/images/maiorani/maiorani-0021.jpg'
+        images: [
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04129-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04139-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04147-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04166-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04178-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04181-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04187-HDR.jpg'
         ],
         description: 'Camera da 45mq con finstra che affaccia su vico Maiorani, utilizzabile da singola a quadrupla',
         services: services.filter(service => service.description['it'] !== 'Angolo cottura')
@@ -106,14 +110,13 @@ export const rooms : Room = {
         name: 'Divino amore',
         slug: 'divino-amore',
         maxOccupancy: 3,
-        carouselData: [
-            '/images/divino-amore/divino-amore-7370.jpg',
-            '/images/divino-amore/divino-amore-7363.jpg',
-            '/images/divino-amore/divino-amore-7351.jpg',
-            '/images/divino-amore/divino-amore-7366.jpg',
-            '/images/divino-amore/divino-amore-7358.jpg',
-            '/images/divino-amore/divino-amore-7395.jpg',
-            '/images/divino-amore/divino-amore-7375.jpg',
+        images: [
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07104-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07110-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07119-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07122-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07134-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07155-HDR.jpg'
         ],
         description: 'Camera da 40mq con balcone che affaccia su Spaccanapoli, utilizzabile da singola a tripla',
         services: services.filter(service => service.description['it'] !== 'Angolo cottura')
