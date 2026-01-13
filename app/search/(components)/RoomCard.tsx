@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
 import {Card, CardHeader, CardBody, Image, Button} from "@heroui/react";
 import { rooms } from "@/data/roomsData";
@@ -55,7 +56,18 @@ export default function App({
           src={rooms[apartmentId].images[0]}
           width={700}
         />
-        <Button className="bg-background text-white font-bold uppercase">seleziona</Button>
+        <Link href={{ 
+          pathname: '/create-booking',
+          query: {
+            arrivalDate,
+            departureDate,
+            guests,
+            apartmentId
+          }
+         }}
+         >
+          <Button className="bg-background w-full text-white font-bold uppercase">seleziona</Button>
+        </Link>
       </CardBody>
     </Card>
   );
