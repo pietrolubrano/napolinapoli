@@ -99,24 +99,26 @@ export default function App() {
           isRequired
           errorMessage={({validationDetails}) => {
             if (validationDetails.valueMissing) {
-              return "Please enter your email";
+              return "Per favore inserisci la tua email";
             }
             if (validationDetails.typeMismatch) {
-              return "Please enter a valid email address";
+              return "Inserisci un indirizzo email valido";
             }
           }}
           label="Email"
           labelPlacement="outside"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Inserisci la tua email"
           type="email"
         />
 
         <Checkbox
           isRequired
           classNames={{
+            base: 'accent-pink-500!',
             label: "text-small",
           }}
+          color="primary"
           isInvalid={!!errors.terms}
           name="terms"
           validationBehavior="aria"
@@ -130,11 +132,11 @@ export default function App() {
 
         <div className="flex gap-4">
           <Button className="w-full" color="primary" type="submit">
-            Submit
+            Invia
           </Button>
-          <Button type="reset" variant="bordered">
+          {/* <Button type="reset" variant="bordered">
             Reset
-          </Button>
+          </Button> */}
         </div>
       </div>
 

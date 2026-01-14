@@ -1,12 +1,11 @@
 "use client"
 
 import {Button} from "@heroui/button";
-import { FaPlus, FaMinus } from "react-icons/fa6";
 import {parseDate} from "@internationalized/date";
 import CustomDateRangePicker from '@/app/search/(components)/CustomDateRangePicker'
 import { useState } from 'react'
 import Link from "next/link";
-import { Input } from "@heroui/react";
+import { NumberInput } from "@heroui/react";
 
 export default function SearchForm({
     arrivalDate,
@@ -18,20 +17,20 @@ export default function SearchForm({
     guests?: string
 }) {
 
-    const handleGuestsValueChange = (action:string) => {
+    /* const handleGuestsValueChange = (action:string) => {
         if(action === 'add'){
-            setGuestsValue(prevState => (+prevState + 1).toString())
+            setGuestsValue(prevState => prevState + 1)
         }
         if(action === 'remove' && +guestsValue > 1){
-            setGuestsValue(prevState => (+prevState - 1).toString())
+            setGuestsValue(prevState => prevState - 1)
         }
-    }
+    } */
 
     const [value, setValue] = useState({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
         end: parseDate(departureDate ? departureDate : new Date().toISOString().substring(0,10)),
     });
-    const [guestsValue, setGuestsValue] = useState(guests ? guests : '2')
+    const [guestsValue, setGuestsValue] = useState(guests ? +guests : 2)
 
     return (
         <div className="grid grid-cols-5 max-w-2xl">
@@ -43,21 +42,21 @@ export default function SearchForm({
 
             <div className="col-span-5 md:col-span-2 grid grid-cols-3">
                 <div className="flex">
-                    <Input
+                    <NumberInput
                         className="col-span-1 w-full"
                         value={guestsValue}
-                        onChange={(event) => setGuestsValue(event.target.value)}
+                        onValueChange={setGuestsValue}
                         label="Ospiti"
                         type="number"
                     />
-                    <div className="flex flex-col w-10 ">
+                    {/* <div className="flex flex-col w-10 ">
                         <Button onPress={() => handleGuestsValueChange('add')} className="px-2 min-w-0.5 h-full bg-gray-100">
                             <FaPlus></FaPlus>
                         </Button>
                         <Button onPress={() => handleGuestsValueChange('remove')} className="px-2 min-w-0.5 h-full bg-gray-100">
                             <FaMinus></FaMinus>
                         </Button>
-                    </div>
+                    </div> */}
                     
                 </div>
                 <Link href={{ 

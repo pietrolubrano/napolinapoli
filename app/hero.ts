@@ -32,6 +32,12 @@ export default heroui({
       },
       themes: {
         light: {
+          colors: {
+            primary: {
+              foreground: "white",
+              DEFAULT: "#00a0d5"
+            },
+          },
           layout: {
             hoverOpacity: 0.8, //  this value is applied as opacity-[value] when the component is hovered
             boxShadow: {
