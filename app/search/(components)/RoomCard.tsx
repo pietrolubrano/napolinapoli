@@ -56,7 +56,7 @@ export default function App({
           src={rooms[apartmentId].images[0]}
           width={700}
         />
-        <Link href={{ 
+        {/* <Link href={{
           pathname: '/create-booking',
           query: {
             arrivalDate,
@@ -67,6 +67,22 @@ export default function App({
          }}
          >
           <Button className="bg-background w-full text-white font-bold uppercase">seleziona</Button>
+        </Link> */}
+
+        <Link
+          href={{ 
+            pathname: 'https://www.booking.com/hotel/it/palepolib-amp-b.it.html',
+            query: {
+              checkin: arrivalDate,
+              checkout: departureDate,
+              group_adults: guests
+            }
+          }}
+          target="_blank"
+          >
+          <Button className="bg-background w-full text-white font-bold uppercase">
+            Prenota su Booking
+          </Button>
         </Link>
       </CardBody>
     </Card>
