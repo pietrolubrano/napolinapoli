@@ -46,13 +46,13 @@ export default function Carousel({
   const goToNext = () => emblaApi?.scrollNext() */
 
   return (
-    <div className="embla w-fit min-h-75">
+    <div className="embla w-fit">
       <div className="embla__viewport w-fit" ref={emblaRef}>
         
-        <div className="embla__container min-h-75">
+        <div className="embla__container">
             {images?.map((image, index) => (
                 <div className="embla__slide flex justify-center" key={index}>
-                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="w-auto min-h-75 max-h-[calc(100vh-150px)] h-auto"/>
+                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="w-auto max-h-[calc(100vh-150px)] h-auto"/>
                 </div>
             ))}
         </div>
