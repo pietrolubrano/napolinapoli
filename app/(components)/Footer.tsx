@@ -4,11 +4,16 @@ import { FaLocationDot, FaInstagram } from "react-icons/fa6";
 import { FaTripadvisor } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { TbBrandBooking } from "react-icons/tb";
+import TripAdvisor from "./TripAdvisor";
 
 export default function Footer() {
   return (
     <footer className="w-full p-8 bg-background text-white mt-auto">
         <div className="container mx-auto grid grid-cols-3">
+
+            <div className="col-span-3 mb-6">
+                 <TripAdvisor></TripAdvisor>
+            </div>
 
             <div className="col-span-3 md:col-span-1 space-y-2">
                 <Link href={'https://maps.app.goo.gl/JiRPB1kuNRNkfqVPA'} target="_blank" className="flex items-center">
