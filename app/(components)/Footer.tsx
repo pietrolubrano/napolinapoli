@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { FaLocationDot, FaInstagram } from "react-icons/fa6";
 import { FaTripadvisor } from "react-icons/fa";
@@ -11,8 +12,11 @@ export default function Footer() {
     <footer className="w-full p-8 bg-background text-white mt-auto">
         <div className="container mx-auto grid grid-cols-3">
 
-            <div className="col-span-3 mb-6">
+            <div className="col-span-3 mb-6 flex flex-col md:flex-row gap-8 items-center justify-center md:justify-start">
                  <TripAdvisor></TripAdvisor>
+                 <Link href={'https://www.booking.com/hotel/it/palepolib-amp-b.it.html'} target="_blank" className="flex items-center">
+                    <Image loading="eager" src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/booking-award/Digital-Award-TRA-2025.png" alt="Logo" width={200} height={200}></Image>
+                 </Link>
             </div>
 
             <div className="col-span-3 md:col-span-1 space-y-2">
