@@ -31,13 +31,32 @@ export default async function Room({
     const { name, description, maxOccupancy, services } = room 
 
     return (
-      <main className="bg-black/70">
+      <main className="bg-gray-100 min-h-screen">
 
-        <Carousel images={room.images}></Carousel>
+        <div className="flex">
+
+          <div className="w-full hidden lg:block">
+            {/* Additional content for the right column */}
+            <h2 className="text-4xl text-background font-bold p-8 pb-0">{name}
+              <span className="text-gray-500 text-sm uppercase font-bold ms-1">Room</span>
+              <span className="float-end">
+                {services.find(service => service.description.it === 'Angolo cottura') && <FaKitchenSet className="inline max-w-5 me-2 mb-2" />}
+                <MaxOccupancy maxOccupancy={maxOccupancy} />
+              </span>
+            </h2>
+
+            <p className="text-gray-500 text-xl mb-8 p-10 italic ">
+              {description}
+            </p>
+          </div>
+
+          <Carousel images={room.images}></Carousel>
+
+        </div>
         
-        <div className="md:p-8 bg-white">
+        <div className="bg-white">
 
-          <h2 className="text-2xl text-background font-bold p-8 md:p-0">{name}
+          <h2 className="lg:hidden text-2xl text-background font-bold p-8 bg-gray-200">{name}
             <span className="text-gray-500 text-sm uppercase font-bold ms-1">Room</span>
             <span className="float-end">
               {services.find(service => service.description.it === 'Angolo cottura') && <FaKitchenSet className="inline max-w-5 me-2 mb-2" />}
@@ -46,10 +65,9 @@ export default async function Room({
           </h2>
 
           <div className="container mx-auto bg-white text-gray-500 font-bold">
-            {/* carosello */}
 
             <div className="p-8">
-              <p className="text-gray-500 font-bold mb-8">
+              <p className="lg:hidden text-gray-500 font-bold mb-8">
                 {description}
               </p>
 

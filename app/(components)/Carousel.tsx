@@ -16,7 +16,7 @@ export default function Carousel({
 }) {
 
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: true })
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
     const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
         containScroll: 'keepSnaps',
         dragFree: true
@@ -46,20 +46,20 @@ export default function Carousel({
   const goToNext = () => emblaApi?.scrollNext() */
 
   return (
-    <div className="embla from-background bg-linear-to-b">
-      <div className="embla__viewport" ref={emblaRef}>
+    <div className="embla w-fit min-h-75">
+      <div className="embla__viewport w-fit" ref={emblaRef}>
         
-        <div className="embla__container">
+        <div className="embla__container min-h-75">
             {images?.map((image, index) => (
-                <div className="embla__slide flex w-full justify-center" key={index}>
-                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="w-auto max-h-[calc(100vh-150px)] h-auto"/>
+                <div className="embla__slide flex justify-center" key={index}>
+                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="w-auto min-h-75 max-h-[calc(100vh-150px)] h-auto"/>
                 </div>
             ))}
         </div>
 
-        <div className="embla-thumbs">
+        <div className="hidden embla-thumbs md:flex justify-center m-0!">
             <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-                <div className="embla-thumbs__container flex justify-center pb-4">
+                <div className="embla-thumbs__container flex justify-center p-4 gap-1">
                     {images?.map((image, index) => (
                     <Thumb
                         key={index}
