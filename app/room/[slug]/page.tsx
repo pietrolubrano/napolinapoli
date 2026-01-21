@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { Button } from "@heroui/button";
 
 import Link from "next/link";
+import Carousel from "@/app/(components)/Carousel";
 
 const MaxOccupancy = ({ maxOccupancy } : { maxOccupancy: number }) => {
 
@@ -32,6 +33,8 @@ export default async function Room({
     return (
       <main className="bg-black/70">
 
+        <Carousel images={room.images}></Carousel>
+        
         <div className="md:p-8 bg-white">
 
           <h2 className="text-2xl text-background font-bold p-8 md:p-0">{name}

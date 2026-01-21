@@ -119,7 +119,7 @@ export default function App() {
       </NavbarContent>
 
       <NavbarMenu className="bg-background">
-        {navigation.map((item, index) => (
+        {rooms.concat(navigation).map((item, index) => (
           <NavbarMenuItem key={`${item.name}-${index}`}>
             <Link
               className="w-full text-white"
