@@ -3,6 +3,7 @@ import SearchForm from "./search/(components)/SearchForm";
 import { rooms } from "@/data/roomsData";
 import Image from "next/image";
 import Link from "next/link";
+import GoogleMapsIFrame from "./(components)/GoogleMapsIFrame";
 
 export default function Home() {
   return (
@@ -66,6 +67,14 @@ export default function Home() {
         }
 
       </div>
+      
+      <div className="bg-background">
+        <div className="p-8 bg-background text-2xl font-bold upper">
+          <h3>Nel cuore del centro storico di Napoli</h3>
+        </div>
+        <GoogleMapsIFrame></GoogleMapsIFrame>
+      </div>
+
     </main>
   );
 }
