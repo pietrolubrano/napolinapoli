@@ -2,6 +2,7 @@ import SearchForm from "./(components)/SearchForm"
 import RoomCard from "./(components)/RoomCard"
 import { Suspense } from "react"
 import Loading from "../loading"
+import Image from "next/image"
 
 export type SmoobuAvailabilityResponseData = {
   availableApartments: number[]
@@ -44,21 +45,28 @@ export default async function Page({
     return (
         <main className="bg-black/70">
 
-          <div className="container mx-auto flex justify-center p-8">
-            <SearchForm
-              arrivalDate={arrivalDate as string}
-              departureDate={departureDate as string}
-              guests={guests as string}
-            />
+          <div className="container mx-auto flex justify-center p-8 min-h-[calc(100svh-70px)] relative">
+            <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 h-full object-cover" />
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center"></div>
+            <div>
+              <SearchForm
+                arrivalDate={arrivalDate as string}
+                departureDate={departureDate as string}
+                guests={guests as string}
+              />
+
+              <Suspense fallback={<Loading></Loading>}>
+                <CardWrapper
+                  arrivalDate={arrivalDate as string}
+                  departureDate={departureDate as string}
+                  guests={guests as string}
+                />
+              </Suspense>
+              
+            </div>
           </div>
 
-          <Suspense fallback={<Loading></Loading>}>
-            <CardWrapper
-              arrivalDate={arrivalDate as string}
-              departureDate={departureDate as string}
-              guests={guests as string}
-            />
-          </Suspense>
+          
 
         </main>
 
@@ -82,8 +90,14 @@ async function CardWrapper({
     response = await data.json()
   }
 
+  if(!response || !response.availableApartments){
+    return (
+      null
+    )
+  }
+
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 p-8 gap-8">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 pt-8">
       {response?.availableApartments?.map((apartmentId: number) => 
         apartmentId !== 260797 &&
           <div key={apartmentId}>

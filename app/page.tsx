@@ -8,12 +8,18 @@ export default function Home() {
   return (
     <main className="bg-black/70">
 
-      <div className="h-[calc(100svh-60px)]">
-        <div className="flex flex-col items-center justify-center h-full p-8 pb-20 text-white">
-          <h3 className="md:text-2xl p-6 uppercase font-bold">
-            Il tuo soggiorno a Napoli <br /> al miglior prezzo possibile
-          </h3>
-          <SearchForm></SearchForm>
+      <div className="h-[calc(100svh-70px)]">
+        <div className="relative h-full p-8 pb-20 text-white">
+
+          <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
+          
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-8 text-center pb-20">
+            <h3 className="md:text-2xl p-2 uppercase font-bold text-white">
+              Il tuo soggiorno a Napoli <br /> al miglior prezzo possibile
+            </h3>
+            <SearchForm></SearchForm>
+          </div>
+
         </div>
       </div>
       
@@ -47,7 +53,7 @@ export default function Home() {
                 <Image width={1920} height={1080} src={room.images[0]} alt={room.name} className="w-full h-auto object-cover" />
               </div>
 
-              <div className="p-8 flex flex-col justify-between w-full">
+              <div className="p-4 md:p-8 flex flex-col justify-between w-full">
                 <div className=" ">
                   <h4 className="w-full text-xl text-background font-bold mb-2">{room.name}</h4>
                   <p className="w-full text-gray-600 mb-4">{room.description}</p>
