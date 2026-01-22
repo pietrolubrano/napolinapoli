@@ -81,9 +81,9 @@ export const rooms : Room = {
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07062-HDR_1.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07068-HDR_1.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07071-HDR_1.jpg',
-            /* 'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07083-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07083-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07086-HDR.jpg',
-            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07143-HDR.jpg', */
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07143-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07158-HDR_1.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07161-HDR_1.jpg'
         ],
@@ -114,8 +114,8 @@ export const rooms : Room = {
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07110-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07119-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07122-HDR.jpg',
-            /* 'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07134-HDR.jpg',
-            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07155-HDR.jpg' */
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07134-HDR.jpg',
+            'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07155-HDR.jpg'
         ],
         description: 'Camera da 40mq con balcone che affaccia su Spaccanapoli, utilizzabile da singola a tripla',
         services: services.filter(service => service.description['it'] !== 'Angolo cottura')

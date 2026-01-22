@@ -1,9 +1,10 @@
+"use client";
+
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function TripAdvisor() {
-
 
     return (<>
         <div id="TA_selfserveprop838" className="TA_selfserveprop">

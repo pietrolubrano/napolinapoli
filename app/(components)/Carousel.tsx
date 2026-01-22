@@ -46,20 +46,20 @@ export default function Carousel({
   const goToNext = () => emblaApi?.scrollNext() */
 
   return (
-    <div className="embla w-fit">
-      <div className="embla__viewport w-fit" ref={emblaRef}>
+    <div className="embla w-fit max-h-screen overflow-hidden">
+      <div className="embla__viewport" ref={emblaRef}>
         
-        <div className="embla__container">
+        <div className="embla__container max-h-screen">
             {images?.map((image, index) => (
-                <div className="embla__slide flex justify-center" key={index}>
-                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="w-auto max-h-[calc(100vh-150px)] h-auto"/>
+                <div className="embla__slide flex justify-center items-center" key={index}>
+                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="bg-green-400 max-h-[calc(100svh-175px)] w-fit h-fit"/>
                 </div>
             ))}
         </div>
 
         <div className="hidden embla-thumbs md:flex justify-center m-0!">
             <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-                <div className="embla-thumbs__container flex justify-center p-4 gap-1">
+                <div className="embla-thumbs__container flex justify-center p-4">
                     {images?.map((image, index) => (
                     <Thumb
                         key={index}
