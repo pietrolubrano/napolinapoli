@@ -95,7 +95,7 @@ export default async function Room({
                   </li>)}
               </ul>
               
-              <div className="flex w-full justify-end">
+              <div className="flex w-full justify-end sticky bottom-4 md:static">
                   <Link href={'/search'} className="w-full sm:w-fit">
                     <Button className="bg-background w-full sm:w-fit p-4 text-white">
                         Verifica la disponibilità
