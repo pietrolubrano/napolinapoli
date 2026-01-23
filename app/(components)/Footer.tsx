@@ -39,12 +39,6 @@ export default function Footer() {
             </div>
 
             <div className="col-span-3 md:col-span-1 flex gap-4 justify-center p-4">
-                <Link href={'https://www.tripadvisor.it/Hotel_Review-g187785-d1152912-Reviews-Napoli_Napoli-Naples_Province_of_Naples_Campania.html?m=19905'} target="_blank" className="flex items-center">
-                    <FaTripadvisor size={'3em'} />
-                </Link>
-                <Link href={'https://www.booking.com/hotel/it/palepolib-amp-b.it.html'} target="_blank" className="flex items-center">
-                    <TbBrandBooking size={'3em'} />
-                </Link>
                 <Link href={'https://www.instagram.com/_napolinapoli'} target="_blank" className="flex items-center">
                     <FaInstagram size={'3em'} />
                 </Link>

@@ -33,7 +33,29 @@ export default async function Room({
     return (
       <main className="bg-gray-100 min-h-screen">
 
+        <div className="lg:hidden grid grid-cols-3">
+          {
+            Object.values(rooms).slice(0,3).map((room) => (
+              <Link href={`/room/${room.slug}`} key={room.name} className="text-background font-bold col-span-1">
+                <Button className={`w-full uppercase text-sm font-bold ${room.slug === slug ? 'bg-gray-200 text-background' : 'bg-background text-white' }`}>
+                  {room.name}
+                </Button>
+              </Link>
+            ))
+          }
+        </div>
+
+        <h2 className="lg:hidden text-2xl text-background font-bold p-8 bg-gray-200">{name}
+          {/* <span className="text-gray-500 text-sm uppercase font-bold ms-1">Room</span> */}
+          <span className="float-end">
+            {services.find(service => service.description.it === 'Angolo cottura') && <FaKitchenSet className="inline max-w-5 me-2 mb-2" />}
+            <MaxOccupancy maxOccupancy={maxOccupancy} />
+          </span>
+        </h2>
+
         <div className="flex">
+
+          {/* Left column - only visible on large screens */}
 
           <div className="w-full hidden lg:block">
             {/* Additional content for the right column */}
@@ -54,15 +76,11 @@ export default async function Room({
 
         </div>
         
+        
+
         <div className="bg-white">
 
-          <h2 className="lg:hidden text-2xl text-background font-bold p-8 bg-gray-200">{name}
-            <span className="text-gray-500 text-sm uppercase font-bold ms-1">Room</span>
-            <span className="float-end">
-              {services.find(service => service.description.it === 'Angolo cottura') && <FaKitchenSet className="inline max-w-5 me-2 mb-2" />}
-              <MaxOccupancy maxOccupancy={maxOccupancy} />
-            </span>
-          </h2>
+          
 
           <div className="container mx-auto bg-white text-gray-500 font-bold">
 
