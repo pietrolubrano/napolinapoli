@@ -17,20 +17,23 @@ export default function SearchForm({
     guests?: string
 }) {
 
-    /* const handleGuestsValueChange = (action:string) => {
-        if(action === 'add'){
-            setGuestsValue(prevState => prevState + 1)
-        }
-        if(action === 'remove' && +guestsValue > 1){
-            setGuestsValue(prevState => prevState - 1)
-        }
-    } */
-
     const [value, setValue] = useState({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
         end: parseDate(departureDate ? departureDate : new Date().toISOString().substring(0,10)),
     });
     const [guestsValue, setGuestsValue] = useState(guests ? +guests : 2)
+
+    const handeGuestsValueChange = (value: number) => {
+        if(value < 1){
+            setGuestsValue(1)
+            return
+        }
+        if(value >= 4){
+            setGuestsValue(4)
+            return
+        }
+        setGuestsValue(value)
+    }
 
     return (
         <div className="grid grid-cols-5 max-w-2xl">
@@ -45,9 +48,11 @@ export default function SearchForm({
                     <NumberInput
                         className="col-span-1 w-full"
                         value={guestsValue}
-                        onValueChange={setGuestsValue}
+                        onValueChange={handeGuestsValueChange}
                         label="Ospiti"
                         type="number"
+                        min={1}
+                        max={4}
                     />
                     {/* <div className="flex flex-col w-10 ">
                         <Button onPress={() => handleGuestsValueChange('add')} className="px-2 min-w-0.5 h-full bg-gray-100">

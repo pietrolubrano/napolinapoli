@@ -21,6 +21,7 @@ export default function CustomDateRangePicker({
         value={value}
         onChange={setValueAction as ((value: RangeValue<CalendarDate> | null) => void) | undefined}
         label="Durata del soggiorno"
+        minValue={new CalendarDate(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())}
       />
     </I18nProvider>
   );
