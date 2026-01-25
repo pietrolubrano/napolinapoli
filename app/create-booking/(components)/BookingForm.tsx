@@ -64,7 +64,11 @@ export default function App() {
       onReset={() => setSubmitted(null)}
       onSubmit={onSubmit}
     >
-      <div className="flex flex-col gap-4 max-w-md w-full sm:w-fit">
+      <div>
+        <h2 className="text-xl font-bold">Compila il modulo coi tuoi dati</h2>
+      </div>
+
+      <div className="flex flex-col gap-4 max-w-md w-full sm:w-fit md:border-4 md:p-4 border-gray-300">
         <Input
           isRequired
           errorMessage={({validationDetails}) => {

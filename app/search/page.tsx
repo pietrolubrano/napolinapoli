@@ -3,6 +3,7 @@ import RoomCard from "./(components)/RoomCard"
 import { Suspense } from "react"
 import Loading from "../loading"
 import Image from "next/image"
+import { checkAvailability } from "../actions"
 
 export type SmoobuAvailabilityResponseData = {
   availableApartments: number[]
@@ -12,27 +13,6 @@ export type SmoobuAvailabilityResponseData = {
     currency: string
   }[]
 }
-
-const checkAvailability = async (
-  arrivalDate: string,
-  departureDate: string,
-  guests: string
-) => fetch("https://login.smoobu.com/booking/checkApartmentAvailability",{
-    headers: {
-      'Api-Key' : process.env.API_KEY as string,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      
-    },
-    method: "POST",
-    body: JSON.stringify({
-      arrivalDate,
-      departureDate,
-      guests: +guests,
-      "apartments": [],
-      "customerId": process.env.CUSTOMER_ID
-    })
-})
 
 export default async function Page({
   searchParams,

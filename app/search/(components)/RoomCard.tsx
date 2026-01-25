@@ -56,32 +56,21 @@ export default function App({
           src={rooms[apartmentId].images[0]}
           width={700}
         />
-        {/* <Link href={{
-          pathname: '/create-booking',
-          query: {
-            arrivalDate,
-            departureDate,
-            guests,
-            apartmentId
-          }
-         }}
-         >
-          <Button className="bg-background w-full text-white font-bold uppercase">seleziona</Button>
-        </Link> */}
+
 
         <Link
           href={{ 
-            pathname: 'https://www.booking.com/hotel/it/palepolib-amp-b.it.html',
+            pathname: '/create-booking',
             query: {
-              checkin: arrivalDate,
-              checkout: departureDate,
-              group_adults: guests
+              arrivalDate,
+              departureDate,
+              guests,
+              apartmentId
             }
           }}
-          target="_blank"
           >
           <Button className="bg-background w-full text-white font-bold uppercase">
-            Prenota su Booking
+            Prenota ora
           </Button>
         </Link>
       </CardBody>
