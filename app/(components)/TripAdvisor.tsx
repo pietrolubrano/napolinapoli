@@ -16,5 +16,5 @@ export default function TripAdvisor() {
                 </li>
             </ul>
         </div>
-        <Script async strategy="beforeInteractive" src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=838&amp;locationId=1152912&amp;lang=it&amp;rating=true&amp;nreviews=0&amp;writereviewlink=false&amp;popIdx=false&amp;iswide=false&amp;border=true&amp;display_version=2" data-loadtrk></Script>
+        <Script async strategy="afterInteractive" src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=838&amp;locationId=1152912&amp;lang=it&amp;rating=true&amp;nreviews=0&amp;writereviewlink=false&amp;popIdx=false&amp;iswide=false&amp;border=true&amp;display_version=2" data-loadtrk></Script>
     </>)}
