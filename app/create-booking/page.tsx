@@ -37,7 +37,13 @@ export default async function Page({
                         price={data.prices[Number(apartmentId)]}
                         apartmentId={Number(apartmentId)}
                     />
-                    <BookingForm></BookingForm>
+                    <BookingForm 
+                        arrivalDate={arrivalDate as string}
+                        departureDate={departureDate as string}
+                        guests={guests as string}
+                        price={data.prices[Number(apartmentId)]}
+                        apartmentId={Number(apartmentId)}
+                    />
 
                 </div>
             </main>
