@@ -20,7 +20,8 @@ import {
 
 const navigation = [
   { name: 'Chi siamo', href: '/about' },
-  { name: 'Contatti', href: '/contacts' }
+  { name: 'Contatti', href: '/contacts' },
+  { name: 'La mia prenotazione', href: '/reservation' }
 ]
 
 const rooms = [

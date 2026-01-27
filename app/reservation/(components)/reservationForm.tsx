@@ -2,22 +2,26 @@
 
 import { useRouter } from "next/navigation"
 import { Button, Form, Input } from "@heroui/react"
-import Link from "next/link"
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 
-export default function ReservationForm() {
+export default function ReservationForm({
+    reservationId
+} : {
+    reservationId: string
+}) {
     const [email, setEmail] = useState('')
-    const [reservationId, setReservationId] = useState('')
+    const [reservationIdValue, setReservationIdValue] = useState(reservationId)
 
     const router = useRouter()
 
-    const onSubmit = () => {
-        router.push(`/reservation?reservationId=${reservationId}&email=${email}`)
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        router.push(`/reservation?reservationId=${reservationIdValue}&email=${email}`)
     };
 
     return (
         <Form
-            className="w-full p-4 max-w-xs flex flex-col gap-4 bg-white"
+            className="w-full p-4 max-w-xs flex flex-col gap-4 bg-white "
             onSubmit={onSubmit}
             >
             <Input
@@ -28,6 +32,8 @@ export default function ReservationForm() {
                 name="reservationId"
                 placeholder="Inserisci l'ID della prenotazione"
                 type="text"
+                value={reservationIdValue}
+                onValueChange={setReservationIdValue}
             />
             <Input
                 isRequired
@@ -37,22 +43,12 @@ export default function ReservationForm() {
                 name="email"
                 placeholder="Inserisci la tua email"
                 type="email"
+                value={email}
+                onValueChange={setEmail}
             />
-            <Link
-
-                href={{ 
-                    pathname: 'reservation',
-                    query: {
-                        reservationId,
-                        email
-                    }
-                    }}
-                    className="w-full"
-            >
-                <Button color="primary" className="w-full" type="submit">
-                    Invia
-                </Button>
-            </Link>
+            <Button color="primary" className="w-full" type="submit">
+                Invia
+            </Button>
         </Form>
     )
 }

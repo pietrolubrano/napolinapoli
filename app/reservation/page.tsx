@@ -1,7 +1,10 @@
+import { Button } from "@heroui/button"
 import BookingHeader from "../create-booking/(components)/BookingHeader"
 import ReservationForm from "./(components)/reservationForm"
+import Link from "next/link"
 
 type Reservation = {
+    "status": number,
     "id": number,
     "reference-id":null | number,
     "type": "reservation",
@@ -71,51 +74,87 @@ export default async function Page({
         const response = await getReservation(reservationId as string)
         const reservation: Reservation = await response.json()
 
-        return(
-            <main>
-                <div className="font-bold p-4">
-                    ID prenotazione: {reservationId}
-                </div>
-                <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4">
-                    Benvenuto <strong>{reservation.firstname}</strong> 🙂,
-                    <p>
-                        ecco i dettagli della tua prenotazione:
-                    </p>
-                    <div>
-                        <BookingHeader
-                            arrivalDate={reservation.arrival}
-                            departureDate={reservation.departure}
-                            guests={reservation.adults.toString()}
-                            price={{
-                                price: reservation.price,
-                                currency: '€',
-                                priceElements: [{
-                                    type: "basePrice",
-                                    amount: reservation.price
-                                }]
-                            }}
-                            apartmentId={reservation.apartment.id}
-                        />
+        if(reservation.status === 404){
+            return(
+                <main className=" flex justify-center items-center w-full">
+                    <div className="text-gray-600 p-4 bg-white text-center">
+                        <p className="mb-4">
+                            Prenotazione non trovata
+                        </p>
+                        <Link href={'/reservation'}>
+                            <Button className="bg-background text-white">
+                                Riprova
+                            </Button>
+                        </Link>
                     </div>
-                    <div>
-                        Come raggiungerci <br />
-                        Nome rete wifi: <br />
-                        Password: <br />
-                        Cosa visitare <br />
+                </main>
+            )
+        }
 
+        if(email === reservation.email){
+            return(
+                <main>
+                    <div className="font-bold p-4">
+                        ID prenotazione: {reservationId}
                     </div>
-                </div>
-                {/* <div>
-                    {JSON.stringify(reservation)}
-                </div> */}
-        </main>
-        )
+                    <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4">
+                        Benvenuto <strong>{reservation.firstname}</strong> 🙂,
+                        <p>
+                            ecco i dettagli della tua prenotazione:
+                        </p>
+                        <div>
+                            <BookingHeader
+                                arrivalDate={reservation.arrival}
+                                departureDate={reservation.departure}
+                                guests={reservation.adults.toString()}
+                                price={{
+                                    price: reservation.price,
+                                    currency: '€',
+                                    priceElements: [{
+                                        type: "basePrice",
+                                        amount: reservation.price
+                                    }]
+                                }}
+                                apartmentId={reservation.apartment.id}
+                            />
+                        </div>
+                        <div>
+                            Come raggiungerci <br />
+                            Nome rete wifi: <br />
+                            Password: <br />
+                            Cosa visitare <br />
+
+                        </div>
+                    </div>
+                </main>
+            )
+        } else {
+            return(
+                <main className=" flex justify-center items-center w-full">
+                    <div className="text-gray-600 p-4 bg-white text-center">
+                        <p className="mb-4">
+                            L&apos;indirizzo email non corrisponne <br /> a quello della prenotazione.
+                        </p>
+                        <Link href={{ 
+                            pathname: '/reservation',
+                            query: {
+                                reservationId
+                            }
+                            }}>
+                            <Button className="bg-background text-white">
+                                Riprova
+                            </Button>
+                        </Link>
+                    </div>
+                </main>
+            )
+        }
     }
 
     return (
-        <main>
-            <div className="container mx-auto flex justify-center text-gray-600 p-8">
-                <ReservationForm></ReservationForm>
+        <main className=" flex justify-center items-center w-full">
+            <div className="text-gray-600 p-8 min-w-sm">
+                <ReservationForm reservationId={reservationId as string} />
             </div>
         </main>
     )
