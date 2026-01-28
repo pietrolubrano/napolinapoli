@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { capturePayment } from "@/app/actions/paypalActions"
 import { rooms } from "@/data/roomsData"
+import { FormData } from "./BookingForm"
 
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
-
-import type { FormData } from "./BookingForm"
+import { useRouter } from "next/navigation"
 
 export default function PaypalForm({
     arrivalDate,
@@ -14,7 +13,8 @@ export default function PaypalForm({
     guests,
     price,
     apartmentId,
-    validatedData
+    validatedData,
+    formData
 } : {
     arrivalDate: string
     departureDate: string
@@ -29,10 +29,43 @@ export default function PaypalForm({
     },
     apartmentId: number,
     validatedData: boolean
+    formData: FormData | null
 }) {
 
     const [isProcessing, setIsProcessing] = useState(false);
     const [paypalError, setPaypalError] = useState("");
+    const router = useRouter()
+
+    const createBooking = async () => {
+
+        const reservationData = {
+            arrivalDate,
+            departureDate,
+            apartmentId,
+            firstName: formData?.firstName as string,
+            lastName: formData?.lastName as string,
+            adults: +guests,
+            children: 0,
+            price: price.price,
+            priceStatus: 0,
+            email: formData?.email as string,
+            arrivalTime: '10:00',
+            phone: '33373858585',
+            notice: 'BOOKING TEST'
+        }
+
+        const bookingResponse = await fetch('/api/booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reservationData),
+        });
+
+        const bookingResult = await bookingResponse.json()
+
+        router.push(`/reservation?email=${encodeURIComponent(formData?.email as string)}&reservationId=${encodeURIComponent(bookingResult.id)}`)
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const createOrder = (data: any, actions: any) => {
@@ -51,50 +84,55 @@ export default function PaypalForm({
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onApprove = async (data: any, actions: any) => {
+
         setIsProcessing(true);
+        
         try {
-        const order = await actions.order.get();
-        console.log('Payment successful', order);
-        
-        // Extract payer information from PayPal response
-        const payerName = order.payer?.name?.given_name || '';
-        const payerEmail = order.payer?.email_address || '';
-        
-        const paymentData = {
-            name: payerName,
-            email: payerEmail,
-            amount: (price.price%10).toFixed(2),
-            orderID: data.orderID
-        };
-        
-        console.log('Sending to API:', paymentData);
-        
-        // Send payment data to our API
-    /*      const response = await fetch('/api/payment', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(paymentData),
-        }); */
+            const order = await actions.order.get();
+            console.log('Payment successful', order);
+            
+            // Extract payer information from PayPal response
+            const payerName = order.payer?.name?.given_name || '';
+            const payerEmail = order.payer?.email_address || '';
+            
+            const paymentData = {
+                name: payerName,
+                email: payerEmail,
+                amount: (price.price%10).toFixed(2),
+                orderID: data.orderID
+            };
+            
+            console.log('Sending to API:', paymentData);
+            
+            // Send payment data to our API
+            const response = await fetch('/api/payment', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(paymentData),
+            });
 
-        const response = await capturePayment(paymentData);
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API error response:', errorText);
+                throw new Error('Payment processing failed');
+            }
 
-    /*       if (!response.ok) {
-            const errorText = await response.text();
-            console.error('API error response:', errorText);
-            throw new Error('Payment processing failed');
-        }
-        const result = await response.json(); */
-        console.log('API response:', response);
-        alert('Payment processed successfully!');
+            const result = await response.json();
+            console.log('API response:', result);
+            
+            await createBooking()
+
         } catch (error) {
-        console.error('Payment failed:', error);
-        setPaypalError('Payment failed. Please try again.');
+            console.error('Payment failed:', error);
+            setPaypalError('Payment failed. Please try again.');
         } finally {
-        setIsProcessing(false);
+            setIsProcessing(false);
         }
+
     };
+
     const onError = (err: unknown) => {
         console.error('PayPal error:', err);
         setPaypalError('An error occurred with PayPal. Please try again.');

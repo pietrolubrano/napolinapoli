@@ -1,9 +1,9 @@
 "use client"
 
 import { FormEvent, useState } from "react";
-import {Form, Input, Checkbox, Button, Divider} from "@heroui/react";
+import {Form, Input, TimeInput, Checkbox, Button, Divider} from "@heroui/react";
 import PaypalForm from "./PaypalForm";
-import { error } from "console";
+import {Time} from "@internationalized/date";
 
 export type FormData = {
     email: string,
@@ -43,14 +43,13 @@ export default function App({
   const [errors, setErrors] = useState<Errors>({});
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    console.log('SUBMIT')
+
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget)) as FormData;
 
     // Custom validation checks
     const newErrors: Errors = {};
 
-    console.log(data)
     // Username validation
     if (data.firstName.length < 3) {
         console.log('errore nome')
@@ -80,8 +79,6 @@ export default function App({
   };
 
   const submittedClassNames = "bg-white border-0 shadow-none hover:bg-white! focus:bg-white! active:bg-white!";
-
-  console.log('Submitted data:', submitted);
 
     return (<>
       <Form
@@ -153,6 +150,10 @@ export default function App({
             }}
           />
 
+          {/* <div className="flex">
+            <TimeInput label="Orario di arrivo" />
+          </div> */}
+
           <Checkbox
             isRequired
             classNames={{
@@ -188,7 +189,7 @@ export default function App({
             
           </div>
           
-          <Divider className="my-4 shadow- "></Divider>
+          <Divider className="my-4"></Divider>
 
           <PaypalForm
             arrivalDate={arrivalDate}
@@ -197,6 +198,7 @@ export default function App({
             price={price}
             apartmentId={apartmentId}
             validatedData={submitted !== null}
+            formData={submitted}
           />
 
         </div>

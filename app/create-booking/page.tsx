@@ -1,7 +1,7 @@
 import { rooms } from "@/data/roomsData"
 import BookingForm from "./(components)/BookingForm"
 import BookingHeader from "./(components)/BookingHeader"
-import { checkAvailability } from "../actions"
+import { checkAvailability } from "../actions/smoobuActions"
 
 export default async function Page({
   searchParams,

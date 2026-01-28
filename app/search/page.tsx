@@ -3,7 +3,7 @@ import RoomCard from "./(components)/RoomCard"
 import { Suspense } from "react"
 import Loading from "../loading"
 import Image from "next/image"
-import { checkAvailability } from "../actions"
+import { checkAvailability } from "../actions/smoobuActions"
 
 export type SmoobuAvailabilityResponseData = {
   availableApartments: number[]

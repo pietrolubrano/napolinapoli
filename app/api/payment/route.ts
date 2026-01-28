@@ -1,5 +1,3 @@
-"use server";
-
 import { NextResponse } from 'next/server';
 
 interface PaymentData {
@@ -8,12 +6,7 @@ interface PaymentData {
   amount: string;
   orderID: string;
 }
-
 const PAYPAL_API_URL = process.env.PAYPAL_API_URL || 'https://api-m.sandbox.paypal.com';
-
-console.log('CLIENT ID', process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID);
-console.log('CLIENT SECRET', process.env.PAYPAL_CLIENT_SECRET);
-
 async function getPayPalAccessToken() {
   try {
     const auth = Buffer.from(`${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`).toString('base64');
@@ -32,7 +25,6 @@ async function getPayPalAccessToken() {
     throw error;
   }
 }
-
 async function capturePayPalOrder(orderID: string, accessToken: string) {
   try {
     console.log(`Capturing order ${orderID} with token ${accessToken.substring(0, 10)}...`);
@@ -53,10 +45,9 @@ async function capturePayPalOrder(orderID: string, accessToken: string) {
     throw error;
   }
 }
-
-export async function capturePayment(data: PaymentData) {
+export async function POST(request: Request) {
   try {
-    /* const data: PaymentData = await request.json(); */
+    const data: PaymentData = await request.json();
     console.log('Received payment data:', data);
     // Validate the payment data
     if (!data.name || !data.email || !data.amount || !data.orderID) {
@@ -79,16 +70,6 @@ export async function capturePayment(data: PaymentData) {
         { status: 400 }
       );
     }
-
-    return ({
-        name: data.name,
-        email: data.email,
-        amount: data.amount,
-        orderID: data.orderID,
-        captureID: captureData.id,
-        captureStatus: captureData.status
-    })
-        
     return NextResponse.json(
       { 
         success: true,
@@ -111,4 +92,10 @@ export async function capturePayment(data: PaymentData) {
       { status: 500 }
     );
   }
+}
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Payment API endpoint' },
+    { status: 200 }
+  );
 }
