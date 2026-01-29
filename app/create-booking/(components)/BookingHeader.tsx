@@ -1,5 +1,20 @@
 "use client"
 
+interface Props {
+    arrivalDate: string
+    departureDate: string
+    guests: string
+    price: {
+        price: number
+        currency: string
+        priceElements: {
+            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
+            amount: number
+        }[]
+    },
+    apartmentId: number
+}
+
 import { rooms } from "@/data/roomsData"
 import {
     FaPerson,
@@ -14,25 +29,12 @@ export default function BookingHeader({
     guests,
     price,
     apartmentId
-} : {
-    arrivalDate: string
-    departureDate: string
-    guests: string
-    price: {
-        price: number
-        currency: string
-        priceElements: {
-            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
-            amount: number
-        }[]
-    },
-    apartmentId: number
-}) {
+} : Props) {
 
     const apartment = rooms[apartmentId]
 
     return (
-        <div className="grid md:grid-cols-4 mb-8 gap-1 md:gap-6">
+        <div className="grid md:grid-cols-4 mb-8 gap-1 md:gap-6 px-4 max-w-lg mx-auto text-gray-600">
 
             <div className="flex md:flex-col md:justify-center items-center text-center gap-3 font-bold">
                 <FaCalendarCheck className="text-background text-xl md:text-4xl" /> Check-in: <br className="hidden md:block" /> {new Date(arrivalDate as string).toLocaleDateString()}

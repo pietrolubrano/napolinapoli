@@ -1,5 +1,6 @@
 // hero.ts
 import { heroui } from "@heroui/react";
+import type { Config } from "tailwindcss"; // Import Tailwind Config type
 // or import from theme package if you are using individual packages.
 // import { heroui } from "@heroui/theme";
 
@@ -55,4 +56,4 @@ export default heroui({
         },
       },
     },
-)
+) as unknown as Config;

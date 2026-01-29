@@ -1,5 +1,22 @@
 "use client"
 
+interface Props {
+  arrivalDate: string
+    departureDate: string
+    guests: string
+    price: {
+        price: number
+        currency: string
+        priceElements: {
+            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
+            amount: number
+        }[]
+    },
+    apartmentId: number,
+    validatedData: boolean
+    formData: FormData | null
+}
+
 import { useState } from "react"
 import { rooms } from "@/data/roomsData"
 import { FormData } from "./BookingForm"
@@ -15,22 +32,7 @@ export default function PaypalForm({
     apartmentId,
     validatedData,
     formData
-} : {
-    arrivalDate: string
-    departureDate: string
-    guests: string
-    price: {
-        price: number
-        currency: string
-        priceElements: {
-            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
-            amount: number
-        }[]
-    },
-    apartmentId: number,
-    validatedData: boolean
-    formData: FormData | null
-}) {
+} : Props) {
 
     const [isProcessing, setIsProcessing] = useState(false);
     const [paypalError, setPaypalError] = useState("");
@@ -70,15 +72,15 @@ export default function PaypalForm({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const createOrder = (data: any, actions: any) => {
         return actions.order.create({
-        purchase_units: [
-            {
-            amount: {
-                value: (price.price/100*10).toFixed(2),
-                currency_code: 'EUR'
-            },
-            description: `Prenotazione della stanza ${rooms[apartmentId].name} dal ${new Date(arrivalDate).toLocaleDateString()} al ${new Date(departureDate).toLocaleDateString()} per ${guests} ospiti`,
-            },
-        ],
+            purchase_units: [
+                {
+                    amount: {
+                        value: (price.price/100*10).toFixed(2),
+                        currency_code: 'EUR'
+                    },
+                    description: `Prenotazione della stanza ${rooms[apartmentId].name} dal ${new Date(arrivalDate).toLocaleDateString()} al ${new Date(departureDate).toLocaleDateString()} per ${guests} ospiti`,
+                },
+            ]
         });
     };
 

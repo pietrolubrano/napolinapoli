@@ -1,5 +1,20 @@
 "use client"
 
+interface Props {
+    arrivalDate: string
+    departureDate: string
+    guests: string
+    price: {
+        price: number
+        currency: string
+        priceElements: {
+            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
+            amount: number
+        }[]
+    },
+    apartmentId: number
+}
+
 import { FormEvent, useState } from "react";
 import {Form, Input, TimeInput, Checkbox, Button, Divider} from "@heroui/react";
 import PaypalForm from "./PaypalForm";
@@ -25,20 +40,7 @@ export default function App({
     guests,
     price,
     apartmentId
-} : {
-    arrivalDate: string
-    departureDate: string
-    guests: string
-    price: {
-        price: number
-        currency: string
-        priceElements: {
-            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
-            amount: number
-        }[]
-    },
-    apartmentId: number
-}) {
+} : Props) {
   const [submitted, setSubmitted] = useState<FormData | null>(null);
   const [errors, setErrors] = useState<Errors>({});
 
@@ -82,16 +84,16 @@ export default function App({
 
     return (<>
       <Form
-        className="w-full justify-center items-center space-y-4"
+        className="w-full  justify-center items-center space-y-4"
         validationErrors={errors}
         onReset={() => setSubmitted(null)}
         onSubmit={onSubmit}
       >
         <div>
-          <h2 className="text-xl font-bold">Compila il modulo coi tuoi dati</h2>
+          <h2 className="text-xl font-bold pt-4">Compila il modulo coi tuoi dati</h2>
         </div>
 
-        <div className="flex flex-col gap-4 max-w-md w-full sm:w-fit md:border-4 md:p-4 border-gray-300">
+        <div className="flex flex-col bg-white gap-4 max-w-md w-full sm:w-fit border-4 p-4 border-gray-300">
           <Input
             isRequired
             errorMessage={({validationDetails}) => {
@@ -203,10 +205,8 @@ export default function App({
 
         </div>
 
-        
       </Form>
 
-      
   </>);
 
 }

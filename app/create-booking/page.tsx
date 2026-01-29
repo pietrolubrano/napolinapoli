@@ -24,20 +24,23 @@ export default async function Page({
     if(data.availableApartments[0] === Number(apartmentId)){
         return (
             <main className="bg-black/70">
-                <div className="container mx-auto bg-white text-gray-600 p-8">
+                <div className="container mx-auto max-w-2xl bg-background pb-8">
+                    <div className="bg-white text-black pb-1">
 
-                    <div className="text-2xl font-bold mb-8 text-center">
-                        Nuova Prenotazione
+                        <h4 className="text-2xl bg-background py-6 text-white font-bold mb-8 text-center">
+                            Nuova Prenotazione
+                        </h4>
+
+                        <BookingHeader
+                            arrivalDate={arrivalDate as string}
+                            departureDate={departureDate as string}
+                            guests={guests as string}
+                            price={data.prices[Number(apartmentId)]}
+                            apartmentId={Number(apartmentId)}
+                        />
+
                     </div>
-
-                    <BookingHeader
-                        arrivalDate={arrivalDate as string}
-                        departureDate={departureDate as string}
-                        guests={guests as string}
-                        price={data.prices[Number(apartmentId)]}
-                        apartmentId={Number(apartmentId)}
-                    />
-                    <BookingForm 
+                    <BookingForm
                         arrivalDate={arrivalDate as string}
                         departureDate={departureDate as string}
                         guests={guests as string}

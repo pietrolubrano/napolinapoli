@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Napoli Napoli Rooms",
   description: "B&B nel centro di Napoli, a due passi da Spaccanapoli e dal Duomo di Napoli.",
+  openGraph: {
+    images: ['/images/napoli-napoli-logo.png']
+  }
 };
 
 export const viewport: Viewport = {

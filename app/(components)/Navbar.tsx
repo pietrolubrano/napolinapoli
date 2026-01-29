@@ -17,6 +17,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@heroui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
   { name: 'Chi siamo', href: '/about' },
@@ -61,7 +62,7 @@ export default function App() {
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4 uppercase" justify="center">
         <NavbarBrand>
           <Link href="/">
             <Logo />
@@ -72,11 +73,12 @@ export default function App() {
           <NavbarItem>
             <DropdownTrigger>
               <Button
-                
-                className="p-0 bg-transparent data-[hover=true]:bg-transparent text-white"
-                radius="sm"
+                className="p-0 bg-transparent text-sm font-bold uppercase data-[hover=true]:bg-transparent text-white"
+                /* radius="sm" */
               >
-                Rooms
+                <div className="flex">
+                  LE STANZE<ChevronDownIcon className="p-0 m-0" height={20}></ChevronDownIcon>  
+                </div>
               </Button>
             </DropdownTrigger>
           </NavbarItem>
@@ -98,8 +100,10 @@ export default function App() {
             <NavbarItem key={item.name} className={classNames(
               "text-inherit hover:text-inherit",
             )}>
-              <Link className="text-white" href={item.href}>
-                {item.name}
+              <Link href={item.href}>
+                <Button className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+                  {item.name}
+                </Button>
               </Link>
             </NavbarItem>
           ))

@@ -1,3 +1,5 @@
+import type { Metadata, ResolvingMetadata } from 'next'
+
 import { FaKitchenSet, FaPerson } from "react-icons/fa6";
 
 import { rooms } from "@/data/roomsData"
@@ -6,6 +8,33 @@ import { Button } from "@heroui/button";
 
 import Link from "next/link";
 import Carousel from "@/app/(components)/Carousel";
+
+export async function generateMetadata(
+  { params } : { params: Promise<{ slug: string }> },
+): Promise<Metadata> {
+  
+  const { slug } = await params
+  // fetch post information
+  const room = Object.values(rooms).find(room => room.slug === slug)
+  
+  if(room){
+    return {
+      title: `Napoli Napoli Rooms b&b - Camera ${room.name}`,
+      description: room.description,
+      openGraph: {
+        images: [room.images[0]],
+      }
+    }
+  }
+
+  return {
+    title: 'Napoli Napoli Rooms b&b - Camera non trovata',
+    description: 'Camera non trovata',
+    openGraph: {
+      images: ['/images/napoli-napoli-logo.png']
+    }
+  }
+}
 
 const MaxOccupancy = ({ maxOccupancy } : { maxOccupancy: number }) => {
 
@@ -16,7 +45,7 @@ const MaxOccupancy = ({ maxOccupancy } : { maxOccupancy: number }) => {
   return arr
 }
 
-export default async function Room({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>
