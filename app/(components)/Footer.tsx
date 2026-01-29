@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { FaCcPaypal, FaCcVisa, FaCcMastercard, FaCreditCard } from "react-icons/fa6";
 import { FaLocationDot, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { FaTripadvisor } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -19,7 +20,7 @@ export default function Footer() {
                  </Link>
             </div>
 
-            <div className="col-span-3 md:col-span-1 space-y-2">
+            <div className="col-span-3 md:col-span-1 space-y-2 mb-6">
                 <Link href={'https://maps.app.goo.gl/JiRPB1kuNRNkfqVPA'} target="_blank" className="flex items-center">
                     <FaLocationDot size={'1.5em'} />
                     <p className="ms-2">
@@ -41,14 +42,20 @@ export default function Footer() {
             </div>
 
             <div className="col-span-3 md:col-span-1">
-
+                Secure payment with:
+                <div className="flex gap-3">
+                    <FaCcPaypal size={'3em'} />
+                    <FaCcVisa size={'3em'} />
+                    <FaCcMastercard size={'3em'} />
+                    <FaCreditCard size={'3em'} />
+                </div>
             </div>
 
-            <div className="col-span-3 md:col-span-1 flex gap-4 justify-center p-4">
+            {/* <div className="col-span-3 md:col-span-1 flex gap-4 justify-center p-4">
                 <Link href={'https://www.instagram.com/_napolinapoli'} target="_blank" className="flex items-center">
                     <FaInstagram size={'3em'} />
                 </Link>
-            </div>
+            </div> */}
             
         </div>
     </footer>

@@ -16,11 +16,11 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Divider,
 } from "@heroui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
-  { name: 'Chi siamo', href: '/about' },
   { name: 'Contatti', href: '/contacts' },
   { name: 'La mia prenotazione', href: '/reservation' }
 ]
@@ -69,7 +69,7 @@ export default function App() {
           </Link>
         </NavbarBrand>
         
-        <Dropdown>
+        <Dropdown className="">
           <NavbarItem>
             <DropdownTrigger>
               <Button
@@ -110,21 +110,47 @@ export default function App() {
         }
       </NavbarContent>
 
-      <NavbarMenu className="bg-background">
-        {rooms.concat(navigation).map((item, index) => (
-          <NavbarMenuItem key={`${item.name}-${index}`}>
-            <Link
-              className="w-full text-white"
-           /*    color={
-                index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
-              } */
-              href={item.href}
-              size="lg"
-            >
-              {item.name}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+      <NavbarMenu className="bg-background flex items-center justify-center uppercase font-bold">
+            <div>
+              <NavbarMenuItem>
+                <p className="text-3xl mb-1">
+                  Le Stanze
+                </p>
+              </NavbarMenuItem>
+              
+              {rooms.map((item, index) => (
+              <NavbarMenuItem key={`${item.name}-${index}`}>
+                <Link
+                  className={`${index <= 2 && ''}ms-3 text-md w-full text-white`}
+              /*    color={
+                    index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
+                  } */
+                  href={item.href}
+                  size="lg"
+                >
+                  {item.name}
+                </Link>
+              </NavbarMenuItem>
+            ))}
+          
+
+          <Divider className="my-2 bg-transparent"></Divider>
+          {navigation.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              <Link
+                className={`${index <= 2 && ''} w-full text-xl text-white`}
+            /*    color={
+                  index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
+                } */
+                href={item.href}
+                size="lg"
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+          <Divider className="p-16 bg-transparent"></Divider>
+          </div>
       </NavbarMenu>
     </Navbar>
   );
