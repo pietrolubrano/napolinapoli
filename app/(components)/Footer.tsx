@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { FaLocationDot, FaInstagram } from "react-icons/fa6";
+import { FaLocationDot, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { FaTripadvisor } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { TbBrandBooking } from "react-icons/tb";
@@ -26,10 +26,16 @@ export default function Footer() {
                         Vico Maiorani, 29 <br />80138 - Napoli (NA)
                     </p>
                 </Link>
-                <Link href={'#'} target="_blank" className="flex items-center">
+                <Link href={'https://wa.me/393484370034'} target="_blank" className="flex items-center">
                     <IoLogoWhatsapp size={'1.5em'} />
                     <p className="ms-2">
-                        +39 333 4444555
+                        +39 348 4370034
+                    </p>
+                </Link>
+                <Link href={'mailto:nnnapolinapoli@gmail.com'} target="_blank" className="flex items-center">
+                    <FaEnvelope size={'1.5em'} />
+                    <p className="ms-2">
+                        nnnapolinapoli@gmail.com
                     </p>
                 </Link>
             </div>
