@@ -59,6 +59,7 @@ export type Room = {
         name: string
         slug: string
         maxOccupancy: number
+        opengraphImage: string
         images: string[]
         description: string
         services: {
@@ -76,6 +77,7 @@ export const rooms : Room = {
         name: 'San Biagio',
         slug: 'san-biagio',
         maxOccupancy: 4,
+        opengraphImage: 'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/openghraph-san-biagio.jpg',
         images: [
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07056-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/san-biagio/DSC07062-HDR_1.jpg',
@@ -94,6 +96,7 @@ export const rooms : Room = {
         name: 'Maiorani',
         slug: 'maiorani',
         maxOccupancy: 4,
+        opengraphImage: 'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/openghraph-maiorani.jpg',
         images: [
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04129-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/maiorani/DSC04139-HDR.jpg',
@@ -109,6 +112,7 @@ export const rooms : Room = {
         name: 'Divino amore',
         slug: 'divino-amore',
         maxOccupancy: 3,
+        opengraphImage: 'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/openghraph-divino-amore.jpg',
         images: [
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07104-HDR.jpg',
             'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/divino-amore/DSC07110-HDR.jpg',

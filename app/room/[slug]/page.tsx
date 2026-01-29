@@ -22,7 +22,7 @@ export async function generateMetadata(
       title: `Napoli Napoli Rooms b&b - Camera ${room.name}`,
       description: room.description,
       openGraph: {
-        images: [room.images[0]],
+        images: [room.opengraphImage],
       }
     }
   }
