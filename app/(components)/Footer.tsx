@@ -13,11 +13,16 @@ export default function Footer() {
     <footer className="w-full p-8 bg-background text-white mt-auto">
         <div className="container mx-auto grid grid-cols-3">
 
-            <div className="col-span-3 mb-6 flex flex-col md:flex-row gap-8 items-center justify-center md:justify-start">
-                 <TripAdvisor></TripAdvisor>
+            <div className="col-span-3 mb-6 flex flex-col md:flex-row gap-8 items-center md:items-start justify-center md:justify-start">
                  <Link href={'https://www.booking.com/hotel/it/palepolib-amp-b.it.html'} target="_blank" className="flex items-center">
                     <Image loading="eager" src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/booking-award/Digital-Award-TRA-2025.png" alt="Logo" width={200} height={200}></Image>
                  </Link>
+                 <TripAdvisor></TripAdvisor>
+                 <div >
+                    <Link href={'https://www.google.com/travel/hotels/entity/ChgI1Y7V-9WC4sT6ARoLL2cvMXRkMF94eXEQAQ/reviews'} target="_blank" className="bg-white p-3 border-2 border-blue-500 inline-block">
+                        <Image width={200} height={100} alt="google reviews" src={'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/google-reviews.png'} />
+                    </Link>
+                 </div>
             </div>
 
             <div className="col-span-3 md:col-span-1 space-y-2 mb-6">
@@ -41,7 +46,7 @@ export default function Footer() {
                 </Link>
             </div>
 
-            <div className="col-span-3 md:col-span-1">
+            <div className="col-span-3 md:col-span-1 italic">
                 Secure payment with:
                 <div className="flex gap-3">
                     <FaCcPaypal size={'3em'} />
