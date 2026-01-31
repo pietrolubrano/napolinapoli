@@ -22,7 +22,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
   { name: 'Contatti', href: '/contacts' },
-  { name: 'La mia prenotazione', href: '/reservation' }
+  { name: 'La Mia Prenotazione', href: '/reservation' },
 ]
 
 const rooms = [
@@ -95,21 +95,30 @@ export default function App() {
             ))}
           </DropdownMenu>
         </Dropdown>
+        
         {
           navigation.map((item) => (
             <NavbarItem key={item.name} className={classNames(
               "text-inherit hover:text-inherit",
             )}>
-              <Link href={item.href}>
-                <Button className="p-0 bg-transparent text-sm font-bold uppercase text-white">
-                  {item.name}
-                </Button>
-              </Link>
+              <Button as={Link} href={item.href} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+                {item.name}
+              </Button>
             </NavbarItem>
           ))
         }
+
       </NavbarContent>
 
+      <NavbarContent justify="end" className="hidden md:flex">
+        <NavbarItem>
+            <Button as={Link} href="/search" className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+              PRENOTA
+            </Button>
+        </NavbarItem>
+      </NavbarContent>
+
+        {/* MOBILE MENU */}
       <NavbarMenu className="bg-background flex items-center justify-center uppercase font-bold">
             <div>
               <NavbarMenuItem>

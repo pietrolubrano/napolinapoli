@@ -28,6 +28,10 @@ export default async function Page({
           <div className="container mx-auto flex flex-col items-center p-8 min-h-[calc(100svh-70px)] relative">
             <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 h-full object-cover" />
             <div className="absolute inset-0 bg-black/70"></div>
+            
+              <div className="text-gray-600 p-3 max-w-2xl bg-gray-300 font-bold w-full z-0">
+                Seleziona la date e cerca
+              </div>
 
               <SearchForm
                 arrivalDate={arrivalDate as string}
