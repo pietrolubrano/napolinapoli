@@ -48,7 +48,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="bg-background z-50">
+    <Navbar isBordered isMenuOpen={isMenuOpen} shouldHideOnScroll maxWidth="full" onMenuOpenChange={setIsMenuOpen} className="bg-background z-50">
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
