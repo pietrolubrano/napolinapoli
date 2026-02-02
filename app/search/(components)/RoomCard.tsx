@@ -1,6 +1,8 @@
 "use client"
 
 import Link from "next/link";
+import NextImage from "next/image";
+
 import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
 import {Card, CardHeader, CardBody, Image, Button} from "@heroui/react";
 import { rooms } from "@/data/roomsData";
@@ -52,11 +54,12 @@ export default function App({
       <CardBody className="overflow-visible p-0">
         <Image
           alt="Card background"
+          as={NextImage}
           className="object-cover bg-red-400"
           src={rooms[apartmentId].images[0]}
           width={700}
+          height={200}
         />
-
 
         <Link
           href={{ 
