@@ -15,8 +15,9 @@ interface Props {
     apartmentId: number
 }
 
+import TermsAndConditionModal from "@/app/(components)/TermsAndConditionModal"
 import { FormEvent, useState } from "react";
-import {Form, Input, TimeInput, Checkbox, Button, Divider} from "@heroui/react";
+import {Form, Input, TimeInput, Checkbox, Button, Divider, useDisclosure} from "@heroui/react";
 import PaypalForm from "./PaypalForm";
 import {Time} from "@internationalized/date";
 
@@ -43,7 +44,7 @@ export default function App({
 } : Props) {
   const [submitted, setSubmitted] = useState<FormData | null>(null);
   const [errors, setErrors] = useState<Errors>({});
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
@@ -156,23 +157,29 @@ export default function App({
             <TimeInput label="Orario di arrivo" />
           </div> */}
 
-          <Checkbox
-            isRequired
-            classNames={{
-              base: 'accent-pink-500!',
-              label: "text-small",
-            }}
-            color="primary"
-            isInvalid={!!errors.terms}
-            name="terms"
-            validationBehavior="aria"
-            value="true"
-            onValueChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
-            isDisabled={submitted !== null}
-          >
-            Accetto termini e condizioni di vendita
-          </Checkbox>
-
+          <div>
+            <Checkbox
+              isRequired
+              classNames={{
+                base: 'accent-pink-500!',
+                label: "text-small",
+              }}
+              color="primary"
+              isInvalid={!!errors.terms}
+              name="terms"
+              validationBehavior="aria"
+              value="true"
+              onValueChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
+              isDisabled={submitted !== null}
+              >
+              
+            </Checkbox>
+            <span className="text-black">
+              Accetto <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> termini e condizioni di vendita </Button>
+            </span>
+          </div>
+          
+          <TermsAndConditionModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}></TermsAndConditionModal>
           {errors.terms && <span className="text-danger text-small">{errors.terms}</span>}
 
           <div className="flex gap-4">
