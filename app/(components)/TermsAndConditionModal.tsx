@@ -23,7 +23,7 @@ export default function TermsAndConditionModal({
     const termsAndConditions = [
         {
             title: '⁠Caparra confirmatoria.',
-            description: 'All’atto della conclusione del contratto, il Cliente è tenuto a versare il ... del costo complessivo dei servizi confermati a titolo di caparra confirmatoria.'
+            description: 'All’atto della conclusione del contratto, il Cliente è tenuto a versare la somma di €50,00 a titolo di caparra confirmatoria.'
         },
         {
             title: '⁠Diritto di recesso senza penale.',

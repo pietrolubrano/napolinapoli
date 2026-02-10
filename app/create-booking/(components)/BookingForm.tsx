@@ -26,6 +26,7 @@ export type FormData = {
     firstName: string,
     lastName: string,
     terms: "true" | "false"
+    arrivalTime: string
 }
 
 type Errors = {
@@ -153,17 +154,20 @@ export default function App({
             }}
           />
 
-          {/* <div className="flex">
-            <TimeInput label="Orario di arrivo" />
-          </div> */}
+          <div className="grid grid-cols-2">
+            <TimeInput
+              label="Orario di arrivo"
+              labelPlacement="outside"
+              name="arrivalTime"
+              defaultValue={new Time(14, 0)}
+              isRequired
+              isDisabled={submitted !== null}
+            />
+          </div>
 
           <div>
             <Checkbox
               isRequired
-              classNames={{
-                base: 'accent-pink-500!',
-                label: "text-small",
-              }}
               color="primary"
               isInvalid={!!errors.terms}
               name="terms"
@@ -171,7 +175,7 @@ export default function App({
               value="true"
               onValueChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
               isDisabled={submitted !== null}
-              >
+            >
               
             </Checkbox>
             <span className="text-black">
@@ -199,6 +203,18 @@ export default function App({
           </div>
           
           <Divider className="my-4"></Divider>
+
+            <div className="text-black space-y-1">
+              <p>
+                Importo totale*: {price.price}{price.currency}
+              </p>
+              <p>
+                Acconto da pagare ora: 50€
+              </p>
+              <p className="text-xs text-gray-500">
+                * Tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non compresa nel prezzo
+              </p>
+            </div>
 
           <PaypalForm
             arrivalDate={arrivalDate}

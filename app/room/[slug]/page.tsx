@@ -126,7 +126,7 @@ export default async function Page({
               
               <div className="flex w-full justify-end sticky bottom-4 md:static">
                   <Link href={'/search'} className="w-full sm:w-fit">
-                    <Button className="bg-background w-full sm:w-fit p-4 text-white">
+                    <Button className="bg-background w-full sm:w-fit p-4 text-white text-sm font-bold uppercase">
                         Verifica la disponibilità
                     </Button>
                   </Link>

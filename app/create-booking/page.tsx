@@ -40,6 +40,7 @@ export default async function Page({
                         />
 
                     </div>
+                    
                     <BookingForm
                         arrivalDate={arrivalDate as string}
                         departureDate={departureDate as string}

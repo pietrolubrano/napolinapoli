@@ -50,8 +50,11 @@ export default function PaypalForm({
             children: 0,
             price: price.price,
             priceStatus: 0,
+            deposit: 50,
+            depositStatus: 1,
+            language: 'it',
             email: formData?.email as string,
-            arrivalTime: '10:00',
+            arrivalTime: formData?.arrivalTime as string,
             phone: '33373858585',
             notice: 'BOOKING TEST'
         }
