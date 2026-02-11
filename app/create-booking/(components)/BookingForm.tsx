@@ -43,9 +43,11 @@ export default function App({
     price,
     apartmentId
 } : Props) {
+
   const [submitted, setSubmitted] = useState<FormData | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
@@ -77,6 +79,7 @@ export default function App({
       return;
     }
 
+    data.arrivalTime = data.arrivalTime.substring(0,5)
     // Clear errors and submit
     setErrors({});
     setSubmitted(data);
