@@ -78,7 +78,7 @@ export default function PaypalForm({
             purchase_units: [
                 {
                     amount: {
-                        value: (price.price/100*10).toFixed(2),
+                        value: 50,
                         currency_code: 'EUR'
                     },
                     description: `Prenotazione della stanza ${rooms[apartmentId].name} dal ${new Date(arrivalDate).toLocaleDateString()} al ${new Date(departureDate).toLocaleDateString()} per ${guests} ospiti`,
