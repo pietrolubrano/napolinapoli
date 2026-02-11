@@ -26,7 +26,8 @@ export type FormData = {
     firstName: string,
     lastName: string,
     terms: "true" | "false"
-    arrivalTime: string
+    arrivalTime: string,
+    phone: string
 }
 
 type Errors = {
@@ -155,6 +156,15 @@ export default function App({
             classNames={{
               inputWrapper: submitted !== null && submittedClassNames,
             }}
+          />
+
+          <Input
+            label="Telefono"
+            labelPlacement="outside"
+            name="phone"
+            placeholder="Inserisci il tuo numero di telefono"
+            type="phone"
+            disabled={submitted !== null}
           />
 
           <div className="grid grid-cols-2">

@@ -49,14 +49,14 @@ export default function PaypalForm({
             adults: +guests,
             children: 0,
             price: price.price,
-            priceStatus: 0,
+            priceStatus: 1,
             deposit: 50,
             depositStatus: 1,
-            language: 'it',
+            language: "it",
             email: formData?.email as string,
             arrivalTime: formData?.arrivalTime as string,
-            phone: '33373858585',
-            notice: 'BOOKING TEST'
+            phone: formData?.phone,
+            notice: 'RESERVATION FROM WEBSITE'
         }
 
         const bookingResponse = await fetch('/api/booking', {
