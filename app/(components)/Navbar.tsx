@@ -21,7 +21,6 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
-  { name: 'Contatti', href: '/contacts' },
   { name: 'La Mia Prenotazione', href: '/reservation' },
 ]
 

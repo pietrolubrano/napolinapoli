@@ -26,10 +26,6 @@ export default function TermsAndConditionModal({
             description: 'All’atto della conclusione del contratto, il Cliente è tenuto a versare la somma di €50,00 a titolo di caparra confirmatoria.'
         },
         {
-            title: '⁠Diritto di recesso senza penale.',
-            description: 'Il Cliente ha diritto di recedere dal contratto fino al 7° giorno/giorni prima della data di arrivo prevista senza pagare alcuna penale. Il recesso deve essere comunicato al Gestore entro tale termine via e-mail (al numero e/o all’indirizzo sopra indicato).'
-        },
-        {
             title: '⁠Inadempimento del Cliente.',
             description: 'In caso di recesso dal contratto da parte del Cliente oltre il termine di cui al capo “2”, o in caso di mancato arrivo senza preavviso entro le ore 24 del giorno stabilito per il check-in, Napoli Napoli Rooms tratterrà l’importo versato a titolo di caparra confirmatoria, fatto salvo il maggior danno, la cui dimostrazione è in capo al Gestore.'
         },
@@ -64,7 +60,7 @@ export default function TermsAndConditionModal({
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1 text-background">Termini e condizioni di acquisto</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1 text-background">Termini e condizioni</ModalHeader>
                 <ModalBody className="text-black">
                     <ul className="space-y-4">
                         {

@@ -179,7 +179,7 @@ export default function App({
               
             </Checkbox>
             <span className="text-black">
-              Accetto <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> termini e condizioni di vendita </Button>
+              Accetto <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> termini e condizioni</Button>
             </span>
           </div>
           
