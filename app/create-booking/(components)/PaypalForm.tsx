@@ -49,7 +49,7 @@ export default function PaypalForm({
             adults: +guests,
             children: 0,
             price: price.price,
-            priceStatus: 1,
+            priceStatus: 0,
             deposit: 50,
             depositStatus: 1,
             language: "it",
