@@ -6,7 +6,6 @@ import "./globals.css";
 import Navbar from "./(components)/Navbar";
 import {Providers} from "./providers";
 import Footer from "./(components)/Footer";
-import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Napoli Napoli Rooms",
-  description: "B&B nel centro di Napoli, a due passi da Spaccanapoli e dal Duomo di Napoli.",
+  title: "Napoli Napoli Rooms - b&b, guest house",
+  description: "B&b nel centro di Napoli, a due passi da Spaccanapoli e dal Duomo di Napoli.",
   openGraph: {
     images: ['/images/napoli-napoli-logo.png']
   }

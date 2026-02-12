@@ -1,4 +1,3 @@
-import { Divider } from "@heroui/react";
 import SearchForm from "./search/(components)/SearchForm";
 import { rooms } from "@/data/roomsData";
 import Image from "next/image";
@@ -11,7 +10,7 @@ export default function Home() {
 
       <div className="h-[calc(100svh-70px)]">
         <div className="relative h-full p-8 pb-20 text-white">
-
+          <h1 className="hidden">Napoli Napoli Rooms - b&b guesthouse Napoli</h1>
           <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
           
           <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-8 text-center pb-20">
