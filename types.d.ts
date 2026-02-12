@@ -20,3 +20,51 @@ type CreateBookingRequestBody = {
     prepaymentStatus: 1|0,
     language: string
 }
+
+type Reservation = {
+    "status": number,
+    "id": number,
+    "reference-id":null | number,
+    "type": "reservation",
+    "arrival": string,
+    "departure":string ,
+    "created-at": string,
+    "modifiedAt":string,
+    "apartment":{
+        "id":number,
+        "name":string
+    },
+    "channel":{
+        "id": number,
+        "channel_id":number,
+        "name":string
+    },
+    "guest-name":string,
+    "firstname":string,
+    "lastname":string,
+    "email":string,
+    "phone":string,
+    "adults":number,
+    "children":number,
+    "check-in":string,
+    "check-out":string,
+    "notice":string,
+    "assistant-notice":string,
+    "price":number,
+    "price-details":string,
+    "city-tax": null | number,
+    "price-paid":string,
+    "commission-included":null | number,
+    "prepayment":number,
+    "prepayment-paid":string,
+    "deposit":number,
+    "deposit-paid":string,
+    "language":string,
+    "guest-app-url":string,
+    "is-blocked-booking":boolean,
+    "guestId":number,
+    "related":{
+        "id":number,
+        "name":string
+    }[]
+}

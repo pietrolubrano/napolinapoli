@@ -124,7 +124,6 @@ export default function App({
               if (validationDetails.valueMissing) {
                 return "inserisci il tuo cognome";
               }
-
               return errors.lastName;
             }}
             label="Cognome"
@@ -165,6 +164,9 @@ export default function App({
             placeholder="Inserisci il tuo numero di telefono"
             type="phone"
             disabled={submitted !== null}
+            classNames={{
+              inputWrapper: submitted !== null && submittedClassNames,
+            }}
           />
 
           <div className="grid grid-cols-2">
@@ -188,9 +190,7 @@ export default function App({
               value="true"
               onValueChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
               isDisabled={submitted !== null}
-            >
-              
-            </Checkbox>
+            />
             <span className="text-black">
               Accetto <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> termini e condizioni</Button>
             </span>
