@@ -40,7 +40,7 @@ export default function PaypalForm({
 
     const createBooking = async () => {
 
-        const reservationData = {
+        const reservationData: CreateBookingRequestBody = {
             arrivalDate,
             departureDate,
             apartmentId,
@@ -50,8 +50,8 @@ export default function PaypalForm({
             children: 0,
             price: price.price,
             priceStatus: 0,
-            deposit: 50,
-            depositStatus: 1,
+            prepayment: 50,
+            prepaymentStatus: 1,
             language: "it",
             email: formData?.email as string,
             arrivalTime: formData?.arrivalTime as string,
@@ -81,7 +81,7 @@ export default function PaypalForm({
                         value: 50,
                         currency_code: 'EUR'
                     },
-                    description: `Prenotazione della stanza ${rooms[apartmentId].name} dal ${new Date(arrivalDate).toLocaleDateString()} al ${new Date(departureDate).toLocaleDateString()} per ${guests} ospiti`,
+                    description: `Acconto per prenotazione della stanza ${rooms[apartmentId].name} dal ${new Date(arrivalDate).toLocaleDateString()} al ${new Date(departureDate).toLocaleDateString()} per ${guests} ospiti`,
                 },
             ]
         });

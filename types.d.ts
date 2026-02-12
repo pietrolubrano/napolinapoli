@@ -1,0 +1,22 @@
+type CreateBookingRequestBody = {
+    arrivalDate: string,
+    departureDate: string,
+    channelId?: number,
+    apartmentId: number,
+    arrivalTime?: string,
+    departureTime?: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone?: string,
+    notice?: string,
+    adults: number,
+    children?: number,
+    price: number,
+    priceStatus: 1|0,
+    deposit?: number,
+    depositStatus?: 1|0,
+    prepayment: number,
+    prepaymentStatus: 1|0,
+    language: string
+}

@@ -6,11 +6,13 @@ interface PaymentData {
   amount: string;
   orderID: string;
 }
+
 const PAYPAL_API_URL = process.env.PAYPAL_API_URL || 'https://api-m.sandbox.paypal.com';
+
 async function getPayPalAccessToken() {
   try {
     const auth = Buffer.from(`${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`).toString('base64');
-    const response = await fetch('https://api-m.sandbox.paypal.com/v1/oauth2/token', {
+    const response = await fetch(`${PAYPAL_API_URL}/v1/oauth2/token`, {
       method: 'POST',
       headers: {
         'Authorization': `Basic ${auth}`,
@@ -38,7 +40,7 @@ async function capturePayPalOrder(orderID: string, accessToken: string) {
       body: JSON.stringify({}),
     });
     const data = await response.json();
-    console.log('Capture response:', data);
+    /* console.log('Capture response:', data); */
     return data;
   } catch (error) {
     console.error('Error capturing PayPal order:', error);
@@ -58,13 +60,13 @@ export async function POST(request: Request) {
     }
     // Get PayPal access token
     const accessToken = await getPayPalAccessToken();
-    console.log('Got PayPal access token');
+    /* console.log('Got PayPal access token'); */
     // Capture the payment
     const captureData = await capturePayPalOrder(data.orderID, accessToken);
-    console.log('PayPal capture response:', captureData);
+    /* console.log('PayPal capture response:', captureData); */
     // Check if capture was successful
     if (captureData.status !== 'COMPLETED') {
-      console.log(`Invalid capture status: ${captureData.status}`);
+      /* console.log(`Invalid capture status: ${captureData.status}`); */
       return NextResponse.json(
         { error: `Payment capture failed with status: ${captureData.status}` },
         { status: 400 }
