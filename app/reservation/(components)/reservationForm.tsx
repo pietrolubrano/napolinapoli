@@ -31,7 +31,7 @@ export default function ReservationForm({
                 labelPlacement="outside"
                 name="reservationId"
                 placeholder="Inserisci l'ID della prenotazione"
-                type="text"
+                type="tel"
                 value={reservationIdValue}
                 onValueChange={setReservationIdValue}
             />

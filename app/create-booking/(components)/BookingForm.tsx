@@ -162,7 +162,7 @@ export default function App({
             labelPlacement="outside"
             name="phone"
             placeholder="Inserisci il tuo numero di telefono"
-            type="phone"
+            type="tel"
             disabled={submitted !== null}
             classNames={{
               inputWrapper: submitted !== null && submittedClassNames,
