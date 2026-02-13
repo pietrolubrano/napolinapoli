@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 
 import { FaKitchenSet, FaPerson } from "react-icons/fa6";
 
@@ -105,13 +105,9 @@ export default async function Page({
 
         </div>
         
-        
+        <div className="md:pb-8">
 
-        <div className="bg-white">
-
-          
-
-          <div className="container mx-auto bg-white text-gray-500 font-bold">
+          <div className="container mx-auto max-w-2xl md:border-4 border-background bg-white text-gray-500 font-bold">
 
             <div className="p-8">
               <p className="lg:hidden text-gray-500 font-bold mb-8">

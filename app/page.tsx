@@ -14,7 +14,7 @@ export default function Home() {
           <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
           
           <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-8 text-center pb-20">
-            <h3 className="md:text-2xl p-2 uppercase font-bold text-white font-birthstone!  ">
+            <h3 className="text-3xl sm:text-5xl font-birthstone p-2 uppercase font-bold text-white font-birthstone!  ">
               Il tuo soggiorno a Napoli <br /> al miglior prezzo possibile
             </h3>
             <SearchForm></SearchForm>
@@ -40,7 +40,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="p-8 bg-background text-2xl font-bold upper mb-8">
+      <div className="p-8 font-birthstone text-3xl bg-background font-bold upper mb-8">
         <h3>Le nostre stanze</h3>
       </div>
 
@@ -68,7 +68,7 @@ export default function Home() {
       </div>
       
       <div className="bg-background">
-        <div className="p-8 bg-background text-2xl font-bold upper">
+        <div className="p-8 font-birthstone bg-background text-3xl font-bold upper">
           <h3>Nel cuore del centro storico di Napoli</h3>
         </div>
         <GoogleMapsIFrame></GoogleMapsIFrame>

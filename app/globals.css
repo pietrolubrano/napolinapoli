@@ -61,6 +61,11 @@ span[data-selection-end="true"] {
 strong {
   color: var(--background);
 }
+
+.font-birthstone {
+  font-family: var(--font-birthstone);
+}
+
 .embla__viewport {
   overflow: hidden;
 }
