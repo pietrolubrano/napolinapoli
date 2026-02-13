@@ -24,8 +24,8 @@ const birthstone = Birthstone({
 })
 
 export const metadata: Metadata = {
-  title: "Napoli Napoli Rooms - b&b, guest house",
-  description: "B&b nel centro di Napoli, a due passi da Spaccanapoli e dal Duomo di Napoli.",
+  title: "Napoli Napoli Rooms - Guest House",
+  description: "Guest House nel centro storico di Napoli, a due passi da Spaccanapoli e dal Duomo.",
   openGraph: {
     images: ['/images/napoli-napoli-logo.png']
   }

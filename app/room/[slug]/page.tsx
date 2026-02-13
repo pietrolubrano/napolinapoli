@@ -19,7 +19,7 @@ export async function generateMetadata(
   
   if(room){
     return {
-      title: `Napoli Napoli Rooms b&b - Camera ${room.name}`,
+      title: `Napoli Napoli Rooms - Guest House - Camera ${room.name}`,
       description: room.description,
       openGraph: {
         images: [room.opengraphImage],
@@ -28,7 +28,7 @@ export async function generateMetadata(
   }
 
   return {
-    title: 'Napoli Napoli Rooms b&b - Camera non trovata',
+    title: 'Napoli Napoli Rooms - Guest House - Camera non trovata',
     description: 'Camera non trovata',
     openGraph: {
       images: ['/images/napoli-napoli-logo.png']
