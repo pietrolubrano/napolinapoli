@@ -58,6 +58,9 @@ span[data-selection-end="true"] {
   color: white;
 }
 
+strong {
+  color: var(--background);
+}
 .embla__viewport {
   overflow: hidden;
 }

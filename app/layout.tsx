@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Viewport } from 'next'
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Birthstone, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./(components)/Navbar";
 import {Providers} from "./providers";
@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const birthstone = Birthstone({
+  variable: "--font-birthstone",
+  weight: "400",
+  subsets: ["latin"]
+})
 
 export const metadata: Metadata = {
   title: "Napoli Napoli Rooms - b&b, guest house",
@@ -40,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} text-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
         <Providers>
           <Navbar></Navbar>

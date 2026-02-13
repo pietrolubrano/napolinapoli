@@ -14,7 +14,7 @@ export default function Home() {
           <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
           
           <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-8 text-center pb-20">
-            <h3 className="md:text-2xl p-2 uppercase font-bold text-white">
+            <h3 className="md:text-2xl p-2 uppercase font-bold text-white font-birthstone!  ">
               Il tuo soggiorno a Napoli <br /> al miglior prezzo possibile
             </h3>
             <SearchForm></SearchForm>
@@ -25,8 +25,8 @@ export default function Home() {
       
       {/* <Divider className="my-4" /> */}
 
-      <div className="p-8 bg-background upper pb-8">
-        <div className="container mx-auto space-y-4">
+      <div className="p-8 upper pb-8 bg-background">
+        <div className="container mx-auto space-y-4 max-w-2xl  text-black p-8 bg-white ">
           <h3 className="text-2xl italic mb-4">Svegliarsi a <strong>Spaccanapoli</strong>, in un confortevole mix tra antico e moderno.</h3>
           <p className='md:ms-3'>
             Situato ad angolo tra <strong>vicolo dei Maiorani</strong> e il decumano minore della città <strong>via San Biagio dei Librai</strong>, popolarmente chiamato <strong>Spaccanapoli</strong>, dove passeggiare vuol dire attraversare i secoli.
