@@ -29,7 +29,7 @@ export const checkApartmentAvailability = async (
   
   data.availableApartments.forEach((apartmentId: number) => {
     const apartmentPrice = data.prices[apartmentId].price
-    data.prices[apartmentId].price = Math.round(apartmentPrice - (apartmentPrice * 0.3)) // Sconto del 30%
+    data.prices[apartmentId].price = Math.round(apartmentPrice - (apartmentPrice * 0.35)) // Sconto del 35%
   })
 
   return data
