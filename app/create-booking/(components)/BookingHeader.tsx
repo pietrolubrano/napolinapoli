@@ -4,7 +4,6 @@ interface Props {
     arrivalDate: string
     departureDate: string
     guests: string
-    price: SmoobuAvailabilityResponseData["prices"][number]
     apartmentId: number
 }
 
@@ -20,7 +19,6 @@ export default function BookingHeader({
     arrivalDate,
     departureDate,
     guests,
-    price,
     apartmentId
 } : Props) {
 

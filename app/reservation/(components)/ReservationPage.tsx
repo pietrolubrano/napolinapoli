@@ -20,14 +20,6 @@ export default function ReservationPage({
                         arrivalDate={reservation.arrival}
                         departureDate={reservation.departure}
                         guests={reservation.adults.toString()}
-                        price={{
-                            price: reservation.price,
-                            currency: '€',
-                            priceElements: [{
-                                type: "basePrice",
-                                amount: reservation.price
-                            }]
-                        }}
                         apartmentId={reservation.apartment.id}
                     />
                 </div>
