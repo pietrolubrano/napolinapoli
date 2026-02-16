@@ -1,7 +1,7 @@
 import { rooms } from "@/data/roomsData"
 import BookingForm from "./(components)/BookingForm"
 import BookingHeader from "./(components)/BookingHeader"
-import { checkAvailability } from "../actions/smoobuActions"
+import { checkApartmentAvailability } from "../actions/smoobuActions"
 
 export default async function Page({
   searchParams,
@@ -11,17 +11,17 @@ export default async function Page({
 
     const { arrivalDate, departureDate, guests, apartmentId } = await searchParams
 
-    const response = await checkAvailability(
+    const data = await checkApartmentAvailability(
         arrivalDate as string,
         departureDate as string,
         guests as string,
         [apartmentId as string]
     )
-    const data = await response.json()
-    
+
     const apartmentName = rooms[Number(apartmentId)].name
 
     if(data.availableApartments[0] === Number(apartmentId)){
+
         return (
             <main className="bg-black/70">
                 <div className="container mx-auto max-w-2xl bg-background pb-8">

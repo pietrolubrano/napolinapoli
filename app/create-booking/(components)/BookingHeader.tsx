@@ -4,14 +4,7 @@ interface Props {
     arrivalDate: string
     departureDate: string
     guests: string
-    price: {
-        price: number
-        currency: string
-        priceElements: {
-            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
-            amount: number
-        }[]
-    },
+    price: SmoobuAvailabilityResponseData["prices"][number]
     apartmentId: number
 }
 

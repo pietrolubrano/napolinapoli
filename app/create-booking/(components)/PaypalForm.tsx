@@ -4,14 +4,7 @@ interface Props {
   arrivalDate: string
     departureDate: string
     guests: string
-    price: {
-        price: number
-        currency: string
-        priceElements: {
-            type: 'basePrice' | 'longStayDiscount' | 'CleaningFee'
-            amount: number
-        }[]
-    },
+    price: SmoobuAvailabilityResponseData["prices"][number]
     apartmentId: number,
     validatedData: boolean
     formData: FormData | null
@@ -103,7 +96,7 @@ export default function PaypalForm({
             const paymentData = {
                 name: payerName,
                 email: payerEmail,
-                amount: (price.price%10).toFixed(2),
+                amount: 50,
                 orderID: data.orderID
             };
             

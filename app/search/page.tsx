@@ -3,16 +3,7 @@ import RoomCard from "./(components)/RoomCard"
 import { Suspense } from "react"
 import Loading from "../loading"
 import Image from "next/image"
-import { checkAvailability } from "../actions/smoobuActions"
-
-export type SmoobuAvailabilityResponseData = {
-  availableApartments: number[]
-  errorMessages: string[]
-  prices: {
-    price: number
-    currency: string
-  }[]
-}
+import { checkApartmentAvailability } from "../actions/smoobuActions"
 
 export default async function Page({
   searchParams,
@@ -63,21 +54,23 @@ async function CardWrapper({
   guests: string
   }) {
 
-  let data
-  let response
+let data
+
   if(arrivalDate && departureDate && guests){
-    data = await checkAvailability(arrivalDate as string, departureDate as string, guests as string)
-    response = await data.json()
-    console.log('Smoobu availability response:', response);
+    data = await checkApartmentAvailability(arrivalDate, departureDate, guests)
+    console.log('Smoobu availability response:', data);
   }
 
-  if(!response || !response.availableApartments){
+  if(!data || !data.availableApartments){
     return (
-      null
+      <div className="text-white text-center mt-8 bg-red-500 z-10 max-w-2xl p-4 rounded">
+        <h3 className="text-2xl font-bold mb-4">🙁 Errore</h3>
+        <p>Per favore prova a riformulare la richiesta.</p>
+      </div>
     )
   }
 
-  if(response.availableApartments.length === 0){
+  if(data.availableApartments.length === 0){
     console.log('No available apartments for the selected dates and number of guests.');
     return (
       <div className="text-white text-center mt-8 bg-red-500 z-10 max-w-2xl p-4 rounded">
@@ -89,12 +82,12 @@ async function CardWrapper({
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 pt-8">
-      {response?.availableApartments?.map((apartmentId: number) => 
+      {data?.availableApartments?.map((apartmentId: number) => 
         apartmentId !== 260797 &&
           <div key={apartmentId}>
             <RoomCard
               apartmentId={apartmentId}
-              response={response}
+              response={data}
               arrivalDate={arrivalDate as string}
               departureDate={departureDate as string}
               guests={guests as string}

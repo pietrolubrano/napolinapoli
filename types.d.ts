@@ -21,6 +21,66 @@ type CreateBookingRequestBody = {
     language: string
 }
 
+type GuestExceedApartmentLimitError = {
+    errorCode: 400
+    message: string
+    numberOfGuest: number
+}
+
+type DurationBookingError = {
+    errorCode: 401
+    message: string
+    minimumLengthOfStay: number
+}
+
+type ChoosenDayOfArrivalNotAvilableError = {
+    errorCode: 402
+    message: string
+}
+
+type ArrivalDayIsTooShortTermError = {
+    errorCode: 403
+    message: string
+}
+
+type MinimumBeetweenBookingsError = {
+    errorCode: 404
+    message: string
+}
+
+type SmoobuAvailabilityErrorMessages = 
+    GuestExceedApartmentLimitError
+    | 
+    DurationBookingError
+    |
+    ChoosenDayOfArrivalNotAvilableError
+    |
+    ArrivalDayIsTooShortTermError
+    |
+    MinimumBeetweenBookingsError
+
+type SmoobuAvailabilityResponseData = {
+  availableApartments: number[]
+  errorMessages: {
+    [key: number]: SmoobuAvailabilityErrorMessages
+}
+  prices: {
+    [key: number]: {
+      price: number
+      currency: string
+      priceElements: {
+        type: 'basePrice' | 'longStayDiscount' | 'cleaningFee'
+        amount: number
+        additionalInfo: string | null
+        currencyCode: string
+        quantity: number | null
+        sortOrder: number | null
+        tax: number | null
+      }[]
+    }
+  }
+}
+
 type Reservation = {
     "status": number,
     "id": number,

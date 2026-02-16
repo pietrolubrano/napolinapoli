@@ -47,6 +47,7 @@ async function capturePayPalOrder(orderID: string, accessToken: string) {
     throw error;
   }
 }
+
 export async function POST(request: Request) {
   try {
     const data: PaymentData = await request.json();
@@ -95,6 +96,7 @@ export async function POST(request: Request) {
     );
   }
 }
+
 export async function GET() {
   return NextResponse.json(
     { message: 'Payment API endpoint' },

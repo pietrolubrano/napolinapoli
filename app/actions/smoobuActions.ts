@@ -1,26 +1,44 @@
 "use server"
 
-export const checkAvailability = async (
+export const checkApartmentAvailability = async (
   arrivalDate: string,
   departureDate: string,
   guests: string,
   apartments?: string[]
-) => fetch("https://login.smoobu.com/booking/checkApartmentAvailability",{
-    headers: {
-      'Api-Key' : process.env.API_KEY as string,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      
-    },
-    method: "POST",
-    body: JSON.stringify({
-      arrivalDate,
-      departureDate,
-      guests: +guests,
-      apartments: apartments || [],
-      customerId: process.env.CUSTOMER_ID
-    })
-})
+) => {
+  try {
+    const response = await fetch("https://login.smoobu.com/booking/checkApartmentAvailability",{
+      headers: {
+        'Api-Key' : process.env.API_KEY as string,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        
+      },
+      method: "POST",
+      body: JSON.stringify({
+        arrivalDate,
+        departureDate,
+        guests: +guests,
+        apartments: apartments || [],
+        customerId: process.env.CUSTOMER_ID
+      })
+  })
+
+  
+  const data: SmoobuAvailabilityResponseData = await response.json()
+  
+  data.availableApartments.forEach((apartmentId: number) => {
+    const apartmentPrice = data.prices[apartmentId].price
+    data.prices[apartmentId].price = apartmentPrice - (apartmentPrice * 0.3) // Sconto del 30%
+  })
+
+  return data
+
+  } catch (error) {
+    console.error('Error checking availability:', error);
+    throw new Error('Failed to check availability. Please try again later.');
+  }
+}
 
 export const createBooking = async(
   arrivalDate: string,

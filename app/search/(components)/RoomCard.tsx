@@ -6,7 +6,6 @@ import NextImage from "next/image";
 import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
 import {Card, CardHeader, CardBody, Image, Button} from "@heroui/react";
 import { rooms } from "@/data/roomsData";
-import { SmoobuAvailabilityResponseData } from "../page";
 
 export default function App({
     apartmentId,
