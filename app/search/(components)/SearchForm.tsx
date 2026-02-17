@@ -19,7 +19,7 @@ export default function SearchForm({
 
     const [value, setValue] = useState({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
-        end: parseDate(departureDate ? departureDate : new Date().toISOString().substring(0,10)),
+        end: parseDate(departureDate ? departureDate : new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().substring(0,10))
     });
     const [guestsValue, setGuestsValue] = useState(guests ? +guests : 2)
 
