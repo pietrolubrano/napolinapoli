@@ -1,6 +1,4 @@
-// Source - https://stackoverflow.com/a/36862446
-// Posted by QoP, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-02-17, License - CC BY-SA 4.0
+"use client"
 
 import { useState, useEffect } from 'react';
 
