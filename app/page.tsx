@@ -3,9 +3,13 @@ import { rooms } from "@/data/roomsData";
 import Image from "next/image";
 import Link from "next/link";
 import GoogleMapsIFrame from "./(components)/GoogleMapsIFrame";
+import Head from "next/head";
 
 export default function Home() {
-  return (
+  return (<>
+    <Head>
+      <link rel="canonical" href="https://www.napolinapolirooms.it/" />
+    </Head>
     <main className="bg-black/70">
 
       <div className="h-[calc(100svh-70px)]">
@@ -75,5 +79,5 @@ export default function Home() {
       </div>
 
     </main>
-  );
+  </>);
 }
