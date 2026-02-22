@@ -49,7 +49,7 @@ export default function PaypalForm({
             email: formData?.email as string,
             arrivalTime: formData?.arrivalTime as string,
             phone: formData?.phone,
-            notice: 'RESERVATION FROM WEBSITE'
+            notice: formData?.notice
         }
 
         const bookingResponse = await fetch('/api/booking', {
@@ -143,6 +143,9 @@ export default function PaypalForm({
           intent: 'capture',
           "disable-funding": "mybank"
         }}>
+        {/*     <button onClick={createBooking} className="mb-4 bg-green-500 text-white px-4 py-2 rounded" disabled={!validatedData || isProcessing}>
+                api booking test
+            </button> */}
           <PayPalButtons
             className="z-0"
             createOrder={createOrder}

@@ -2,6 +2,7 @@ export async function POST(request: Request) {
 
     const body: CreateBookingRequestBody = await request.json();
 
+    /* console.log("Received booking request:", body); */
     const response = await fetch("https://login.smoobu.com/api/reservations",{
         headers: {
         'Api-Key' : process.env.API_KEY as string,

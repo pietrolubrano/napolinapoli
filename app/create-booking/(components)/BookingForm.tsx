@@ -10,17 +10,18 @@ interface Props {
 
 import TermsAndConditionModal from "@/app/(components)/TermsAndConditionModal"
 import { FormEvent, useState } from "react";
-import {Form, Input, TimeInput, Checkbox, Button, Divider, useDisclosure} from "@heroui/react";
+import {Form, Input, TimeInput, Checkbox, Button, Divider, useDisclosure, Textarea} from "@heroui/react";
 import PaypalForm from "./PaypalForm";
 import {Time} from "@internationalized/date";
 
 export type FormData = {
-    email: string,
-    firstName: string,
-    lastName: string,
+    email: string
+    firstName: string
+    lastName: string
     terms: "true" | "false"
-    arrivalTime: string,
+    arrivalTime: string
     phone: string
+    notice: string
 }
 
 type Errors = {
@@ -170,8 +171,23 @@ export default function App({
               defaultValue={new Time(14, 0)}
               isRequired
               isDisabled={submitted !== null}
+              classNames={{
+                inputWrapper: submitted !== null && submittedClassNames,
+              }}
             />
           </div>
+
+          <Textarea
+            isDisabled={submitted !== null}
+            className=""
+            name="notice"
+            label="Note"
+            labelPlacement="outside"
+            classNames={{
+                inputWrapper: submitted !== null && submittedClassNames,
+              }}
+            placeholder="Inserisci qui eventuali richieste particolari o informazioni che pensi siano utili per il tuo soggiorno"
+          />
 
           <div>
             <Checkbox
