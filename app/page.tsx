@@ -11,11 +11,11 @@ export default function Home() {
       <div className="h-[calc(100svh-70px)]">
         <div className="relative h-full p-8 pb-20 text-white">
           <h1 className="hidden">Napoli Napoli Rooms - b&b guesthouse Napoli</h1>
-          <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
+          <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/spaccanapoli-1068x712.jpg" alt="Napoli" width={1068} height={712} className="absolute inset-0 w-full h-full object-cover" />
           
           <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-8 text-center pb-52">
             <h3 className="text-3xl sm:text-5xl font-birthstone p-2 uppercase font-bold text-white font-birthstone!  ">
-              Il tuo soggiorno a Napoli <br /> al miglior prezzo possibile
+              Prenota qui <br /> al miglior prezzo possibile
             </h3>
             <SearchForm></SearchForm>
           </div>

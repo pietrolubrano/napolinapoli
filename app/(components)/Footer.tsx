@@ -15,7 +15,7 @@ export default function Footer() {
 
             <div className="col-span-3 mb-6 flex flex-col md:flex-row gap-8 items-center md:items-start justify-center md:justify-start">
                  <Link href={'https://www.booking.com/hotel/it/palepolib-amp-b.it.html'} target="_blank" className="flex items-center">
-                    <Image loading="eager" src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/booking-award/Digital-Award-TRA-2025.png" alt="Logo" width={200} height={200}></Image>
+                    <Image loading="eager" src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/booking-award/Print-Award-Blue_TRA-2026.jpg" alt="Logo" width={200} height={200}></Image>
                  </Link>
                  <TripAdvisor></TripAdvisor>
                  <div >

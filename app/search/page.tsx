@@ -17,7 +17,7 @@ export default async function Page({
         <main className="bg-black/70">
 
           <div className="container mx-auto flex flex-col items-center p-8 min-h-[calc(100svh-70px)] relative">
-            <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/napoli-sfondo.webp" alt="Napoli" width={1920} height={1080} className="absolute inset-0 h-full object-cover" />
+            <Image src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/sfondi/spaccanapoli-1068x712.jpg" alt="Napoli" width={1068} height={712} className="absolute inset-0 h-full object-cover" />
             <div className="absolute inset-0 bg-black/70"></div>
             
               <div className="text-gray-600 p-3 max-w-2xl bg-gray-300 font-bold w-full z-0">
