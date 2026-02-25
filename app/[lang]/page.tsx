@@ -6,11 +6,12 @@ import GoogleMapsIFrame from "./components/GoogleMapsIFrame";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
 
-export default async function Home(props: {
-  params: Promise<{ lang: Locale }>;
-}) {
-  const { lang } = await props.params;
-  const dictionary = await getDictionary(lang);
+export default async function Page({
+  params,
+}: PageProps<'/[lang]'>) {
+
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
 
   return (
     <main className="bg-black/70">
@@ -26,7 +27,7 @@ export default async function Home(props: {
                 lang === "it" ? <>Prenota qui<br/> al miglior prezzo possibile</> : <>Book here<br/> at the best possible price</>
               }
             </h3>
-            <SearchForm lang={lang}></SearchForm>
+            <SearchForm lang={lang as Locale}></SearchForm>
           </div>
 
         </div>
@@ -82,9 +83,9 @@ export default async function Home(props: {
               <div className="p-4 md:p-8 flex flex-col justify-between w-full">
                 <div className=" ">
                   <h4 className="w-full text-xl text-background font-bold mb-2">{room.name}</h4>
-                  <p className="w-full text-gray-600 mb-4">{room.description[lang]}</p>
+                  <p className="w-full text-gray-600 mb-4">{room.description[lang as Locale]}</p>
                 </div>
-                <Link href={`/room/${room.slug}`} className="text-background font-bold underline text-center">
+                <Link href={`/${lang}/room/${room.slug}`} className="text-background font-bold underline text-center">
                   {lang === 'it' ? 'Scopri di più' : 'Show more'}
                 </Link>
               </div>

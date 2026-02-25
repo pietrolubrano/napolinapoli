@@ -13,7 +13,7 @@ export default function ReservationNotFount({
                 <p className="mb-4">
                     {lang === "it" ? "Prenotazione non trovata" : "Reservation not found"}
                 </p>
-                <Button as={Link} href={'/reservation'} className="bg-background text-white">
+                <Button as={Link} href={`/${lang}/reservation`} className="bg-background text-white">
                     {lang === "it" ? "Riprova" : "Try again"}
                 </Button>
             </div>

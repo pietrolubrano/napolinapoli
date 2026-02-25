@@ -48,9 +48,7 @@ const MaxOccupancy = ({ maxOccupancy } : { maxOccupancy: number }) => {
 
 export default async function Page({
   params,
-}: {
-  params: Promise<{ slug: string, lang: Locale }>
-}) {
+}: PageProps<'/[lang]/room/[slug]'>) {
 
   const { slug, lang } = await params
 
@@ -66,7 +64,7 @@ export default async function Page({
         <div className="lg:hidden grid grid-cols-3">
           {
             Object.values(rooms).slice(0,3).map((room) => (
-              <Link href={`/room/${room.slug}`} key={room.name} className="text-background font-bold col-span-1">
+              <Link href={`/${lang}/room/${room.slug}`} key={room.name} className="text-background font-bold col-span-1">
                 <Button className={`w-full uppercase text-sm font-bold ${room.slug === slug ? 'bg-gray-200 text-background' : 'bg-background text-white' }`}>
                   {room.name}
                 </Button>
@@ -98,7 +96,7 @@ export default async function Page({
             </h2>
 
             <p className="text-gray-500 text-xl mb-8 p-10 italic ">
-              {description[lang]}
+              {description[lang as Locale]}
             </p>
           </div>
 
@@ -112,17 +110,17 @@ export default async function Page({
 
             <div className="p-8">
               <p className="lg:hidden text-gray-500 font-bold mb-8">
-                {description[lang]}
+                {description[lang as Locale]}
               </p>
 
               <ul className="space-y-2 mb-8">
                 {services.map(service => <li key={service.description.it} className="flex items-center">
-                    <span className=" inline-block me-2 text-xl text-background">{service.icon}</span>{service.description[lang]}
+                    <span className=" inline-block me-2 text-xl text-background">{service.icon}</span>{service.description[lang as Locale]}
                   </li>)}
               </ul>
               
               <div className="flex w-full justify-end sticky bottom-4 md:static">
-                  <Link href={'/search'} className="w-full sm:w-fit">
+                  <Link href={`/${lang}/search`} className="w-full sm:w-fit">
                     <Button className="bg-background w-full sm:w-fit p-4 text-white text-sm font-bold uppercase">
                       {lang === 'it' ? 'Verifica la disponibilità' : 'Check availability'}
                     </Button>

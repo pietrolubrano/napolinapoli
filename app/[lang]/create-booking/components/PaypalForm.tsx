@@ -48,7 +48,7 @@ export default function PaypalForm({
             priceStatus: 0,
             prepayment: 50,
             prepaymentStatus: 1,
-            language: "it",
+            language: lang,
             email: formData?.email as string,
             arrivalTime: formData?.arrivalTime as string,
             phone: formData?.phone,
@@ -65,7 +65,7 @@ export default function PaypalForm({
 
         const bookingResult = await bookingResponse.json()
 
-        router.push(`/reservation?email=${encodeURIComponent(formData?.email as string)}&reservationId=${encodeURIComponent(bookingResult.id)}`)
+        router.push(`/${lang}/reservation?email=${encodeURIComponent(formData?.email as string)}&reservationId=${encodeURIComponent(bookingResult.id)}`)
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

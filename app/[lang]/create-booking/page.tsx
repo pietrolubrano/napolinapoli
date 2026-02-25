@@ -7,10 +7,7 @@ import { Locale } from "@/i18n-config"
 export default async function Page({
     params,
     searchParams,
-}: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-    params: Promise<{ lang: Locale }>
-}) {
+}: PageProps<'/[lang]'>) {
 
     const { lang } = await params
     const { arrivalDate, departureDate, guests, apartmentId } = await searchParams
@@ -40,7 +37,7 @@ export default async function Page({
                             departureDate={departureDate as string}
                             guests={guests as string}
                             apartmentId={Number(apartmentId)}
-                            lang={lang}
+                            lang={lang as Locale}
                         />
 
                     </div>
@@ -51,7 +48,7 @@ export default async function Page({
                         guests={guests as string}
                         price={data.prices[Number(apartmentId)]}
                         apartmentId={Number(apartmentId)}
-                        lang={lang}
+                        lang={lang as Locale}
                     />
 
                 </div>

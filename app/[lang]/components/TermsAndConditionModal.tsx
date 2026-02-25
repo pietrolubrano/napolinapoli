@@ -127,7 +127,7 @@ export default function TermsAndConditionModal({
                     Chiudi
                     </Button> */}
                     <Button color="primary" onPress={onClose}>
-                    Chiudi
+                        {lang === "it" ? "Chiudi" : "Close"}
                     </Button>
                 </ModalFooter>
                 </>

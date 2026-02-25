@@ -54,7 +54,7 @@ export default function App(props: { lang: Locale }) {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <Logo />
           </Link>
         </NavbarBrand>
@@ -66,7 +66,7 @@ export default function App(props: { lang: Locale }) {
 
       <NavbarContent className="hidden sm:flex gap-4 uppercase" justify="center">
         <NavbarBrand>
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <Logo />
           </Link>
         </NavbarBrand>
@@ -91,7 +91,7 @@ export default function App(props: { lang: Locale }) {
             }}
           >
             {rooms.map((item) => (
-              <DropdownItem key={item.name} as={Link} href={item.href}>
+              <DropdownItem key={item.name} as={Link} href={`/${lang}/${item.href}`}>
                 {item.name}
               </DropdownItem>
             ))}
@@ -103,7 +103,7 @@ export default function App(props: { lang: Locale }) {
             <NavbarItem key={item.name[lang]} className={classNames(
               "text-inherit hover:text-inherit",
             )}>
-              <Button as={Link} href={item.href} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+              <Button as={Link} href={`/${lang}/${item.href}`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
                 {item.name[lang]}
               </Button>
             </NavbarItem>
@@ -114,7 +114,7 @@ export default function App(props: { lang: Locale }) {
 
       <NavbarContent justify="end" className="hidden md:flex">
         <NavbarItem>
-            <Button as={Link} href="/search" className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+            <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
               {lang === "it" ? "PRENOTA" : "BOOK NOW"}
             </Button>
         </NavbarItem>
@@ -136,7 +136,7 @@ export default function App(props: { lang: Locale }) {
               /*    color={
                     index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
                   } */
-                  href={item.href}
+                  href={`/${lang}/${item.href}`}
                   size="lg"
                 >
                   {item.name}
@@ -153,7 +153,7 @@ export default function App(props: { lang: Locale }) {
             /*    color={
                   index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
                 } */
-                href={item.href}
+                href={`/${lang}/${item.href}`}
                 size="lg"
               >
                 {item.name[lang]}

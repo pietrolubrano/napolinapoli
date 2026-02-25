@@ -183,7 +183,7 @@ export default function BookingForm({
             classNames={{
                 inputWrapper: submitted !== null && submittedClassNames,
               }}
-            placeholder="Inserisci qui eventuali richieste particolari o informazioni che pensi siano utili per il tuo soggiorno"
+            placeholder={lang === "it" ? "Inserisci qui eventuali richieste particolari o informazioni che pensi siano utili per il tuo soggiorno." : "Enter any special requests or information you think would be useful for your stay."}
           />
 
           <div>

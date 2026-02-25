@@ -54,7 +54,7 @@ export default async function Page({
                             }
                         </p>
                         <Link href={{ 
-                            pathname: '/reservation',
+                            pathname: `/${lang}/reservation`,
                             query: {
                                 reservationId
                             }
