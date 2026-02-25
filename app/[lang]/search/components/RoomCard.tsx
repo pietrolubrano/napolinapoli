@@ -65,7 +65,7 @@ export default function App({
 
         <Link
           href={{ 
-            pathname: '/create-booking',
+            pathname: `/${lang}/create-booking`,
             query: {
               arrivalDate,
               departureDate,
