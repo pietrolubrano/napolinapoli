@@ -108,7 +108,7 @@ export default function TermsAndConditionModal({
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1 text-background">Termini e condizioni</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1 text-background">{lang === 'it' ? 'Termini e condizioni' : 'Terms and conditions'}</ModalHeader>
                 <ModalBody className="text-black">
                     <ul className="space-y-4">
                         {
