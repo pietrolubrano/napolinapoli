@@ -202,7 +202,7 @@ export default function BookingForm({
             </span>
           </div>
           
-          <TermsAndConditionModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}></TermsAndConditionModal>
+          <TermsAndConditionModal lang={lang} isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} />
           {errors.terms && <span className="text-danger text-small">{errors.terms}</span>}
 
           <div className="flex gap-4">
