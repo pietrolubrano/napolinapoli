@@ -43,23 +43,22 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function RootLayout(props: 
-  Readonly<{
-    children: React.ReactNode;
-    params: Promise<{ lang: Locale }>;
-  }>) {
+export default async function RootLayout({
+  params,
+  children
+}: LayoutProps<'/[lang]'>) {
 
-  const params = await props.params;
-  
+  const { lang } = await params
+
   return (
-    <html lang={params?.lang || "en"}>
+    <html lang={lang || "en"}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
         <Providers>
-          <Navbar lang={params.lang}></Navbar>
-            {props.children}
-          <Footer lang={params.lang}></Footer>
+          <Navbar lang={lang as Locale}></Navbar>
+            {children}
+          <Footer lang={lang as Locale}></Footer>
         </Providers>
       </body>
     </html>
