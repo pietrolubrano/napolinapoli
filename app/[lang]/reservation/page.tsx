@@ -18,6 +18,17 @@ const getReservation = async (
     method: "GET",
 })
 
+const getReservationMessages = async (
+  reservationId: string,
+) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages`,{
+    headers: {
+      'Api-Key' : process.env.API_KEY as string,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: "GET",
+})
+
 export default async function Page({
     searchParams,
     params
@@ -41,7 +52,9 @@ export default async function Page({
         }
 
         if(email === reservation.email){
-            return <ReservationPage reservation={reservation} lang={lang} />
+            const messagesResponse = await getReservationMessages(reservationId as string)
+            const messages: ReservationMessageResponse = await messagesResponse.json()
+            return <ReservationPage reservation={reservation} messages={messages} lang={lang} />
         } else {
             return(
                 <main className=" flex justify-center items-center w-full">

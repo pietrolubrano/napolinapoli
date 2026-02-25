@@ -19,7 +19,7 @@ export default function ReservationForm({
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        router.push(`/reservation?reservationId=${encodeURIComponent(reservationIdValue)}&email=${encodeURIComponent(email)}`)
+        router.push(`/${lang}/reservation?reservationId=${encodeURIComponent(reservationIdValue)}&email=${encodeURIComponent(email)}`)
     };
 
     return (

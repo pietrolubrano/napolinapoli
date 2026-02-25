@@ -128,3 +128,19 @@ type Reservation = {
         "name":string
     }[]
 }
+
+type Message = {
+    "id": number,
+    "subject": string,
+    "message": string,
+    "messageHtml": string,
+    "type": number
+}
+
+type ReservationMessageResponse = {
+    "page_count": number
+    "page_size": number
+    "total_items": number
+    "page": number
+    "messages": Message[]
+}
