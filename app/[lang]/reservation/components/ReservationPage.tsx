@@ -1,9 +1,12 @@
 import BookingHeader from '@/app/[lang]/create-booking/components/BookingHeader'
+import { Locale } from '@/i18n-config'
 
 export default function ReservationPage({
-    reservation
+    reservation,
+    lang
 } : {
     reservation: Reservation
+    lang: Locale
 }) {
     return (
         <main>
@@ -21,6 +24,7 @@ export default function ReservationPage({
                         departureDate={reservation.departure}
                         guests={reservation.adults.toString()}
                         apartmentId={reservation.apartment.id}
+                        lang={lang}
                     />
                 </div>
                 <div>

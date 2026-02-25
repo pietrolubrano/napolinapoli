@@ -41,7 +41,7 @@ export default async function Page({
         }
 
         if(email === reservation.email){
-            return <ReservationPage reservation={reservation}></ReservationPage>
+            return <ReservationPage reservation={reservation} lang={lang} />
         } else {
             return(
                 <main className=" flex justify-center items-center w-full">
