@@ -32,14 +32,12 @@ const getReservationMessages = async (
 export default async function Page({
     searchParams,
     params
-}: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-    params: Promise<{ lang: Locale }>;
-}) {
+    } : PageProps<'/[lang]'>
+) {
 
     const { lang } = await params;
     
-    const dictionary = await getDictionary(lang);
+    const dictionary = await getDictionary(lang as Locale);
 
     const { email, reservationId } = await searchParams
 
@@ -48,13 +46,13 @@ export default async function Page({
         const reservation: Reservation = await response.json()
 
         if(reservation.status === 404){
-            return<ReservationNotFount lang={lang} />
+            return<ReservationNotFount lang={lang as Locale} />
         }
 
         if(email === reservation.email){
             const messagesResponse = await getReservationMessages(reservationId as string)
             const messages: ReservationMessageResponse = await messagesResponse.json()
-            return <ReservationPage reservation={reservation} messages={messages} lang={lang} />
+            return <ReservationPage reservation={reservation} messages={messages} lang={lang as Locale} />
         } else {
             return(
                 <main className=" flex justify-center items-center w-full">
@@ -85,7 +83,7 @@ export default async function Page({
     return (
         <main className=" flex justify-center items-center w-full">
             <div className="text-gray-600 p-8 min-w-sm">
-                <ReservationForm reservationId={reservationId as string} lang={lang} />
+                <ReservationForm reservationId={reservationId as string} lang={lang as Locale} />
             </div>
         </main>
     )

@@ -130,11 +130,12 @@ type Reservation = {
 }
 
 type Message = {
-    "id": number,
-    "subject": string,
-    "message": string,
-    "messageHtml": string,
-    "type": number
+    "id": number
+    "subject": string
+    "message": string
+    "htmlMessage": string
+    "type": 1 | 2
+    "createdAt": string
 }
 
 type ReservationMessageResponse = {

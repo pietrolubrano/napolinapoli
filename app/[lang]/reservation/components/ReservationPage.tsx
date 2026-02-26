@@ -5,6 +5,7 @@ import { Locale } from '@/i18n-config'
 import Link from 'next/link'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { Accordion, AccordionItem } from "@heroui/react";
+import { FaUserCircle, FaCalendar } from "react-icons/fa";
 
 export default function ReservationPage({
     reservation,
@@ -62,8 +63,18 @@ export default function ReservationPage({
                             {
                                 messages.messages.map((message) => (
                                     <AccordionItem key={message.id} className='bg-gray-100 px-4' title={message.subject || 'Message'}>
-                                        <div className='py-8 bg-gray-100 mb-8 rounded-2xl'>
-                                            {message.message.split(/\n/g).map((line, i) => <p className='mb-3' key={i}>{line}</p>)}
+                                        
+                                        <div className='mb-2 flex w-full items-center text-sm text-gray-500 justify-between'>
+                                            <div>
+                                                <FaUserCircle className='inline' size={'1.5em'} /> <span className='font-bold'>{message.type === 1 ? 'ME' : 'HOST'}</span>
+                                            </div>
+                                            <div>
+                                                <span className='float-right text-xs flex items-center'><FaCalendar className='inline mr-1' />{new Date(message.createdAt).toLocaleDateString(lang)}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='py-8 bg-gray-100 mb-8 rounded-2xl' dangerouslySetInnerHTML={{ __html:message.htmlMessage }}>
+                                            {/* {message.message.split(/\n/g).map((line, i) => <p className='mb-3' key={i}>{line}</p>)} */}
                                         </div>
                                     </AccordionItem>
                                 ))
