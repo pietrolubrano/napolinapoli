@@ -1,8 +1,11 @@
 import Image from 'next/image'
-import RootLayout from './[lang]/layout'
+import { Suspense } from 'react';
+
 import Navbar from './[lang]/components/Navbar'
-import { Birthstone, Geist, Geist_Mono } from 'next/font/google';
 import Footer from './[lang]/components/Footer';
+import Loading from './[lang]/loading';
+
+import { Birthstone, Geist, Geist_Mono } from 'next/font/google';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +30,9 @@ export default function NotFound() {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
-        <Navbar lang='en'></Navbar>
+        <Suspense fallback={<Loading />}>
+          <Navbar lang='en'></Navbar>
+        </Suspense>
           <div className="h-[calc(100svh-70px)]">
             <div className="relative h-full p-8 pb-20 text-white">
               <h1 className="hidden">Napoli Napoli Rooms - b&b guesthouse Napoli</h1>
