@@ -8,6 +8,9 @@ import Navbar from "./components/Navbar";
 import {Providers} from "../providers";
 import Footer from "./components/Footer";
 
+import { Suspense } from 'react'
+import Loading from "./loading";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -56,7 +59,9 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
         <Providers>
-          <Navbar lang={lang as Locale}></Navbar>
+          <Suspense fallback={<Loading />}>
+            <Navbar lang={lang as Locale}></Navbar>
+          </Suspense>
             {children}
           <Footer lang={lang as Locale}></Footer>
         </Providers>
