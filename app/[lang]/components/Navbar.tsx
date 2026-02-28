@@ -20,7 +20,7 @@ import {
 } from "@heroui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Locale } from "@/i18n-config";
-import LocaleSwitcher from "./locale-switcher";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 const navigation = [
   { name: {it: "La Mia Prenotazione", en: "My Booking"}, href: '/reservation' },

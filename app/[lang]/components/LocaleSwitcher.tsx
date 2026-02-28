@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { i18n, type Locale } from "@/i18n-config";
 import { Button } from "@headlessui/react";
@@ -9,11 +9,15 @@ import { Button } from "@headlessui/react";
 export default function LocaleSwitcher() {
 
   const pathname = usePathname();
+  const searchParams = useSearchParams()
   const segments = pathname.split("/");
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return "/";
     segments[1] = locale;
+    if (searchParams.toString()) {
+      return segments.join("/") + "?" + searchParams.toString();
+    }
     return segments.join("/");
   };
 
