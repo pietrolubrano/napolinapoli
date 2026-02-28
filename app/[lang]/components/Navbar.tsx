@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -21,6 +21,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Locale } from "@/i18n-config";
 import LocaleSwitcher from "./LocaleSwitcher";
+import Loading from "../loading";
 
 const navigation = [
   { name: {it: "La Mia Prenotazione", en: "My Booking"}, href: '/reservation' },
@@ -62,7 +63,9 @@ export default function App(props: { lang: Locale }) {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden" justify="end">
+        <Suspense fallback={<Loading />}>
           <LocaleSwitcher></LocaleSwitcher>
+        </Suspense>
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
@@ -119,7 +122,9 @@ export default function App(props: { lang: Locale }) {
       </NavbarContent>
 
       <NavbarContent justify="end" className="hidden sm:flex">
-        <LocaleSwitcher></LocaleSwitcher>
+        <Suspense fallback={<Loading />}>
+          <LocaleSwitcher></LocaleSwitcher>
+        </Suspense>
         <NavbarItem>
             <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
               {lang === "it" ? "PRENOTA" : "BOOK NOW"}

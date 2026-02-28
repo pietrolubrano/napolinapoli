@@ -30,9 +30,7 @@ export default function NotFound() {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
-        <Suspense fallback={<Loading />}>
-          <Navbar lang='en'></Navbar>
-        </Suspense>
+        <Navbar lang='en'></Navbar>
           <div className="h-[calc(100svh-70px)]">
             <div className="relative h-full p-8 pb-20 text-white">
               <h1 className="hidden">Napoli Napoli Rooms - b&b guesthouse Napoli</h1>

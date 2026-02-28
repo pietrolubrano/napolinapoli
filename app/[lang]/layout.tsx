@@ -59,9 +59,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${birthstone.variable} text-white antialiased`}
       >
         <Providers>
-          <Suspense fallback={<Loading />}>
-            <Navbar lang={lang as Locale}></Navbar>
-          </Suspense>
+          <Navbar lang={lang as Locale}></Navbar>
             {children}
           <Footer lang={lang as Locale}></Footer>
         </Providers>
