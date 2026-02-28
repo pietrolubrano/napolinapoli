@@ -20,6 +20,7 @@ import {
 } from "@heroui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Locale } from "@/i18n-config";
+import LocaleSwitcher from "./locale-switcher";
 
 const navigation = [
   { name: {it: "La Mia Prenotazione", en: "My Booking"}, href: '/reservation' },
@@ -61,10 +62,12 @@ export default function App(props: { lang: Locale }) {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden" justify="end">
+          <LocaleSwitcher></LocaleSwitcher>
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4 uppercase" justify="center">
+
         <NavbarBrand>
           <Link href={`/${lang}`}>
             <Logo />
@@ -72,6 +75,7 @@ export default function App(props: { lang: Locale }) {
         </NavbarBrand>
         
         <Dropdown className="">
+
           <NavbarItem>
             <DropdownTrigger>
               <Button
@@ -84,6 +88,7 @@ export default function App(props: { lang: Locale }) {
               </Button>
             </DropdownTrigger>
           </NavbarItem>
+
           <DropdownMenu
             aria-label="Napoli Napoli Rooms"
             itemClasses={{
@@ -96,6 +101,7 @@ export default function App(props: { lang: Locale }) {
               </DropdownItem>
             ))}
           </DropdownMenu>
+
         </Dropdown>
         
         {
@@ -112,7 +118,8 @@ export default function App(props: { lang: Locale }) {
 
       </NavbarContent>
 
-      <NavbarContent justify="end" className="hidden md:flex">
+      <NavbarContent justify="end" className="hidden sm:flex">
+        <LocaleSwitcher></LocaleSwitcher>
         <NavbarItem>
             <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
               {lang === "it" ? "PRENOTA" : "BOOK NOW"}
@@ -122,29 +129,30 @@ export default function App(props: { lang: Locale }) {
 
         {/* MOBILE MENU */}
       <NavbarMenu className="bg-background flex items-center justify-center uppercase font-bold">
-            <div>
-              <NavbarMenuItem>
-                <p className="text-3xl mb-1">
-                  {lang === "it" ? "Le Stanze" : "Our Rooms"}
-                </p>
-              </NavbarMenuItem>
-              
-              {rooms.map((item, index) => (
-              <NavbarMenuItem key={`${item.name}-${index}`}>
-                <Link
-                  className={`${index <= 2 && ''}ms-3 text-md w-full text-white`}
-              /*    color={
-                    index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
-                  } */
-                  href={`/${lang}/${item.href}`}
-                  size="lg"
-                >
-                  {item.name}
-                </Link>
-              </NavbarMenuItem>
-            ))}
-          
+        
+        <div>
 
+          <NavbarMenuItem>
+            <p className="text-3xl mb-1">
+              {lang === "it" ? "Le Stanze" : "Our Rooms"}
+            </p>
+          </NavbarMenuItem>
+          
+          {rooms.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              <Link
+                className={`${index <= 2 && ''}ms-3 text-md w-full text-white`}
+            /*    color={
+                  index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
+                } */
+                href={`/${lang}/${item.href}`}
+                size="lg"
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+      
           <Divider className="my-2 bg-transparent"></Divider>
           {navigation.map((item, index) => (
             <NavbarMenuItem key={`${item.name}-${index}`}>
@@ -160,9 +168,13 @@ export default function App(props: { lang: Locale }) {
               </Link>
             </NavbarMenuItem>
           ))}
+
           <Divider className="p-16 bg-transparent"></Divider>
-          </div>
+          
+        </div>
+
       </NavbarMenu>
+
     </Navbar>
   );
 }
