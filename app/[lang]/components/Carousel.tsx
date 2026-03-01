@@ -7,6 +7,8 @@ import {
     FaArrowCircleRight
 } from "react-icons/fa";
 import Thumb from "./ThumbsButton";
+import Autoplay from "embla-carousel-autoplay";
+
 import { useCallback, useEffect, useState } from "react";
 
 export default function Carousel({
@@ -16,7 +18,7 @@ export default function Carousel({
 }) {
 
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true },[Autoplay()])
     const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
         containScroll: 'keepSnaps',
         dragFree: true
@@ -24,8 +26,8 @@ export default function Carousel({
 
     const onThumbClick = useCallback(
         (index: number) => {
-        if (!emblaApi || !emblaThumbsApi) return
-        emblaApi.scrollTo(index)
+            if (!emblaApi || !emblaThumbsApi) return
+            emblaApi.scrollTo(index)
         },
         [emblaApi, emblaThumbsApi]
     )
