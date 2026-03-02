@@ -2,10 +2,11 @@
 
 import {Button} from "@heroui/button";
 import {parseDate} from "@internationalized/date";
+import type {DateValue} from "@react-types/datepicker";
 import CustomDateRangePicker from '@/app/[lang]/search/components/CustomDateRangePicker'
 import { useState } from 'react'
 import Link from "next/link";
-import { NumberInput } from "@heroui/react";
+import { NumberInput, RangeValue } from "@heroui/react";
 import { Locale } from "@/i18n-config";
 
 export default function SearchForm({
@@ -20,7 +21,7 @@ export default function SearchForm({
     lang: Locale
 }) {
 
-    const [value, setValue] = useState({
+    const [value, setValue] = useState<RangeValue<DateValue> | null>({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
         end: parseDate(departureDate ? departureDate : new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().substring(0,10))
     });
@@ -71,8 +72,8 @@ export default function SearchForm({
                 <Link href={{
                     pathname: `/${lang}/search`,
                     query: {
-                        arrivalDate: value.start.toString(),
-                        departureDate: value.end.toString(),
+                        arrivalDate: value?.start.toString(),
+                        departureDate: value?.end.toString(),
                         guests: guestsValue
                     }
                 }}

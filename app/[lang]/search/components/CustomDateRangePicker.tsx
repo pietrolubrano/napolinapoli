@@ -2,7 +2,8 @@
 
 import {I18nProvider} from "@react-aria/i18n";
 import {DateRangePicker, RangeValue} from "@heroui/react";
-import {CalendarDate} from "@internationalized/date";
+import type {DateValue} from "@react-types/datepicker";
+import {getLocalTimeZone, today} from "@internationalized/date";
 import { Dispatch, SetStateAction } from "react";
 import useWindowDimensions from "@/app/[lang]/components/useWindowDimensions";
 import { Locale } from "@/i18n-config";
@@ -12,8 +13,8 @@ export default function CustomDateRangePicker({
   setValueAction,
   lang
 } : {
-  value: RangeValue<CalendarDate>,
-  setValueAction: Dispatch<SetStateAction<RangeValue<CalendarDate>>>
+  value: RangeValue<DateValue> | null,
+  setValueAction: Dispatch<SetStateAction<RangeValue<DateValue> | null>>,
   lang: Locale
 }) {
   
@@ -25,10 +26,10 @@ export default function CustomDateRangePicker({
         aria-label="date-range-picker"
         className="col-span-5 md:col-span-3"
         value={value}
-        onChange={setValueAction as ((value: RangeValue<CalendarDate> | null) => void) | undefined}
+        onChange={setValueAction as ((value: RangeValue<DateValue> | null) => void) | undefined}
         label={lang === "it" ? "Durata del soggiorno" : "Duration of stay"}
         visibleMonths={width > 640 ? 2 : 1}
-        minValue={new CalendarDate(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())}
+        minValue={today(getLocalTimeZone())}
       />
     </I18nProvider>
   );
