@@ -39,15 +39,6 @@ export async function generateMetadata(
   }
 }
 
-
-export const metadata: Metadata = {
-  title: "Napoli Napoli Rooms - Guest House",
-  description: "Guest House nel centro storico di Napoli, a due passi da Spaccanapoli e dal Duomo.",
-  openGraph: {
-    images: ['/images/napoli-napoli-logo.png']
-  }
-};
-
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#00a0d5' },
