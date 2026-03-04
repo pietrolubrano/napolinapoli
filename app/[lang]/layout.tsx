@@ -8,9 +8,6 @@ import Navbar from "./components/Navbar";
 import {Providers} from "../providers";
 import Footer from "./components/Footer";
 
-import { Suspense } from 'react'
-import Loading from "./loading";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,6 +23,22 @@ const birthstone = Birthstone({
   weight: "400",
   subsets: ["latin"]
 })
+
+export async function generateMetadata(
+  { params } : { params: Promise<{ lang: Locale }> }
+): Promise<Metadata> {
+  
+  const { lang } = await params
+  // fetch post information
+  return {
+    title: "Napoli Napoli Rooms - Guest House",
+    description: lang === 'it' ? "Guest House nel centro storico di Napoli, a due passi da Spaccanapoli e dal Duomo." : "Guest House in the historic center of Naples, two steps from Spaccanapoli and the Duomo.",
+    openGraph: {
+      images: ['/images/napoli-napoli-logo.png']
+    }
+  }
+}
+
 
 export const metadata: Metadata = {
   title: "Napoli Napoli Rooms - Guest House",
