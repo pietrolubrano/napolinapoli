@@ -16,6 +16,7 @@ const getReservation = async (
       'Content-Type': 'application/json',
     },
     method: "GET",
+    next: { tags: ['messages'] },
 })
 
 const getReservationMessages = async (

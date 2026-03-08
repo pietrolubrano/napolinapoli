@@ -1,5 +1,7 @@
 "use server"
 
+import { updateTag } from "next/cache"
+
 export const checkApartmentAvailability = async (
   arrivalDate: string,
   departureDate: string,
@@ -54,7 +56,11 @@ export const createBooking = async(createBookingData: CreateBookingData) =>
     })
 })
 
-export const sendMessageToHost = async (reservationId: string, subject: string, message: string) => {
+export const sendMessageToHost = async (prevState: any, formData: FormData) => {
+
+  const reservationId = formData.get('reservationId') as string
+  const subject = formData.get('subject') as string
+  const messageBody = formData.get('messageBody') as string
 
   try {
     const response = await fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-host`, {
@@ -66,18 +72,22 @@ export const sendMessageToHost = async (reservationId: string, subject: string, 
       method: "POST",
       body: JSON.stringify({
         subject,
-        message
+        messageBody
       })
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to send message. Please try again later.');
-    }
-
+    updateTag('messages');
     return await response.json();
 
   } catch (error) {
-    console.error('Error sending message:', error);
-    throw error;
+
+    console.error('Error sending message to host:', error);
+
+    return {
+      errors: {
+        messageBody: "Invalid.",
+      },
+    };
+
   }
 }

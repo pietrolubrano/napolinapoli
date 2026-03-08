@@ -145,3 +145,10 @@ type ReservationMessageResponse = {
     "page": number
     "messages": Message[]
 }
+
+type SendMessageToHostData = {
+    reservationId: string
+    messageBody: string
+    subject?: string
+    internal?: boolean
+}

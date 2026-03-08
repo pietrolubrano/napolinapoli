@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { Accordion, AccordionItem } from "@heroui/react";
 import { FaUserCircle, FaCalendar } from "react-icons/fa";
+import MessageToHostForm from './MessageToHostForm'
+import { FaClock } from 'react-icons/fa6'
 
 export default function ReservationPage({
     reservation,
@@ -38,7 +40,7 @@ export default function ReservationPage({
                 </div>
                 <table className="table-auto font-bold mx-auto p-8">
                     <tbody>
-                     {
+                        {
                             [
                                 { description: {it: 'Importo totale:', en: 'Total amount:'}, value: reservation.price },
                                 { description: {it: 'Acconto pagato:', en: 'Prepayment paid:'}, value: reservation.prepayment },
@@ -68,19 +70,21 @@ export default function ReservationPage({
                                             <div>
                                                 <FaUserCircle className='inline' size={'1.5em'} /> <span className='font-bold'>{message.type === 1 ? 'ME' : 'HOST'}</span>
                                             </div>
-                                            <div>
+                                            <div className='flex flex-col'>
                                                 <span className='float-right text-xs flex items-center'><FaCalendar className='inline mr-1' />{new Date(message.createdAt).toLocaleDateString(lang)}</span>
+                                                <span className='float-right text-xs flex items-center'><FaClock className='inline mr-1' />{new Date(message.createdAt).getHours()}:{new Date(message.createdAt).getMinutes().toString().padStart(2, '0')}</span>
                                             </div>
                                         </div>
                                         
-                                        <div className='py-8 bg-gray-100 mb-8 rounded-2xl' dangerouslySetInnerHTML={{ __html:message.htmlMessage }}>
-                                            {/* {message.message.split(/\n/g).map((line, i) => <p className='mb-3' key={i}>{line}</p>)} */}
+                                        <div className=' bg-gray-100 mb-4 px-3' /* dangerouslySetInnerHTML={{ __html:message.htmlMessage }} */>
+                                            {message.message.split(/\n/g).map((line, i) => <p className='mb-3' key={i}>{line}</p>)}
                                         </div>
                                     </AccordionItem>
                                 ))
                             }
                         </Accordion>
                     }
+                    <MessageToHostForm reservationId={reservation.id.toString()} lang={lang} />
                     {/* Come raggiungerci <br />
                     Nome rete wifi: <br />
                     Password: <br />
