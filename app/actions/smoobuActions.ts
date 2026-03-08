@@ -40,45 +40,44 @@ export const checkApartmentAvailability = async (
   }
 }
 
-export const createBooking = async(
-  arrivalDate: string,
-  departureDate: string,
-  apartmentId: number,
-  firstName: string,
-  lastName: string,
-  adults: number,
-  children: number,
-  price: number,
-  priceStatus: 1|0,
-  email: string,
-  phone?: string,
-  notice?: string,
-  arrivalTime?: string,
-  departureTime?: string,
-
-) => fetch("https://login.smoobu.com/api/reservations",{
+export const createBooking = async(createBookingData: CreateBookingData) => 
+  fetch("https://login.smoobu.com/api/reservations",{
     headers: {
       'Api-Key' : process.env.API_KEY as string,
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      
+      'Content-Type': 'application/json'
     },
     method: "POST",
     body: JSON.stringify({
-      arrivalDate,
-      departureDate,
-      apartmentId,
-      firstName,
-      lastName,
-      adults,
-      children,
-      price,
-      priceStatus,
-      email,
-      phone,
-      notice,
-      arrivalTime,
-      departureTime,
+      ...createBookingData,
       customerId: process.env.CUSTOMER_ID
     })
 })
+
+export const sendMessageToHost = async (reservationId: string, subject: string, message: string) => {
+
+  try {
+    const response = await fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-host`, {
+      headers: {
+        'Api-Key': process.env.API_KEY as string,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({
+        subject,
+        message
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send message. Please try again later.');
+    }
+
+    return await response.json();
+
+  } catch (error) {
+    console.error('Error sending message:', error);
+    throw error;
+  }
+}

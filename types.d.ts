@@ -1,4 +1,4 @@
-type CreateBookingRequestBody = {
+type CreateBookingData = {
     arrivalDate: string,
     departureDate: string,
     channelId?: number,

@@ -36,7 +36,7 @@ export default function PaypalForm({
 
     const createBooking = async () => {
 
-        const reservationData: CreateBookingRequestBody = {
+        const createBookingData: CreateBookingData = {
             arrivalDate,
             departureDate,
             apartmentId,
@@ -60,7 +60,7 @@ export default function PaypalForm({
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(reservationData),
+            body: JSON.stringify(createBookingData),
         });
 
         const bookingResult = await bookingResponse.json()
