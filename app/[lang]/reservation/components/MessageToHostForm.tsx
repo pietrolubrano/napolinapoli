@@ -19,10 +19,11 @@ export default function MessageToHostForm({
 
     return (
         <Form
-            className="w-full p-4 flex flex-col gap-4"
+            className="w-full p-4 flex flex-col gap-4 max-w-md bg-white"
             action={formAction}
             validationErrors={errors}
             >
+            <h3 className="font-bold text-lg text-gray-500">{lang === "it" ? "Nuovo messaggio" : "New message"}</h3>
             <input type="text" name="reservationId" defaultValue={reservationId} className="sr-only" />
             <Input
                 isRequired
@@ -34,7 +35,7 @@ export default function MessageToHostForm({
                 type="text"
             />
             <Textarea
-                
+                isRequired
                 errorMessage={lang === "it" ? "Inserisci il tuo messaggio" : "Enter your message"}
                 label={lang === "it" ? "Messaggio" : "Message"}
                 labelPlacement="outside"

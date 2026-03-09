@@ -4,10 +4,7 @@ import BookingHeader from '@/app/[lang]/create-booking/components/BookingHeader'
 import { Locale } from '@/i18n-config'
 import Link from 'next/link'
 import { IoLogoWhatsapp } from 'react-icons/io'
-import { Accordion, AccordionItem } from "@heroui/react";
-import { FaUserCircle, FaCalendar } from "react-icons/fa";
-import MessageToHostForm from './MessageToHostForm'
-import { FaClock } from 'react-icons/fa6'
+import MessagesAccordion from './MessagesAccordion'
 
 export default function ReservationPage({
     reservation,
@@ -54,51 +51,22 @@ export default function ReservationPage({
                         }
                     </tbody>
                 </table>
-                    <p className="text-xs text-gray-500">{lang === 'it' ? '* La tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non è inclusa nel prezzo' : '* The tourism tax of €4.50 per person per day to be paid in the accommodation is not included in the price'}</p>
-                <div>
-                    <p className="font-bold">
-                        {lang === 'it' ? 'I tuoi messaggi:' : 'Your messages:'}
-                    </p>
-                    {
-                        messages.messages.length > 0 &&
-                        <Accordion className='p-0!' selectionMode="multiple">
-                            {
-                                messages.messages.map((message) => (
-                                    <AccordionItem key={message.id} className='bg-gray-100 px-4' title={message.subject || 'Message'}>
-                                        
-                                        <div className='mb-2 flex w-full items-center text-sm text-gray-500 justify-between'>
-                                            <div>
-                                                <FaUserCircle className='inline' size={'1.5em'} /> <span className='font-bold'>{message.type === 1 ? 'ME' : 'HOST'}</span>
-                                            </div>
-                                            <div className='flex flex-col'>
-                                                <span className='float-right text-xs flex items-center'><FaCalendar className='inline mr-1' />{new Date(message.createdAt).toLocaleDateString(lang)}</span>
-                                                <span className='float-right text-xs flex items-center'><FaClock className='inline mr-1' />{new Date(message.createdAt).getHours()}:{new Date(message.createdAt).getMinutes().toString().padStart(2, '0')}</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div className=' bg-gray-100 mb-4 px-3' /* dangerouslySetInnerHTML={{ __html:message.htmlMessage }} */>
-                                            {message.message.split(/\n/g).map((line, i) => <p className='mb-3' key={i}>{line}</p>)}
-                                        </div>
-                                    </AccordionItem>
-                                ))
-                            }
-                        </Accordion>
-                    }
-                    <MessageToHostForm reservationId={reservation.id.toString()} lang={lang} />
+                <p className="text-xs text-gray-500">{lang === 'it' ? '* La tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non è inclusa nel prezzo' : '* The tourism tax of €4.50 per person per day to be paid in the accommodation is not included in the price'}</p>
+            </div>
+            <MessagesAccordion reservation={reservation} messages={messages} lang={lang} />
                     {/* Come raggiungerci <br />
                     Nome rete wifi: <br />
                     Password: <br />
                     Cosa visitare <br /> */}
-                </div>
-                <div>
-                    {lang === 'it' ? 'Per qualsiasi informazione o richiesta non esitare a contattarci!' : 'For any information or request do not hesitate to contact us!'}
-                </div>
-                <div>
-                    <Link href={'https://wa.me/393484370034'} target="_blank" className="flex items-center fixed bottom-4 right-4 bg-white rounded-full p-1 border-2 border-green-600">
-                        <IoLogoWhatsapp size={'2em'} className='text-green-600' />
-                    </Link>
-                </div>
+            <div className='p-8'>
+                {lang === 'it' ? 'Per qualsiasi informazione o richiesta non esitare a contattarci!' : 'For any information or request do not hesitate to contact us!'}
             </div>
+            <div>
+                <Link href={'https://wa.me/393484370034'} target="_blank" className="flex items-center fixed bottom-4 right-4 bg-white rounded-full p-1 border-2 border-green-600">
+                    <IoLogoWhatsapp size={'2em'} className='text-green-600' />
+                </Link>
+            </div>
+            
         </main>
     )
 }

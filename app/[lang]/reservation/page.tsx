@@ -15,19 +15,20 @@ const getReservation = async (
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    method: "GET",
-    next: { tags: ['messages'] },
+    method: "GET"
 })
 
 const getReservationMessages = async (
   reservationId: string,
-) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages`,{
+  page: string = '1'
+) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages?page=${page}`,{
     headers: {
       'Api-Key' : process.env.API_KEY as string,
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     method: "GET",
+    next: { tags: ['messages'] }
 })
 
 export default async function Page({
