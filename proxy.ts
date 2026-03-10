@@ -25,6 +25,7 @@ function getLocale(request: NextRequest): string | undefined {
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const searchParams = request.nextUrl.searchParams;
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // // If you have one
@@ -63,12 +64,16 @@ export function proxy(request: NextRequest) {
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
+    const searchParamsKeys = Array.from(searchParams.keys());
+    const searchParamsString = searchParamsKeys
+      .map((key) => `${key}=${encodeURIComponent(searchParams.get(key) as string)}`)
+      .join("&");
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
     return NextResponse.redirect(
       new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}${searchParamsKeys.length > 0 ? `?${searchParamsString}` : ""}`,
         request.url,
       ),
     );
