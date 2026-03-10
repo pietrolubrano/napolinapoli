@@ -4,25 +4,20 @@ import BookingHeader from '@/app/[lang]/create-booking/components/BookingHeader'
 import { Locale } from '@/i18n-config'
 import Link from 'next/link'
 import { IoLogoWhatsapp } from 'react-icons/io'
-import MessagesAccordion from './MessagesAccordion'
 
-export default function ReservationPage({
+export default function ReservationDetails({
     reservation,
-    messages,
     lang
 } : {
     reservation: Reservation
     lang: Locale
-    messages: ReservationMessageResponse
 }) {
 
-    return (
-        <main>
+    return (<>
             <div className="font-bold p-4">
                 {lang === 'it' ? 'ID prenotazione:' : 'Reservation ID:'} {reservation.id}
             </div>
             <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4">
-                {lang === 'it' ? 'Benvenuto' : 'Welcome'} <strong>{reservation.firstname}</strong> 🙂,
                 <p>
                     {lang === 'it' ? 'Ecco i dettagli della tua prenotazione:' : 'Here are the details of your reservation:'}
                 </p>
@@ -53,7 +48,7 @@ export default function ReservationPage({
                 </table>
                 <p className="text-xs text-gray-500">{lang === 'it' ? '* La tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non è inclusa nel prezzo' : '* The tourism tax of €4.50 per person per day to be paid in the accommodation is not included in the price'}</p>
             </div>
-            <MessagesAccordion reservation={reservation} messages={messages} lang={lang} />
+            {/* <MessagesAccordion reservation={reservation} messages={messages} lang={lang} /> */}
                     {/* Come raggiungerci <br />
                     Nome rete wifi: <br />
                     Password: <br />
@@ -61,12 +56,5 @@ export default function ReservationPage({
             <div className='p-8'>
                 {lang === 'it' ? 'Per qualsiasi informazione o richiesta non esitare a contattarci!' : 'For any information or request do not hesitate to contact us!'}
             </div>
-            <div>
-                <Link href={'https://wa.me/393484370034'} target="_blank" className="flex items-center fixed bottom-4 right-4 bg-white rounded-full p-1 border-2 border-green-600">
-                    <IoLogoWhatsapp size={'2em'} className='text-green-600' />
-                </Link>
-            </div>
-            
-        </main>
-    )
+    </>)
 }

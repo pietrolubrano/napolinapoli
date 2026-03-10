@@ -1,11 +1,10 @@
-
-import ReservationPage from "./components/ReservationPage"
 import ReservationNotFount from "./components/ReservationNotFount"
 import Link from "next/link"
 import { Button } from "@heroui/button"
 import ReservationForm from "./components/reservationForm"
 import { Locale } from "@/i18n-config"
 import { getDictionary } from "@/get-dictionary"
+import ReservationPageLayout from "./components/ReservationPageLayout"
 
 const getReservation = async (
   reservationId: string,
@@ -54,7 +53,7 @@ export default async function Page({
         if(email === reservation.email){
             const messagesResponse = await getReservationMessages(reservationId as string)
             const messages: ReservationMessageResponse = await messagesResponse.json()
-            return <ReservationPage reservation={reservation} messages={messages} lang={lang as Locale} />
+            return <ReservationPageLayout reservation={reservation} messages={messages} lang={lang as Locale} />
         } else {
             return(
                 <main className=" flex justify-center items-center w-full">
