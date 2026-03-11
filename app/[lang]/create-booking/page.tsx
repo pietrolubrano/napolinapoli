@@ -3,6 +3,7 @@ import BookingForm from "./components/BookingForm"
 import BookingHeader from "./components/BookingHeader"
 import { checkApartmentAvailability } from "../../actions/smoobuActions"
 import { Locale } from "@/i18n-config"
+import Carousel from '../components/Carousel';
 
 export default async function Page({
     params,
@@ -42,6 +43,8 @@ export default async function Page({
 
                     </div>
                     
+                    <Carousel images={rooms[Number(apartmentId)].images} />
+
                     <BookingForm
                         arrivalDate={arrivalDate as string}
                         departureDate={departureDate as string}

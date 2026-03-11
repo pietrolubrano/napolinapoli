@@ -7,6 +7,7 @@ import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
 import {Card, CardHeader, CardBody, Image, Button} from "@heroui/react";
 import { rooms } from "@/data/roomsData";
 import { Locale } from "@/i18n-config";
+import Carousel from '../../components/Carousel';
 
 export default function App({
     apartmentId,
@@ -54,14 +55,16 @@ export default function App({
       </CardHeader>
         
       <CardBody className="overflow-visible p-0">
-        <Image
+        {/* <Image
           alt="Card background"
           as={NextImage}
-          className="object-cover bg-red-400"
+          className="object-cover"
           src={rooms[apartmentId].images[0]}
           width={700}
           height={200}
-        />
+        /> */}
+
+        <Carousel images={rooms[apartmentId].images} showThumbs={false} showAlwaysArrows />
 
         <Link
           href={{ 

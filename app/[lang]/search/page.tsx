@@ -89,7 +89,7 @@ let data
   }
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 pt-8">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
       {data?.availableApartments?.map((apartmentId: number) => 
         apartmentId !== 260797 &&
           <div key={apartmentId}>
