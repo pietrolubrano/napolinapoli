@@ -4,6 +4,8 @@ import BookingHeader from "./components/BookingHeader"
 import { checkApartmentAvailability } from "../../actions/smoobuActions"
 import { Locale } from "@/i18n-config"
 import Carousel from '../components/Carousel';
+import RoomServicesList from '../room/[slug]/componenst/RoomServicesList';
+import {Chip} from "@heroui/chip";
 
 export default async function Page({
     params,
@@ -20,7 +22,7 @@ export default async function Page({
         [apartmentId as string]
     )
 
-    const apartmentName = rooms[Number(apartmentId)].name
+    const room = rooms[Number(apartmentId)]
 
     if(data.availableApartments[0] === Number(apartmentId)){
 
@@ -43,7 +45,21 @@ export default async function Page({
 
                     </div>
                     
-                    <Carousel images={rooms[Number(apartmentId)].images} />
+                    <Carousel images={room.images} />
+
+                    <div className="space-y-2 space-x-2 p-4 bg-white">
+                        {
+                            room.services.map(service => <Chip key={service.description[lang as Locale]} size="sm" variant="bordered" className="bg-white border-background">
+                                <div className="inline-flex gap-1 items-center text-gray-800">
+                                    <span className="text-background">
+                                        {service.icon}
+                                    </span>
+                                    {service.description[lang as Locale]}
+                                </div>
+                                </Chip>)
+                        }
+                    </div>
+                    {/* <RoomServicesList services={room.services} lang={lang as Locale} /> */}
 
                     <BookingForm
                         arrivalDate={arrivalDate as string}
@@ -69,9 +85,9 @@ export default async function Page({
 
                 <div className="text-center">
                     {lang === "it" ?
-                        `Ci dispiace, l'appartamento ${apartmentName} non è disponibile per le date selezionate.`
+                        `Ci dispiace, l'appartamento ${room.name} non è disponibile per le date selezionate.`
                         :
-                        `Sorry, the apartment ${apartmentName} is not available for the selected dates.`
+                        `Sorry, the apartment ${room.name} is not available for the selected dates.`
                     }
                 </div>
 

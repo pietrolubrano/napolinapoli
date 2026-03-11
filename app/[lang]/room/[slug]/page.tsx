@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 
 import { FaKitchenSet, FaPerson } from "react-icons/fa6";
 
-import { rooms } from "@/data/roomsData"
+import { Room, rooms } from "@/data/roomsData"
 import { notFound } from 'next/navigation';
 import { Button } from "@heroui/button";
 
 import Link from "next/link";
 import Carousel from "@/app/[lang]/components/Carousel";
 import { Locale } from '@/i18n-config';
+import RoomServicesList from './componenst/RoomServicesList';
 
 export async function generateMetadata(
   { params } : { params: Promise<{ slug: string, lang: Locale }> }
@@ -56,7 +57,7 @@ export default async function Page({
 
   if(room){
 
-    const { name, description, maxOccupancy, services } = room 
+    const { name, description, maxOccupancy, services } = room
 
     return (
       <main className="bg-gray-100 min-h-screen">
@@ -108,18 +109,14 @@ export default async function Page({
 
           <div className="container mx-auto max-w-2xl md:border-4 border-background bg-white text-gray-500 font-bold">
 
-            <div className="p-8">
-              <p className="lg:hidden text-gray-500 font-bold mb-8">
+            <div className="">
+              <p className="lg:hidden p-8 text-gray-500 font-bold">
                 {description[lang as Locale]}
               </p>
 
-              <ul className="space-y-2 mb-8">
-                {services.map(service => <li key={service.description.it} className="flex items-center">
-                    <span className=" inline-block me-2 text-xl text-background">{service.icon}</span>{service.description[lang as Locale]}
-                  </li>)}
-              </ul>
+              <RoomServicesList services={room.services} lang={lang as Locale} />
               
-              <div className="flex w-full justify-end sticky bottom-4 md:static">
+              <div className="flex w-full justify-end sticky bottom-0 md:static p-8">
                   <Link href={`/${lang}/search`} className="w-full sm:w-fit">
                     <Button className="bg-background w-full sm:w-fit p-4 text-white text-sm font-bold uppercase">
                       {lang === 'it' ? 'Verifica la disponibilità' : 'Check availability'}
