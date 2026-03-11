@@ -14,7 +14,7 @@ export default function ReservationDetails({
 }) {
 
     return (<>
-            <div className="font-bold p-4">
+            <div className="">
                 {lang === 'it' ? 'ID prenotazione:' : 'Reservation ID:'} {reservation.id}
             </div>
             <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4">

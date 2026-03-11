@@ -1,5 +1,6 @@
 import { rooms } from "@/data/roomsData"
 import { Locale } from "@/i18n-config"
+import ReservationDetails from "./ReservationDetails"
 
 export default function ReservationHome({
     reservation,
@@ -21,9 +22,7 @@ export default function ReservationHome({
                     <p>Your Room is <span className="font-bold text-background">{reservation.apartment.name}</span></p>
                 }
                 
-            <p>
-                Cosa visitare a Napoli:
-            </p>
+            <ReservationDetails reservation={reservation} lang={lang} />
         </div>
     )
 }

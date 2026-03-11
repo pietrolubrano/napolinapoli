@@ -30,11 +30,11 @@ const components = [
     name: 'messages',
     icon: <FaRegEnvelope />,
     component: <MessagesAccordion messages={messages} reservation={reservation} lang={lang} />
-  },{
+  }/* ,{
     name: 'details',
     icon: <FaEllipsisV />,
     component: <ReservationDetails reservation={reservation} lang={lang} />
-  }
+  } */
 ]
 
   const [currentComponent, setCurrentComponent] = useState(0)
@@ -49,7 +49,7 @@ const components = [
         components[currentComponent].component
       }
       <div className="fixed bottom-0 z-50 w-full flex justify-center">
-        <div className="mb-4 space-x-4 backdrop-blur p-3 rounded-full">
+        <div className="mb-4 space-x-4 backdrop-blur p-3 rounded-full border">
           {
             components.map((component, index) => 
               <Button
