@@ -6,10 +6,9 @@ import { Button } from "@headlessui/react"
 import { Locale } from "@/i18n-config"
 
 import MessagesAccordion from "./MessagesAccordion"
-import ReservationDetails from "./ReservationDetails"
 import ReservationHome from "./ReservationHome"
 
-import { FaEllipsisV, FaHome, FaRegEnvelope, FaWhatsapp } from "react-icons/fa"
+import { FaHome, FaRegEnvelope, FaWhatsapp } from "react-icons/fa"
 
 export default function ReservationPageLayout({
     reservation,

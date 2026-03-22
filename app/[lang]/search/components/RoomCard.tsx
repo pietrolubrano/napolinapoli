@@ -1,10 +1,9 @@
 "use client"
 
 import Link from "next/link";
-import NextImage from "next/image";
 
 import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
-import {Card, CardHeader, CardBody, Image, Button} from "@heroui/react";
+import {Card, CardHeader, CardBody, Button} from "@heroui/react";
 import { rooms } from "@/data/roomsData";
 import { Locale } from "@/i18n-config";
 import Carousel from '../../components/Carousel';

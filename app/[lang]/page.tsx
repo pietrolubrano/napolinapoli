@@ -64,7 +64,6 @@ export default async function Page({
               </p>
             </>
           }
-          
         </div>
       </div>
 
@@ -76,9 +75,8 @@ export default async function Page({
         {
           rooms && Object.values(rooms).slice(0,3).map((room, index) => <RoomCard key={index} room={room} lang={lang as Locale} index={index} />)
         }
-
       </div>
-      
+
       <div className="bg-background">
         <div className="p-8 font-birthstone bg-background text-3xl font-bold upper">
           <h3>

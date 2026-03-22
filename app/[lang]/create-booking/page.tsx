@@ -4,7 +4,6 @@ import BookingHeader from "./components/BookingHeader"
 import { checkApartmentAvailability } from "../../actions/smoobuActions"
 import { Locale } from "@/i18n-config"
 import Carousel from '../components/Carousel';
-import RoomServicesList from '../room/[slug]/componenst/RoomServicesList';
 import {Chip} from "@heroui/chip";
 
 export default async function Page({
@@ -24,7 +23,7 @@ export default async function Page({
 
     const room = rooms[Number(apartmentId)]
 
-    if(data.availableApartments[0] === Number(apartmentId)){
+    if(data && data.availableApartments[0] === Number(apartmentId)){
 
         return (
             <main className="bg-black/70">

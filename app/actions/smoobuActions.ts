@@ -13,8 +13,7 @@ export const checkApartmentAvailability = async (
       headers: {
         'Api-Key' : process.env.API_KEY as string,
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        
+        'Content-Type': 'application/json'
       },
       method: "POST",
       body: JSON.stringify({
@@ -26,15 +25,15 @@ export const checkApartmentAvailability = async (
       })
   })
 
-  
   const data: SmoobuAvailabilityResponseData = await response.json()
-  
-  data.availableApartments.forEach((apartmentId: number) => {
-    const apartmentPrice = data.prices[apartmentId].price
-    data.prices[apartmentId].price = Math.round(apartmentPrice - (apartmentPrice * 0.40)) // Sconto del 40%
-  })
 
-  return data
+  if(response.status === 200){
+    data.availableApartments.forEach((apartmentId: number) => {
+      const apartmentPrice = data.prices[apartmentId].price
+      data.prices[apartmentId].price = Math.round(apartmentPrice - (apartmentPrice * 0.40)) // Sconto del 40%
+    })
+    return data
+  }
 
   } catch (error) {
     console.error('Error checking availability:', error);
@@ -88,6 +87,5 @@ export const sendMessageToHost = async (prevState: any, formData: FormData) => {
         messageBody: "Invalid.",
       },
     };
-
   }
 }
