@@ -86,7 +86,8 @@ export default async function Page({
 
           {/* Left column - only visible on large screens */}
 
-          <div className="w-full hidden lg:block">
+          <div className="w-full hidden lg:flex flex-col justify-between">
+
             {/* Additional content for the right column */}
             <h2 className="text-4xl text-background font-bold p-8 pb-0">{name}
               <span className="text-gray-500 text-sm uppercase font-bold ms-1">Room</span>
@@ -99,6 +100,11 @@ export default async function Page({
             <p className="text-gray-500 text-xl mb-8 p-10 italic ">
               {description[lang as Locale]}
             </p>
+
+            <div>
+
+            </div>
+
           </div>
 
           <Carousel images={room.images}></Carousel>
