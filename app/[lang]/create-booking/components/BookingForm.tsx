@@ -201,7 +201,7 @@ export default function BookingForm({
               {lang === "it" ? "Accetto " : "I accept "} <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> {lang === "it" ? "termini e condizioni" : "terms and conditions"}</Button>
             </span>
           </div>
-          
+
           <TermsAndConditionModal lang={lang} isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} />
           {errors.terms && <span className="text-danger text-small">{errors.terms}</span>}
 
@@ -218,9 +218,9 @@ export default function BookingForm({
                 {lang === "it" ? "Modifica i dati" : "Edit data"}
               </Button>
             }
-            
+
           </div>
-          
+
           <Divider className="my-4"></Divider>
 
             <div className="text-black space-y-1">
@@ -232,9 +232,9 @@ export default function BookingForm({
               </p>
               <p className="text-xs text-gray-500">
                 {lang === "it" ?
-                  "* Tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non compresa nel prezzo"
+                  "* Tassa di soggiorno di 5,50 € per persona al giorno da pagare in struttura non compresa nel prezzo"
                   :
-                  "* Tourism tax of €4.50 per person per day to be paid in the accommodation and not included in the price"
+                  "* Tourism tax of €5,50 per person per day to be paid in the accommodation and not included in the price"
                 }
               </p>
             </div>

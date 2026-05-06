@@ -46,7 +46,7 @@ export default function ReservationDetails({
                         }
                     </tbody>
                 </table>
-                <p className="text-xs text-gray-500">{lang === 'it' ? '* La tassa di soggiorno di 4,50 € per persona al giorno da pagare in struttura non è inclusa nel prezzo' : '* The tourism tax of €4.50 per person per day to be paid in the accommodation is not included in the price'}</p>
+                <p className="text-xs text-gray-500">{lang === 'it' ? '* La tassa di soggiorno di 5,50 € per persona al giorno da pagare in struttura non è inclusa nel prezzo' : '* The tourism tax of €5,50 per person per day to be paid in the accommodation is not included in the price'}</p>
             </div>
             {/* <MessagesAccordion reservation={reservation} messages={messages} lang={lang} /> */}
                     {/* Come raggiungerci <br />

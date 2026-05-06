@@ -17,7 +17,7 @@ export default function CustomDateRangePicker({
   setValueAction: Dispatch<SetStateAction<RangeValue<DateValue> | null>>,
   lang: Locale
 }) {
-  
+
   const { width } = useWindowDimensions();
 
   return (
