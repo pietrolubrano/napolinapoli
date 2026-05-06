@@ -24,7 +24,7 @@ export default function App({
     lang: Locale
 }) {
   return (
-    <Card className="border-1 border-gray-500 text-gray-500 font-bold">
+    <Card className="border-1 border-gray-500 text-gray-500 font-bold animate-fade-in md:hover:scale-105 ">
       <CardHeader className="pb-1 pt-2 flex-col items-start">
         <h4 className="font-bold text-large w-full text-background">
           { rooms[apartmentId].name}
