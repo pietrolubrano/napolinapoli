@@ -62,13 +62,15 @@ export default function Carousel({
             ))}
         </div>
 
-        <div className={`${!showAlwaysArrows && 'md:hidden'} text-white`}>    
+        <div className={`${!showAlwaysArrows && 'md:hidden'} text-white`}>
             <button className="embla__prev absolute left-2 top-0 h-full" onClick={goToPrev}>
                 <FaAngleLeft size={'2em'} />
             </button>
             <button className="embla__next absolute right-2 top-0 h-full" onClick={goToNext}>
                 <FaAngleRight size={'2em'} />
             </button>
+        </div>
+
         </div>
 
         {
@@ -89,8 +91,6 @@ export default function Carousel({
                 </div>
             </div>
         }
-       
-        </div>
 
     </div>
     )

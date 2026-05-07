@@ -44,7 +44,7 @@ export default async function Page({
 
                     </div>
                     
-                    <Carousel images={room.images} />
+                    <Carousel images={room.images} showAlwaysArrows/>
 
                     <div className="space-y-2 space-x-2 p-4 bg-white">
                         {

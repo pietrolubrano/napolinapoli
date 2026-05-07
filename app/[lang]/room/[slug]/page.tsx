@@ -107,7 +107,7 @@ export default async function Page({
 
           </div>
 
-          <Carousel images={room.images}></Carousel>
+          <Carousel images={room.images} showAlwaysArrows></Carousel>
 
         </div>
         

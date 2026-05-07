@@ -16,7 +16,7 @@ export default function RoomCard({ room, lang, index }: RoomCardProps) {
 
             <div className={`md:col-span-2 ${index % 2 !== 0 && 'md:order-last'}`}>
                 {/* <Image width={1920} height={1080} src={room.images[0]} alt={room.name} className="w-full h-auto object-cover" /> */}
-                <Carousel images={room.images}></Carousel>
+                <Carousel images={room.images} showAlwaysArrows></Carousel>
             </div>
 
             <div className="p-4 md:p-8 flex flex-col justify-between w-full">
