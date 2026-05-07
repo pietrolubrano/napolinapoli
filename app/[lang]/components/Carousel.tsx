@@ -53,11 +53,11 @@ export default function Carousel({
   return (
     <div className="embla w-fit max-h-screen overflow-hidden">
       <div className="embla__viewport relative" ref={emblaRef}>
-        
+
         <div className="embla__container max-h-screen">
             {images?.map((image, index) => (
                 <div className="embla__slide flex justify-center items-center" key={index}>
-                    <Image src={image} width={1920} height={1080} alt={`Slide ${index + 1}`} className="max-h-[calc(100svh-175px)] w-fit h-fit"/>
+                    <Image src={image} preload width={1920} height={1080} alt={`Slide ${index + 1}`} className="max-h-[calc(100svh-175px)] w-fit h-fit"/>
                 </div>
             ))}
         </div>
