@@ -59,6 +59,14 @@ type SmoobuAvailabilityErrorMessages =
     |
     MinimumBeetweenBookingsError
 
+type SmoobuGetBookingsResponseData = {
+    bookings: Reservation[]
+    page: number
+    page_count: number
+    page_size: number
+    total_items: number
+}
+
 type SmoobuAvailabilityResponseData = {
   availableApartments: number[]
   errorMessages: {
@@ -151,4 +159,12 @@ type SendMessageToHostData = {
     messageBody: string
     subject?: string
     internal?: boolean
+}
+
+type Vacancy = {
+    apartmentId: string;
+    vacancies: {
+        from: string;
+        to: string;
+    }[]
 }

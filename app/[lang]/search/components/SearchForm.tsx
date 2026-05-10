@@ -4,7 +4,7 @@ import {Button} from "@heroui/button";
 import {parseDate} from "@internationalized/date";
 import type {DateValue} from "@react-types/datepicker";
 import CustomDateRangePicker from '@/app/[lang]/search/components/CustomDateRangePicker'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from "next/link";
 import { NumberInput, RangeValue } from "@heroui/react";
 import { Locale } from "@/i18n-config";
@@ -39,6 +39,14 @@ export default function SearchForm({
         setGuestsValue(value)
     }
 
+    useEffect(() => {
+        setValue({
+            start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
+            end: parseDate(departureDate ? departureDate : new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().substring(0,10))
+        })
+        setGuestsValue(guests ? +guests : 2)
+    }, [arrivalDate, departureDate, guests])
+
     return (
         <div className="grid grid-cols-5 max-w-2xl">
 
@@ -59,15 +67,6 @@ export default function SearchForm({
                         min={1}
                         max={4}
                     />
-                    {/* <div className="flex flex-col w-10 ">
-                        <Button onPress={() => handleGuestsValueChange('add')} className="px-2 min-w-0.5 h-full bg-gray-100">
-                            <FaPlus></FaPlus>
-                        </Button>
-                        <Button onPress={() => handleGuestsValueChange('remove')} className="px-2 min-w-0.5 h-full bg-gray-100">
-                            <FaMinus></FaMinus>
-                        </Button>
-                    </div> */}
-                    
                 </div>
                 <Link href={{
                     pathname: `/${lang}/search`,

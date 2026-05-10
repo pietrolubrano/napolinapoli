@@ -1,6 +1,60 @@
 "use server"
 
 import { updateTag } from "next/cache"
+import { rooms } from '../../data/roomsData';
+
+export const getVacancies = async (
+  from?: string,
+  to?: string
+) => {
+  try {
+    const response = await fetch(`https://login.smoobu.com/api/reservations?from=${from}&to=${to}&showCancellation=false`,{
+      headers: {
+        'Api-Key' : process.env.API_KEY as string,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "GET"
+    })
+
+    const data : SmoobuGetBookingsResponseData = await response.json()
+    const apartmentsIds = Object.keys(rooms).map(key => +key)
+    const bookingsByApartment: { [key: number]: { arrival: string, departure: string }[] } = {}
+
+    apartmentsIds.forEach(apartmentId => {
+      const apartmentBookings = data.bookings.filter(booking => booking.apartment.id === apartmentId)
+      bookingsByApartment[apartmentId] = apartmentBookings.map(booking => ({
+        arrival: booking.arrival,
+        departure: booking.departure
+      }))
+    })
+
+    const vacancyData = Object.entries(bookingsByApartment).map(([apartmentId, bookings]) => {
+      const sortedBookings = bookings.sort((a, b) => new Date(a.arrival).getTime() - new Date(b.arrival).getTime())
+      const vacancies = []
+      for(let i = 0; i < sortedBookings.length - 1; i++){
+        const currentBooking = sortedBookings[i]
+        const nextBooking = sortedBookings[i + 1]
+        if(currentBooking.departure !== nextBooking.arrival){
+          vacancies.push({
+            from: currentBooking.departure,
+            to: nextBooking.arrival
+          })
+        }
+      }
+      return {
+        apartmentId,
+        vacancies
+      }
+    })
+
+    return vacancyData
+
+  } catch (error) {
+    console.error('Error fetching bookings:', error);
+    throw new Error('Failed to fetch bookings. Please try again later.');
+  }
+}
 
 export const checkApartmentAvailability = async (
   arrivalDate: string,
