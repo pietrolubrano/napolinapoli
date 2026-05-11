@@ -2,13 +2,11 @@
 
 import RoomCard from './RoomCard';
 
-import { rooms } from "@/data/roomsData";
 import { Locale } from "@/i18n-config";
-import { FaArrowRight } from "react-icons/fa6";
 import SearchForm from "./SearchForm";
 import { useState } from "react";
-import { Button } from "@headlessui/react";
 import { useRouter } from "next/navigation";
+import VacancyCard from './VacancyCard';
 
 export default function MainWrapper({
   arrivalDate,
@@ -31,9 +29,9 @@ export default function MainWrapper({
   const [departureDateState, setDepartureDateState] = useState(departureDate)
 
   const handleClick = (from: string, to: string) => {
+    router.push(`/${lang}/search?arrivalDate=${from}&departureDate=${to}&guests=${guests}`)
     setArrivalDateState(from)
     setDepartureDateState(to)
-    router.push(`/${lang}/search?arrivalDate=${from}&departureDate=${to}&guests=${guests}`)
   }
 
   return (<>
@@ -75,29 +73,9 @@ export default function MainWrapper({
           <div className="text-gray-600 text-center mt-8 z-10 rounded md:min-w-2xl">
             <h3 className="text-xl font-bold mb-4 md:mb-6 bg-background text-white p-4 rounded">{lang === "it" ? "🙂 Abbiamo camere disponibili in questi periodi" : "🙂 We have rooms available in these periods"}</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {vacancies?.map((apartment) => (
-                <div key={apartment.apartmentId} className="bg-gray-200 p-4 rounded">
-                  <h4 className="font-bold mb-2 text-xl">{rooms[+apartment.apartmentId]?.name || apartment.apartmentId}</h4>
-                  {apartment.vacancies.length > 0 ? (
-                    apartment.vacancies.map((vacancy, index) => (
-                      <Button 
-                        onClick={() => handleClick(new Date(vacancy.from).toLocaleDateString('en-CA'), new Date(vacancy.to).toLocaleDateString('en-CA'))}
-                        key={index}
-                        className="mb-2 flex items-center justify-center gap-1 w-full text-background font-bold"
-                        >
-                        {new Date(vacancy.from).toLocaleDateString(lang, { day: '2-digit', month: '2-digit', year: '2-digit' })}
-                        <FaArrowRight className="mb-0.5" />
-                        {new Date(vacancy.to).toLocaleDateString(lang, { day: '2-digit', month: '2-digit', year: '2-digit' })}
-                      </Button>
-                    ))
-                  ) : (
-                    <p>{lang === "it" ? "Nessuna disponibilità" : "No availability"}</p>
-                  )}
-                </div>
-              ))}
+              {vacancies?.map((apartmentVacancies) => <VacancyCard key={apartmentVacancies.apartmentId} apartmentVacancies={apartmentVacancies} handleClick={handleClick} lang={lang} />)}
             </div>
           </div>
-
         </>
       }
   </>)

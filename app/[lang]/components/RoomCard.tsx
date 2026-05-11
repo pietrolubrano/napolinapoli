@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { rooms } from "@/data/roomsData";
 import { Locale } from "@/i18n-config";
