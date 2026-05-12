@@ -2,8 +2,8 @@ import { Locale } from "@/i18n-config"
 import ReservationDetails from "./ReservationDetails"
 import { Button } from "@headlessui/react";
 import { clearReservationCookie } from "@/app/actions/cookieActions";
-import { MdLogout } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
+import TripadvisorLeaveReview from './TripadvisorLeaveReview';
 
 export default function ReservationHome({
     reservation,
@@ -23,15 +23,16 @@ export default function ReservationHome({
                     <IoIosCloseCircle size={'1.8em'} />
                 </Button>
             </p>
-            
+
                 {
                     lang === 'it' ?
                     <p> La tua camera è la <span className="font-bold text-background">{reservation.apartment.name}</span></p>
                     :
                     <p>Your Room is <span className="font-bold text-background">{reservation.apartment.name}</span></p>
                 }
-                
+
             <ReservationDetails reservation={reservation} lang={lang} />
+            <TripadvisorLeaveReview />
         </div>
     )
 }
