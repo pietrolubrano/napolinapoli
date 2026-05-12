@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@headlessui/react"
 import { Locale } from "@/i18n-config"
 
@@ -9,6 +9,7 @@ import MessagesAccordion from "./MessagesAccordion"
 import ReservationHome from "./ReservationHome"
 
 import { FaHome, FaRegEnvelope, FaWhatsapp } from "react-icons/fa"
+import { setReservationCookie } from "@/app/actions/cookieActions";
 
 export default function ReservationPageLayout({
     reservation,
@@ -42,6 +43,10 @@ const components = [
     setCurrentComponent(index)
     window.scrollTo(0, 0)
   }
+
+  useEffect(() => {
+    setReservationCookie(reservation.id.toString(), reservation.email)
+  }, [])
 
   return(<>
       {

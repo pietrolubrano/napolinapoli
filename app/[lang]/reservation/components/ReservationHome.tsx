@@ -1,6 +1,9 @@
-import { rooms } from "@/data/roomsData"
 import { Locale } from "@/i18n-config"
 import ReservationDetails from "./ReservationDetails"
+import { Button } from "@headlessui/react";
+import { clearReservationCookie } from "@/app/actions/cookieActions";
+import { MdLogout } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
 
 export default function ReservationHome({
     reservation,
@@ -10,9 +13,15 @@ export default function ReservationHome({
     lang: Locale
 }) {
     return (
-        <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4">
+        <div className="container mx-auto bg-white text-gray-600 p-8 space-y-4 relative">
             <p>
-                {lang === 'it' ? 'Benvenuto' : 'Welcome'} <strong>{reservation.firstname}</strong> 🙂,
+                {lang === 'it' ? 'Benvenuto/a' : 'Welcome'} <strong>{reservation.firstname}</strong> 🙂,
+                <Button
+                    onClick={() => clearReservationCookie()}
+                    className="ml-4 text-red-300 hover:text-red-600 p-1 rounded float-end absolute right-4 top-4"
+                >
+                    <IoIosCloseCircle size={'1.8em'} />
+                </Button>
             </p>
             
                 {

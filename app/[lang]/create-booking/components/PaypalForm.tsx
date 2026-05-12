@@ -18,6 +18,7 @@ import { FormData } from "./BookingForm"
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { useRouter } from "next/navigation"
 import { Locale } from "@/i18n-config"
+import { setReservationCookie } from "@/app/actions/cookieActions";
 
 export default function PaypalForm({
     arrivalDate,
@@ -65,7 +66,9 @@ export default function PaypalForm({
 
         const bookingResult = await bookingResponse.json()
 
-        router.push(`/${lang}/reservation?email=${encodeURIComponent(formData?.email as string)}&reservationId=${encodeURIComponent(bookingResult.id)}`)
+        await setReservationCookie(bookingResult.id, formData?.email as string)
+        
+        router.push(`/${lang}/reservation`)
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

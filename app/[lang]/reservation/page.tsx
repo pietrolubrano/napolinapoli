@@ -1,83 +1,44 @@
 import ReservationNotFount from "./components/ReservationNotFount"
-import Link from "next/link"
-import { Button } from "@heroui/button"
-import ReservationForm from "./components/reservationForm"
+import ReservationForm from "./components/ReservationForm"
 import { Locale } from "@/i18n-config"
-import { getDictionary } from "@/get-dictionary"
 import ReservationPageLayout from "./components/ReservationPageLayout"
-
-const getReservation = async (
-  reservationId: string,
-) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}`,{
-    headers: {
-      'Api-Key' : process.env.API_KEY as string,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: "GET"
-})
-
-const getReservationMessages = async (
-  reservationId: string,
-  page: string = '1'
-) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages?page=${page}`,{
-    headers: {
-      'Api-Key' : process.env.API_KEY as string,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: "GET",
-    next: { tags: ['messages'] }
-})
+import { getReservation, getReservationMessages } from "@/app/actions/smoobuActions"
+import { cookies } from 'next/headers'
 
 export default async function Page({
-    searchParams,
     params
     } : PageProps<'/[lang]'>
 ) {
+    const cookieStore = await cookies()
+    const reservationId = cookieStore.get('reservationId')?.value
+    const email = cookieStore.get('email')?.value
 
     const { lang } = await params;
-    
-    const dictionary = await getDictionary(lang as Locale);
-
-    const { email, reservationId } = await searchParams
 
     if(email && reservationId){
+
         const response = await getReservation(reservationId as string)
         const reservation: Reservation = await response.json()
 
         if(reservation.status === 404){
-            return<ReservationNotFount lang={lang as Locale} />
+            const message = {
+                it: "Prenotazione non trovata",
+                en: "Reservation not found"
+            }
+            return<ReservationNotFount lang={lang as Locale} message={message} />
         }
 
-        if(email === reservation.email){
+        if(email !== reservation.email){
+            return(
+                <ReservationNotFount lang={lang as Locale} message={{
+                    it: "Email non corrispondente alla prenotazione",
+                    en: "Email does not match the reservation"
+                }}/>
+            )
+        } else {
             const messagesResponse = await getReservationMessages(reservationId as string)
             const messages: ReservationMessageResponse = await messagesResponse.json()
             return <ReservationPageLayout reservation={reservation} messages={messages} lang={lang as Locale} />
-        } else {
-            return(
-                <main className=" flex justify-center items-center w-full">
-                    <div className="text-gray-600 p-4 bg-white text-center">
-                        <p className="mb-4">
-                            {lang === "it"?
-                                "L'indirizzo email non corrisponde a quello della prenotazione."
-                                :
-                                "The email address does not match the reservation."
-                            }
-                        </p>
-                        <Link href={{ 
-                            pathname: `/${lang}/reservation`,
-                            query: {
-                                reservationId
-                            }
-                            }}>
-                            <Button className="bg-background text-white">
-                                {lang === "it" ? "Riprova" : "Try again"}
-                            </Button>
-                        </Link>
-                    </div>
-                </main>
-            )
         }
     }
 

@@ -1,22 +1,29 @@
+"use client"
+
+import { clearReservationCookie } from "@/app/actions/cookieActions";
 import { Locale } from "@/i18n-config";
 import { Button } from "@heroui/button";
-import Link from "next/link";
 
 export default function ReservationNotFount({
-    lang
+    lang,
+    message
 } : {
-    lang: Locale
+    lang: Locale,
+    message: {
+        'it': string,
+        'en': string
+    }
 }) {
-  return (
+    return (
         <main className=" flex justify-center items-center w-full">
             <div className="text-gray-600 p-4 bg-white text-center">
                 <p className="mb-4">
-                    {lang === "it" ? "Prenotazione non trovata" : "Reservation not found"}
+                    {lang === "it" ? message.it : message.en}
                 </p>
-                <Button as={Link} href={`/${lang}/reservation`} className="bg-background text-white">
+                <Button onPress={() => clearReservationCookie()} className="bg-background text-white">
                     {lang === "it" ? "Riprova" : "Try again"}
                 </Button>
             </div>
         </main>
-  )
+    )
 }

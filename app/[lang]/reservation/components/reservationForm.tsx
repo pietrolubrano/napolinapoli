@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { Button, Form, Input } from "@heroui/react"
 import { FormEvent, useState } from "react"
 import { Locale } from "@/i18n-config"
+import { setReservationCookie } from "@/app/actions/cookieActions";
 
 export default function ReservationForm({
     reservationId,
@@ -17,9 +18,10 @@ export default function ReservationForm({
 
     const router = useRouter()
 
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        router.push(`/${lang}/reservation?reservationId=${encodeURIComponent(reservationIdValue)}&email=${encodeURIComponent(email)}`)
+        await setReservationCookie(reservationIdValue, email)
+        /* router.push(`/${lang}/reservation?reservationId=${encodeURIComponent(reservationIdValue)}&email=${encodeURIComponent(email)}`) */
     };
 
     return (
