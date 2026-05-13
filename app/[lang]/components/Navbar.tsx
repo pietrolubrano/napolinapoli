@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image";
+import Link from "next/link";
 import React, { Suspense, useState } from "react";
 import {
   Navbar,
@@ -10,7 +11,6 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
   DropdownTrigger,
   Dropdown,
@@ -56,7 +56,7 @@ export default function App(props: { lang: Locale }) {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Link href={`/${lang}`}>
+          <Link href={`/${lang}`} onClick={() => setIsMenuOpen(false)}>
             <Logo />
           </Link>
         </NavbarBrand>
@@ -72,7 +72,7 @@ export default function App(props: { lang: Locale }) {
       <NavbarContent className="hidden sm:flex gap-4 uppercase" justify="center">
 
         <NavbarBrand>
-          <Link href={`/${lang}`}>
+          <Link href={`/${lang}`} onClick={() => setIsMenuOpen(false)}>
             <Logo />
           </Link>
         </NavbarBrand>
@@ -99,7 +99,7 @@ export default function App(props: { lang: Locale }) {
             }}
           >
             {rooms.map((item) => (
-              <DropdownItem key={item.name} as={Link} href={`/${lang}/${item.href}`}>
+              <DropdownItem className="text-background hover:text-background!" key={item.name} as={Link} href={`/${lang}/${item.href}`} onClick={() => setIsMenuOpen(false)}>
                 {item.name}
               </DropdownItem>
             ))}
@@ -112,7 +112,7 @@ export default function App(props: { lang: Locale }) {
             <NavbarItem key={item.name[lang]} className={classNames(
               "text-inherit hover:text-inherit",
             )}>
-              <Button as={Link} href={`/${lang}/${item.href}`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+              <Button as={Link} href={`/${lang}/${item.href}`} className="p-0 bg-transparent text-sm font-bold uppercase text-white" onClick={() => setIsMenuOpen(false)}>
                 {item.name[lang]}
               </Button>
             </NavbarItem>
@@ -126,7 +126,7 @@ export default function App(props: { lang: Locale }) {
           <LocaleSwitcher></LocaleSwitcher>
         </Suspense>
         <NavbarItem>
-            <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white">
+            <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white" onClick={() => setIsMenuOpen(false)}>
               {lang === "it" ? "PRENOTA" : "BOOK NOW"}
             </Button>
         </NavbarItem>
@@ -134,7 +134,7 @@ export default function App(props: { lang: Locale }) {
 
         {/* MOBILE MENU */}
       <NavbarMenu className="bg-background flex items-center justify-center uppercase font-bold">
-        
+
         <div>
 
           <NavbarMenuItem>
@@ -142,7 +142,7 @@ export default function App(props: { lang: Locale }) {
               {lang === "it" ? "Le Stanze" : "Our Rooms"}
             </p>
           </NavbarMenuItem>
-          
+
           {rooms.map((item, index) => (
             <NavbarMenuItem key={`${item.name}-${index}`}>
               <Link
@@ -151,13 +151,13 @@ export default function App(props: { lang: Locale }) {
                   index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
                 } */
                 href={`/${lang}/${item.href}`}
-                size="lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </Link>
             </NavbarMenuItem>
           ))}
-      
+
           <Divider className="my-2 bg-transparent"></Divider>
           {navigation.map((item, index) => (
             <NavbarMenuItem key={`${item.name}-${index}`}>
@@ -167,7 +167,7 @@ export default function App(props: { lang: Locale }) {
                   index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
                 } */
                 href={`/${lang}/${item.href}`}
-                size="lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name[lang]}
               </Link>
@@ -175,7 +175,7 @@ export default function App(props: { lang: Locale }) {
           ))}
 
           <Divider className="p-16 bg-transparent"></Divider>
-          
+
         </div>
 
       </NavbarMenu>
