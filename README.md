@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Napoli Napoli Rooms - [text](https://www.napolinapolirooms.it/it)
 
-## Getting Started
+Overview
 
-First, run the development server:
+Hospitality web platform built with Next.js integrating Smoobu PMS APIs for real-time availability and booking management.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Next.js App Router
+* React
+* TypeScript
+* TailwindCSS
+* Server Actions
+* Smoobu API integration
+* Paypal integration
+* Next UI
+* i18n
+* Responsive Design
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Real-time room availability
+* External PMS integration
+* Dynamic multilingual routing
+* SEO metadata generation
+* Server-side data fetching
+* Booking flow handling
+* Responsive UI
 
-## Learn More
+Reservation Persistence Strategy
 
-To learn more about Next.js, take a look at the following resources:
+Once a reservation is completed, users are redirected to their booking details page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application temporarily stores non-sensitive reservation reference data in cookies, including:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* reservation ID
+* guest email
 
-## Deploy on Vercel
+These values are subsequently used to fetch and display the corresponding reservation data through server-side requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A traditional authentication system was intentionally avoided in order to:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* reduce friction during the booking flow
+* simplify the user experience
+* avoid unnecessary account management complexity for a public-facing hospitality platform
