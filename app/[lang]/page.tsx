@@ -67,11 +67,11 @@ export default async function Page({
         </div>
       </div>
 
-      <div className="p-8 font-birthstone text-3xl bg-background font-bold upper mb-8">
+      <div className="p-8 font-birthstone text-4xl bg-background font-bold upper">
         <h3>{lang === 'it' ? 'Le nostre stanze' : 'Our rooms'}</h3>
       </div>
 
-      <div className="container mx-auto space-y-8 pb-16! p-8 md:p-0 ">
+      <div className="container mx-auto space-y-8  p-8 max-w-7xl">
         {
           rooms && Object.values(rooms).slice(0,3).map((room, index) => <RoomCard key={index} room={room} lang={lang as Locale} index={index} />)
         }

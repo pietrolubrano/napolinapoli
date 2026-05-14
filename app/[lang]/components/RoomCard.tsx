@@ -11,27 +11,31 @@ interface RoomCardProps {
 
 export default function RoomCard({ room, lang, index }: RoomCardProps) {
     return (
-        <div key={room.name} className="grid md:grid-cols-3 border-b border-gray-300 bg-white">
+        <div key={room.name} className="grid md:grid-cols-3 border-4 border-gray-300 bg-white">
 
             <div className={`md:col-span-2 ${index % 2 !== 0 && 'md:order-last'}`}>
                 {/* <Image width={1920} height={1080} src={room.images[0]} alt={room.name} className="w-full h-auto object-cover" /> */}
                 <Carousel images={room.images} showAlwaysArrows></Carousel>
             </div>
 
-            <div className="p-4 md:p-8 flex flex-col justify-between w-full">
+            <div className="md:p-8 flex flex-col justify-between w-full border-gray-300">
 
-                <div className=" ">
+                <div>
                 </div>
 
-                <div className="md:text-center">
-                    <h4 className="w-full text-xl md:text-2xl lg:text-4xl text-background font-bold mb-4">{room.name}</h4>
-                    <p className="w-full text-gray-600 mb-4">{room.description[lang as Locale]}</p>
+                <div className="text-center">
+                    <h4 className="w-full text-4xl lg:text-6xl text-background font-bold p-4 font-birthstone">
+                        {room.name}
+                    </h4>
+                    <p className="w-full text-gray-600 mb-4 p-4">
+                        {room.description[lang as Locale]}
+                    </p>
                 </div>
-                <Link href={`/${lang}/room/${room.slug}`} className="text-background font-bold underline text-center">
+                <Link href={`/${lang}/room/${room.slug}`} className="bg-background p-4 font-bold underline text-center">
                     {lang === 'it' ? 'Scopri di più' : 'Show more'}
                 </Link>
             </div>
-            
+
         </div>
     )
 }
