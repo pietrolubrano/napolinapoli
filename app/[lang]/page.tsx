@@ -36,7 +36,7 @@ export default async function Page({
       
       {/* <Divider className="my-4" /> */}
 
-      <div className="p-8 upper pb-8 bg-background">
+      <div className="upper bg-background">
         <div className="container mx-auto space-y-4 max-w-2xl  text-black p-8 bg-white ">
           {
             lang === "it" ? <>
@@ -71,7 +71,7 @@ export default async function Page({
         <h3>{lang === 'it' ? 'Le nostre stanze' : 'Our rooms'}</h3>
       </div>
 
-      <div className="container mx-auto space-y-8  p-8 max-w-7xl">
+      <div className="container mx-auto space-y-8 p-4 py-8 md:p-8 max-w-7xl">
         {
           rooms && Object.values(rooms).slice(0,3).map((room, index) => <RoomCard key={index} room={room} lang={lang as Locale} index={index} />)
         }

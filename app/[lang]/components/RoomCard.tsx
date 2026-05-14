@@ -24,7 +24,7 @@ export default function RoomCard({ room, lang, index }: RoomCardProps) {
                 </div>
 
                 <div className="text-center">
-                    <h4 className="w-full text-4xl lg:text-6xl text-background font-bold p-4 font-birthstone">
+                    <h4 className="w-full text-5xl lg:text-6xl text-background font-bold pt-4 font-birthstone">
                         {room.name}
                     </h4>
                     <p className="w-full text-gray-600 mb-4 p-4">
