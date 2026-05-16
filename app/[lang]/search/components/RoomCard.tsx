@@ -36,10 +36,10 @@ export default function RoomCard({
 
         <ul className="text-tiny p-1">
           <li>
-            <FaRegCalendarCheck className="inline text-background"></FaRegCalendarCheck> Check-in {new Date(arrivalDate).toLocaleDateString()}
+            <FaRegCalendarCheck className="inline text-background"></FaRegCalendarCheck> Check-in {new Date(arrivalDate).toLocaleDateString(lang)}
           </li>
           <li>
-            <FaRegCalendarCheck className="inline text-background"></FaRegCalendarCheck> Check-out {new Date(departureDate).toLocaleDateString()}
+            <FaRegCalendarCheck className="inline text-background"></FaRegCalendarCheck> Check-out {new Date(departureDate).toLocaleDateString(lang)}
           </li>
           <li>
             <FaPerson className="inline text-background me-1"></FaPerson>{guests} {lang === "it" ? "Persone" : "Guests"}
