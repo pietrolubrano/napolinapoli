@@ -2,19 +2,20 @@
 
 import { updateTag } from "next/cache"
 import { rooms } from '../../data/roomsData';
+import { getSmoobuCustomerId, smoobuFetch } from "@/lib/smoobu";
 
 export const getVacancies = async (
   from?: string,
   to?: string
 ) => {
   try {
-    const response = await fetch(`https://login.smoobu.com/api/reservations?from=${from}&to=${to}&showCancellation=false`,{
-      headers: {
-        'Api-Key' : process.env.API_KEY as string,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    const response = await smoobuFetch("/api/reservations", {
+      searchParams: {
+        from,
+        to,
+        showCancellation: false,
       },
-      method: "GET"
+      method: "GET",
     })
 
     const data : SmoobuGetBookingsResponseData = await response.json()
@@ -63,21 +64,16 @@ export const checkApartmentAvailability = async (
   apartments?: string[]
 ) => {
   try {
-    const response = await fetch("https://login.smoobu.com/booking/checkApartmentAvailability",{
-      headers: {
-        'Api-Key' : process.env.API_KEY as string,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+    const response = await smoobuFetch("/booking/checkApartmentAvailability", {
       method: "POST",
-      body: JSON.stringify({
+      body: {
         arrivalDate,
         departureDate,
         guests: +guests,
         apartments: apartments || [],
-        customerId: process.env.CUSTOMER_ID
-      })
-  })
+        customerId: getSmoobuCustomerId(),
+      },
+    })
 
   const data: SmoobuAvailabilityResponseData = await response.json()
 
@@ -95,19 +91,14 @@ export const checkApartmentAvailability = async (
   }
 }
 
-export const createBooking = async(createBookingData: CreateBookingData) => 
-  fetch("https://login.smoobu.com/api/reservations",{
-    headers: {
-      'Api-Key' : process.env.API_KEY as string,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+export const createBooking = async(createBookingData: CreateBookingData) =>
+  smoobuFetch("/api/reservations", {
     method: "POST",
-    body: JSON.stringify({
+    body: {
       ...createBookingData,
-      customerId: process.env.CUSTOMER_ID
-    })
-})
+      customerId: getSmoobuCustomerId(),
+    },
+  })
 
 export const sendMessageToHost = async (prevState: any, formData: FormData) => {
 
@@ -116,17 +107,12 @@ export const sendMessageToHost = async (prevState: any, formData: FormData) => {
   const messageBody = formData.get('messageBody') as string
 
   try {
-    const response = await fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-host`, {
-      headers: {
-        'Api-Key': process.env.API_KEY as string,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+    const response = await smoobuFetch(`/api/reservations/${reservationId}/messages/send-message-to-host`, {
       method: "POST",
-      body: JSON.stringify({
+      body: {
         subject,
         messageBody
-      })
+      }
     });
 
     updateTag('messages');
@@ -146,24 +132,15 @@ export const sendMessageToHost = async (prevState: any, formData: FormData) => {
 
 export const getReservation = async (
     reservationId: string,
-) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}`,{
-    headers: {
-        'Api-Key' : process.env.API_KEY as string,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    },
-    method: "GET"
+) => smoobuFetch(`/api/reservations/${reservationId}`, {
+    method: "GET",
 })
 
 export const getReservationMessages = async (
   reservationId: string,
   page: string = '1'
-) => fetch(`https://login.smoobu.com/api/reservations/${reservationId}/messages?page=${page}`,{
-    headers: {
-        'Api-Key' : process.env.API_KEY as string,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    },
+) => smoobuFetch(`/api/reservations/${reservationId}/messages`, {
     method: "GET",
+    searchParams: { page },
     next: { tags: ['messages'] }
 })
