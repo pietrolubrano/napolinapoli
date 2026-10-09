@@ -1,9 +1,11 @@
+import Link from "next/link"
 import { Locale } from "@/i18n-config"
 import ReservationDetails from "./ReservationDetails"
 import { Button } from "@headlessui/react";
 import { clearReservationCookie } from "@/app/actions/cookieActions";
 import { IoIosCloseCircle } from "react-icons/io";
 import TripadvisorLeaveReview from './TripadvisorLeaveReview';
+import { touristPageCopy } from "@/data/touristInfo";
 
 export default function ReservationHome({
     reservation,
@@ -30,6 +32,12 @@ export default function ReservationHome({
                     :
                     <p>Your Room is <span className="font-bold text-background">{reservation.apartment.name}</span></p>
                 }
+
+            <p>
+                <Link href={`/${lang}/napoli`} className="text-background underline font-medium">
+                    {touristPageCopy.reservationLink[lang]}
+                </Link>
+            </p>
 
             <ReservationDetails reservation={reservation} lang={lang} />
             <TripadvisorLeaveReview />

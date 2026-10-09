@@ -25,6 +25,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },{
+      url: 'https://www.napolinapolirooms.it/napoli',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+      alternates: {
+        languages: {
+          it: 'https://www.napolinapolirooms.it/it/napoli',
+          en: 'https://www.napolinapolirooms.it/en/napoli',
+        },
+      },
+    },{
       url: 'https://www.napolinapolirooms.it/room/san-biagio',
       lastModified: new Date(),
       changeFrequency: 'yearly',

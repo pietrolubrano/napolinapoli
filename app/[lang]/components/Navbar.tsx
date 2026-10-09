@@ -24,6 +24,7 @@ import LocaleSwitcher from "./LocaleSwitcher";
 import Loading from "../loading";
 
 const navigation = [
+  { name: {it: "Napoli", en: "Naples"}, href: '/napoli' },
   { name: {it: "La Mia Prenotazione", en: "My Booking"}, href: '/reservation' },
 ]
 

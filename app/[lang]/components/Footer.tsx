@@ -50,13 +50,18 @@ export default async function Footer(props: { lang: Locale }){
                     </Link>
                 </div>
 
-                <div className="col-span-3 md:col-span-1 italic">
-                    Secure payment with:
-                    <div className="flex gap-3">
-                        <FaCcPaypal size={'3em'} />
-                        <FaCcVisa size={'3em'} />
-                        <FaCcMastercard size={'3em'} />
-                        <FaCreditCard size={'3em'} />
+                <div className="col-span-3 md:col-span-1 space-y-3 mb-6 md:mb-0">
+                    <Link href={`/${lang}/napoli`} className="block underline">
+                        {lang === "it" ? "Info utili per il soggiorno" : "Useful info for your stay"}
+                    </Link>
+                    <div className="italic">
+                        Secure payment with:
+                        <div className="flex gap-3 mt-1">
+                            <FaCcPaypal size={'3em'} />
+                            <FaCcVisa size={'3em'} />
+                            <FaCcMastercard size={'3em'} />
+                            <FaCreditCard size={'3em'} />
+                        </div>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@ import { rooms } from "@/data/roomsData";
 import Image from "next/image";
 
 import GoogleMapsIFrame from "./components/GoogleMapsIFrame";
-import { getDictionary } from "@/get-dictionary";
+import TouristInfoTeaser from "./components/TouristInfoTeaser";
 import { Locale } from "@/i18n-config";
 import RoomCard from "./components/RoomCard";
 
@@ -12,7 +12,6 @@ export default async function Page({
 }: PageProps<'/[lang]'>) {
 
   const { lang } = await params;
-  const dictionary = await getDictionary(lang as Locale);
 
   return (
     <main className="bg-black/70">
@@ -76,6 +75,8 @@ export default async function Page({
           rooms && Object.values(rooms).slice(0,3).map((room, index) => <RoomCard key={index} room={room} lang={lang as Locale} index={index} />)
         }
       </div>
+
+      <TouristInfoTeaser lang={lang as Locale} />
 
       <div className="bg-background">
         <div className="p-8 font-birthstone bg-background text-3xl font-bold upper">
