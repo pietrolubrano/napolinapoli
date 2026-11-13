@@ -2,22 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense, useState } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenuItem,
-  NavbarMenu,
-  NavbarContent,
-  NavbarItem,
-  Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  Divider,
-} from "@heroui/react";
+import React, { Suspense, useEffect, useState } from "react";
+import { Button, Dropdown } from "@heroui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Locale } from "@/i18n-config";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -48,144 +34,158 @@ export const Logo = () => {
 };
 
 export default function App(props: { lang: Locale }) {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { lang } = props
+  const [hiddenOnScroll, setHiddenOnScroll] = useState(false);
+  const { lang } = props;
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHiddenOnScroll(y > lastY && y > 80);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} shouldHideOnScroll maxWidth="full" onMenuOpenChange={setIsMenuOpen} className="bg-background z-50">
-
-      <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand>
+    <nav
+      className={`sticky top-0 z-50 w-full border-b border-white/20 bg-background transition-transform duration-300 ${
+        hiddenOnScroll && !isMenuOpen ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
+      <div className="flex h-[70px] w-full items-center justify-between gap-4 px-4 sm:px-6">
+        {/* Mobile brand */}
+        <div className="flex flex-1 items-center justify-center sm:hidden">
           <Link href={`/${lang}`} onClick={() => setIsMenuOpen(false)}>
             <Logo />
           </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden" justify="end">
-        <Suspense fallback={<Loading />}>
-          <LocaleSwitcher></LocaleSwitcher>
-        </Suspense>
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-4 uppercase" justify="center">
-
-        <NavbarBrand>
-          <Link href={`/${lang}`} onClick={() => setIsMenuOpen(false)}>
-            <Logo />
-          </Link>
-        </NavbarBrand>
-        
-        <Dropdown className="">
-
-          <NavbarItem>
-            <DropdownTrigger>
-              <Button
-                className="p-0 bg-transparent text-sm font-bold uppercase data-[hover=true]:bg-transparent text-white"
-                /* radius="sm" */
-              >
-                <div className="flex">
-                  {lang === "it" ? "Le Stanze" : "Our Rooms"}<ChevronDownIcon className="p-0 m-0" height={20}></ChevronDownIcon>  
-                </div>
-              </Button>
-            </DropdownTrigger>
-          </NavbarItem>
-
-          <DropdownMenu
-            aria-label="Napoli Napoli Rooms"
-            itemClasses={{
-              base: "gap-4",
-            }}
-          >
-            {rooms.map((item) => (
-              <DropdownItem className="text-background hover:text-background!" key={item.name} as={Link} href={`/${lang}/${item.href}`} onClick={() => setIsMenuOpen(false)}>
-                {item.name}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-
-        </Dropdown>
-        
-        {
-          navigation.map((item) => (
-            <NavbarItem key={item.name[lang]} className={classNames(
-              "text-inherit hover:text-inherit",
-            )}>
-              <Button as={Link} href={`/${lang}/${item.href}`} className="p-0 bg-transparent text-sm font-bold uppercase text-white" onClick={() => setIsMenuOpen(false)}>
-                {item.name[lang]}
-              </Button>
-            </NavbarItem>
-          ))
-        }
-
-      </NavbarContent>
-
-      <NavbarContent justify="end" className="hidden sm:flex">
-        <Suspense fallback={<Loading />}>
-          <LocaleSwitcher></LocaleSwitcher>
-        </Suspense>
-        <NavbarItem>
-            <Button as={Link} href={`/${lang}/search`} className="p-0 bg-transparent text-sm font-bold uppercase text-white" onClick={() => setIsMenuOpen(false)}>
-              {lang === "it" ? "PRENOTA" : "BOOK NOW"}
-            </Button>
-        </NavbarItem>
-      </NavbarContent>
-
-        {/* MOBILE MENU */}
-      <NavbarMenu className="bg-background flex items-center justify-center uppercase font-bold">
-
-        <div>
-
-          <NavbarMenuItem>
-            <p className="text-3xl mb-1">
-              {lang === "it" ? "Le Stanze" : "Our Rooms"}
-            </p>
-          </NavbarMenuItem>
-
-          {rooms.map((item, index) => (
-            <NavbarMenuItem key={`${item.name}-${index}`}>
-              <Link
-                className={`${index <= 2 && ''}ms-3 text-md w-full text-white`}
-            /*    color={
-                  index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
-                } */
-                href={`/${lang}/${item.href}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-
-          <Divider className="my-2 bg-transparent"></Divider>
-          {navigation.map((item, index) => (
-            <NavbarMenuItem key={`${item.name}-${index}`}>
-              <Link
-                className={`${index <= 2 && ''} w-full text-xl text-white`}
-            /*    color={
-                  index === 2 ? "primary" : index === navigation.length - 1 ? "danger" : "foreground"
-                } */
-                href={`/${lang}/${item.href}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name[lang]}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-
-          <Divider className="p-16 bg-transparent"></Divider>
-
         </div>
 
-      </NavbarMenu>
+        {/* Mobile actions */}
+        <div className="flex items-center gap-2 sm:hidden">
+          <Suspense fallback={<Loading />}>
+            <LocaleSwitcher />
+          </Suspense>
+          <button
+            type="button"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            className="inline-flex h-10 w-10 items-center justify-center text-white"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
+            <span className="flex flex-col gap-1.5">
+              <span className={`block h-0.5 w-5 bg-white transition ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-5 bg-white transition ${isMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-5 bg-white transition ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+            </span>
+          </button>
+        </div>
 
-    </Navbar>
+        {/* Desktop nav */}
+        <div className="hidden flex-1 items-center gap-4 uppercase sm:flex">
+          <Link href={`/${lang}`} onClick={() => setIsMenuOpen(false)}>
+            <Logo />
+          </Link>
+
+          <Dropdown>
+            <Dropdown.Trigger>
+              <Button
+                variant="ghost"
+                className="bg-transparent p-0 text-sm font-bold uppercase text-white hover:bg-transparent"
+              >
+                <span className="flex items-center">
+                  {lang === "it" ? "Le Stanze" : "Our Rooms"}
+                  <ChevronDownIcon className="m-0 p-0" height={20} />
+                </span>
+              </Button>
+            </Dropdown.Trigger>
+            <Dropdown.Popover>
+              <Dropdown.Menu aria-label="Napoli Napoli Rooms">
+                {rooms.map((item) => (
+                  <Dropdown.Item
+                    key={item.name}
+                    id={item.name}
+                    textValue={item.name}
+                    href={`/${lang}${item.href}`}
+                    className="text-foreground"
+                  >
+                    {item.name}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown.Popover>
+          </Dropdown>
+
+          {navigation.map((item) => (
+            <Link
+              key={item.name[lang]}
+              href={`/${lang}${item.href}`}
+              className="text-sm font-bold uppercase text-white"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name[lang]}
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden items-center gap-4 sm:flex">
+          <Suspense fallback={<Loading />}>
+            <LocaleSwitcher />
+          </Suspense>
+          <Link
+            href={`/${lang}/search`}
+            className="text-sm font-bold uppercase text-white"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {lang === "it" ? "PRENOTA" : "BOOK NOW"}
+          </Link>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="fixed inset-x-0 bottom-0 top-[70px] z-40 flex items-center justify-center bg-background uppercase font-bold sm:hidden">
+          <div>
+            <p className="mb-1 text-3xl text-white">
+              {lang === "it" ? "Le Stanze" : "Our Rooms"}
+            </p>
+            {rooms.map((item) => (
+              <div key={item.name} className="ms-3">
+                <Link
+                  className="w-full text-md text-white"
+                  href={`/${lang}${item.href}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </div>
+            ))}
+
+            <div className="my-4 h-px w-full bg-transparent" />
+
+            {navigation.map((item) => (
+              <div key={item.name[lang]}>
+                <Link
+                  className="w-full text-xl text-white"
+                  href={`/${lang}${item.href}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name[lang]}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
   );
 }
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
-

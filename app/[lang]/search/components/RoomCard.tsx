@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { FaPerson, FaRegCalendarCheck, FaKitchenSet } from "react-icons/fa6";
-import { Card, CardHeader, CardBody, Button } from "@heroui/react";
+import { Card, Button } from "@heroui/react";
 import { rooms } from "@/data/roomsData";
 import { Locale } from "@/i18n-config";
 import Carousel from '../../components/Carousel';
@@ -24,15 +24,15 @@ export default function RoomCard({
     lang: Locale
 }) {
   return (
-    <Card className="border-1 border-gray-500 text-gray-500 font-bold animate-fade-in md:hover:scale-105 ">
-      <CardHeader className="pb-1 pt-2 flex-col items-start">
-        <h4 className="font-bold text-large w-full text-background">
-          { rooms[apartmentId].name}
+    <Card className="border border-gray-500 text-gray-500 font-bold animate-fade-in md:hover:scale-105 ">
+      <Card.Header className="pb-1 pt-2 flex-col items-start">
+        <Card.Title className="font-bold text-large w-full text-background">
+          { rooms[apartmentId].name}
           <span className="float-end">
             {response.prices[apartmentId].price }
             {response.prices[apartmentId].currency}
           </span>
-        </h4>
+        </Card.Title>
 
         <ul className="text-tiny p-1">
           <li>
@@ -50,19 +50,9 @@ export default function RoomCard({
           </li>
           
         </ul>
-        {/* <small className="text-default-500">12 Tracks</small> */}
-      </CardHeader>
+      </Card.Header>
         
-      <CardBody className="overflow-visible p-0">
-        {/* <Image
-          alt="Card background"
-          as={NextImage}
-          className="object-cover"
-          src={rooms[apartmentId].images[0]}
-          width={700}
-          height={200}
-        /> */}
-
+      <Card.Content className="overflow-visible p-0">
         <Carousel images={rooms[apartmentId].images} showThumbs={false} showAlwaysArrows />
 
         <Link
@@ -76,11 +66,11 @@ export default function RoomCard({
             }
           }}
           >
-          <Button className="bg-background w-full text-white font-bold uppercase">
+          <Button className="bg-background w-full text-white font-bold uppercase" fullWidth variant="primary">
             {lang === "it" ? "Prenota ora" : "Book now"}
           </Button>
         </Link>
-      </CardBody>
+      </Card.Content>
     </Card>
   );
 }

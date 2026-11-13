@@ -1,12 +1,12 @@
 "use client"
 
-import {Button} from "@heroui/button";
-import {parseDate} from "@internationalized/date";
-import type {DateValue} from "@react-types/datepicker";
-import CustomDateRangePicker from '@/app/[lang]/search/components/CustomDateRangePicker'
-import { useEffect, useState } from 'react'
+import { Button, Label, NumberField } from "@heroui/react";
+import { parseDate } from "@internationalized/date";
+import CustomDateRangePicker, {
+  type DateRangeValue,
+} from "@/app/[lang]/search/components/CustomDateRangePicker";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { NumberInput, RangeValue } from "@heroui/react";
 import { Locale } from "@/i18n-config";
 
 export default function SearchForm({
@@ -21,22 +21,23 @@ export default function SearchForm({
     lang: Locale
 }) {
 
-    const [value, setValue] = useState<RangeValue<DateValue> | null>({
+    const [value, setValue] = useState<DateRangeValue>({
         start: parseDate(arrivalDate ? arrivalDate : new Date().toISOString().substring(0,10)),
         end: parseDate(departureDate ? departureDate : new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().substring(0,10))
     });
     const [guestsValue, setGuestsValue] = useState(guests ? +guests : 2)
 
-    const handeGuestsValueChange = (value: number) => {
-        if(value < 1){
+    const handeGuestsValueChange = (value: number | null) => {
+        const next = value ?? 1
+        if(next < 1){
             setGuestsValue(1)
             return
         }
-        if(value >= 4){
+        if(next >= 4){
             setGuestsValue(4)
             return
         }
-        setGuestsValue(value)
+        setGuestsValue(next)
     }
 
     useEffect(() => {
@@ -58,15 +59,20 @@ export default function SearchForm({
 
             <div className="col-span-5 md:col-span-2 grid grid-cols-3">
                 <div className="flex">
-                    <NumberInput
+                    <NumberField
                         className="col-span-1 w-full"
                         value={guestsValue}
-                        onValueChange={handeGuestsValueChange}
-                        label={lang === "it" ? "Ospiti" : "Guests"}
-                        type="number"
-                        min={1}
-                        max={4}
-                    />
+                        onChange={handeGuestsValueChange}
+                        minValue={1}
+                        maxValue={4}
+                    >
+                        <Label>{lang === "it" ? "Ospiti" : "Guests"}</Label>
+                        <NumberField.Group>
+                            <NumberField.DecrementButton />
+                            <NumberField.Input />
+                            <NumberField.IncrementButton />
+                        </NumberField.Group>
+                    </NumberField>
                 </div>
                 <Link href={{
                     pathname: `/${lang}/search`,
@@ -78,7 +84,7 @@ export default function SearchForm({
                 }}
                 className="col-span-2"
                 >
-                    <Button className="h-14 w-full">
+                    <Button className="h-14 w-full" fullWidth variant="primary">
                         {lang === "it" ? "Cerca" : "Search"}
                     </Button>
                 </Link>
@@ -87,4 +93,3 @@ export default function SearchForm({
         </div>
     )
 }
-

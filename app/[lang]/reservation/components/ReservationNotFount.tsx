@@ -2,7 +2,7 @@
 
 import { clearReservationCookie } from "@/app/actions/cookieActions";
 import { Locale } from "@/i18n-config";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 
 export default function ReservationNotFount({
     lang,

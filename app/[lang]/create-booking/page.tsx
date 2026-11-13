@@ -4,7 +4,7 @@ import BookingHeader from "./components/BookingHeader"
 import { checkApartmentAvailability } from "../../actions/smoobuActions"
 import { Locale } from "@/i18n-config"
 import Carousel from '../components/Carousel';
-import {Chip} from "@heroui/chip";
+import {Chip} from "@heroui/react";
 
 export default async function Page({
     params,
@@ -48,7 +48,7 @@ export default async function Page({
 
                     <div className="space-y-2 space-x-2 p-4 bg-white">
                         {
-                            room.services.map(service => <Chip key={service.description[lang as Locale]} size="sm" variant="bordered" className="bg-white border-background">
+                            room.services.map(service => <Chip key={service.description[lang as Locale]} size="sm" variant="secondary" className="bg-white border border-background">
                                 <div className="inline-flex gap-1 items-center text-gray-800">
                                     <span className="text-background">
                                         {service.icon}

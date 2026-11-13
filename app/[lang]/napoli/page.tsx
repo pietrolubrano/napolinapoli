@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { Locale } from "@/i18n-config";
 import { touristPageCopy } from "@/data/touristInfo";
+import TouristInfoSections from "../reservation/components/TouristInfoSections";
 
 export async function generateMetadata({
   params,
@@ -36,6 +37,7 @@ export default async function NapoliPage({
 
       <div className="bg-background">
         <div className="container mx-auto max-w-2xl p-8 bg-white text-black">
+          <TouristInfoSections lang={locale} />
 
           <div className="mt-12 pt-8 border-t border-gray-200 text-center">
             <Link

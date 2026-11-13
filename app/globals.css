@@ -1,16 +1,18 @@
-@import "tailwindcss";
-@plugin './hero.ts';
-/* Note: You may need to change the path to fit your project structure */
-@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-@custom-variant dark (&:is(.dark *));
+@import "@heroui/styles";
 
 :root {
+  /* Brand tokens used by the site via Tailwind bg-background / text-background */
+  --brand: #00a0d5;
   --foreground: #171717;
-  --background: #00a0d5;
   --custom-blue-alpha: rgba(0, 160, 213, 0.4);
   --custom-orange: #feb259;
   --custom-orange-alpha: rgba(254, 178, 89, 0.8);
+
+  /* HeroUI accent aligned with brand */
+  --accent: #00a0d5;
+  --accent-foreground: #ffffff;
 }
+
 @theme {
   --animate-fade-in: fade-in 0.5s ease-in;
   @keyframes fade-in {
@@ -26,21 +28,14 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--brand);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 body {
-  background-color: var(--background);
+  background-color: var(--brand);
   background-position: center;
   background-repeat: no-repeat;
   color: white;
@@ -73,7 +68,7 @@ span[data-selection-end="true"] {
 }
 
 strong {
-  color: var(--background);
+  color: var(--brand);
 }
 
 /*

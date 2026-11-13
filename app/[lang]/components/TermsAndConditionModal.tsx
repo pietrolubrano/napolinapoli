@@ -1,26 +1,15 @@
-import { useState } from "react";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Listbox,
-  ListboxItem
-} from "@heroui/react";
+"use client"
+
+import { Modal, Button } from "@heroui/react";
 import { Locale } from "@/i18n-config";
+import type { ReactNode } from "react";
 
 export default function TermsAndConditionModal({
-    isOpen,
-    onOpen,
-    onOpenChange,
-    lang
+    lang,
+    trigger,
 } : {
-    isOpen: boolean
-    onOpen: () => void
-    onOpenChange: () => void
     lang: Locale
+    trigger: ReactNode
 }) {
 
     const termsAndConditions = [
@@ -104,36 +93,37 @@ export default function TermsAndConditionModal({
     ]
 
     return (
-        <Modal isOpen={isOpen} scrollBehavior={'inside'} onOpenChange={onOpenChange}>
-            <ModalContent>
-            {(onClose) => (
-                <>
-                <ModalHeader className="flex flex-col gap-1 text-background">{lang === 'it' ? 'Termini e condizioni' : 'Terms and conditions'}</ModalHeader>
-                <ModalBody className="text-black">
-                    <ul className="space-y-4">
-                        {
-                            termsAndConditions.map(item => <li key={item.title[lang]} className="overflow-visible! ">
-                                <h5 className="font-bold text-gray-600">{item.title[lang]}</h5>
-                                <p className="ms-1 text-sm">
-                                    {item.description[lang]}
-                                </p>
-                            </li>)
-                        }
-                    </ul>
-
-                </ModalBody>
-                <ModalFooter>
-                    {/* <Button color="danger" variant="light" onPress={onClose}>
-                    Chiudi
-                    </Button> */}
-                    <Button color="primary" onPress={onClose}>
-                        {lang === "it" ? "Chiudi" : "Close"}
-                    </Button>
-                </ModalFooter>
-                </>
-            )}
-            </ModalContent>
+        <Modal>
+            {trigger}
+            <Modal.Backdrop>
+                <Modal.Container scroll="inside" size="lg">
+                    <Modal.Dialog className="bg-white text-black">
+                        <Modal.CloseTrigger />
+                        <Modal.Header>
+                            <Modal.Heading className="text-background">
+                                {lang === 'it' ? 'Termini e condizioni' : 'Terms and conditions'}
+                            </Modal.Heading>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ul className="space-y-4">
+                                {termsAndConditions.map(item => (
+                                    <li key={item.title[lang]}>
+                                        <h5 className="font-bold text-gray-600">{item.title[lang]}</h5>
+                                        <p className="ms-1 text-sm">
+                                            {item.description[lang]}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button slot="close" variant="primary">
+                                {lang === "it" ? "Chiudi" : "Close"}
+                            </Button>
+                        </Modal.Footer>
+                    </Modal.Dialog>
+                </Modal.Container>
+            </Modal.Backdrop>
         </Modal>
     );
 }
-

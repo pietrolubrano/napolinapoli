@@ -4,7 +4,7 @@ import { FaKitchenSet, FaPerson } from "react-icons/fa6";
 
 import { Room, rooms } from "@/data/roomsData"
 import { notFound } from 'next/navigation';
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 
 import Link from "next/link";
 import Carousel from "@/app/[lang]/components/Carousel";

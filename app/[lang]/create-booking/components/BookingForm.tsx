@@ -11,7 +11,18 @@ interface Props {
 
 import TermsAndConditionModal from "@/app/[lang]/components/TermsAndConditionModal"
 import { FormEvent, useState } from "react";
-import {Form, Input, TimeInput, Checkbox, Button, Divider, useDisclosure, Textarea} from "@heroui/react";
+import {
+  Form,
+  TextField,
+  Label,
+  Input,
+  TextArea,
+  TimeField,
+  Checkbox,
+  Button,
+  Separator,
+  FieldError,
+} from "@heroui/react";
 import PaypalForm from "./PaypalForm";
 import {Time} from "@internationalized/date";
 import { Locale } from "@/i18n-config"
@@ -44,12 +55,13 @@ export default function BookingForm({
 
   const [submitted, setSubmitted] = useState<FormData | null>(null);
   const [errors, setErrors] = useState<Errors>({});
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [arrivalTime, setArrivalTime] = useState(new Time(14, 0));
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget)) as FormData;
+    data.arrivalTime = arrivalTime.toString().substring(0, 5);
 
     // Custom validation checks
     const newErrors: Errors = {};
@@ -72,13 +84,12 @@ export default function BookingForm({
       return;
     }
 
-    data.arrivalTime = data.arrivalTime.substring(0,5)
     // Clear errors and submit
     setErrors({});
     setSubmitted(data);
   };
 
-  const submittedClassNames = "bg-white border-0 shadow-none hover:bg-white! focus:bg-white! active:bg-white!";
+  const fieldDisabled = submitted !== null;
 
     return (<>
       <Form
@@ -92,136 +103,126 @@ export default function BookingForm({
         </div>
 
         <div className="flex flex-col bg-white gap-4 max-w-md w-full sm:w-fit border-4 p-4 border-gray-300">
-          <Input
+          <TextField
             isRequired
-            errorMessage={({validationDetails}) => {
-              if (validationDetails.valueMissing) {
-                return lang === "it" ? "inserisci il tuo nome" : "enter your name";
-              }
-
-              return errors.firstName;
-            }}
-            label={lang === "it" ? "Nome" : "First Name"}
-            labelPlacement="outside"
             name="firstName"
-            placeholder={lang === "it" ? "Nome" : "First Name"}
-            disabled={submitted !== null}
-            classNames={{
-              inputWrapper: submitted !== null && submittedClassNames,
-             }}
-          />
-          <Input
+            isDisabled={fieldDisabled}
+            isInvalid={!!errors.firstName}
+          >
+            <Label>{lang === "it" ? "Nome" : "First Name"}</Label>
+            <Input placeholder={lang === "it" ? "Nome" : "First Name"} />
+            <FieldError>
+              {errors.firstName || (lang === "it" ? "inserisci il tuo nome" : "enter your name")}
+            </FieldError>
+          </TextField>
+
+          <TextField
             isRequired
-            errorMessage={({validationDetails}) => {
-              if (validationDetails.valueMissing) {
-                return lang === "it" ? "inserisci il tuo cognome" : "enter your last name";
-              }
-              return errors.lastName;
-            }}
-            label={lang === "it" ? "Cognome" : "Last Name"}
-            labelPlacement="outside"
             name="lastName"
-            placeholder={lang === "it" ? "Cognome" : "Last Name"}
-            disabled={submitted !== null}
-            classNames={{
-              inputWrapper: submitted !== null && submittedClassNames,
-             }}
-          />
+            isDisabled={fieldDisabled}
+            isInvalid={!!errors.lastName}
+          >
+            <Label>{lang === "it" ? "Cognome" : "Last Name"}</Label>
+            <Input placeholder={lang === "it" ? "Cognome" : "Last Name"} />
+            <FieldError>
+              {errors.lastName || (lang === "it" ? "inserisci il tuo cognome" : "enter your last name")}
+            </FieldError>
+          </TextField>
 
-          <Input
+          <TextField
             isRequired
-            errorMessage={({validationDetails}) => {
-              if (validationDetails.valueMissing) {
-                return lang === "it" ? "Per favore inserisci la tua email" : "Please enter your email";
-              }
-              if (validationDetails.typeMismatch) {
-                return lang === "it" ? "Inserisci un indirizzo email valido" : "Please enter a valid email address";
-              }
-            }}
-            label="Email"
-            labelPlacement="outside"
             name="email"
-            placeholder={lang === "it" ? "Inserisci la tua email" : "Enter your email"}
             type="email"
-            disabled={submitted !== null}
-            classNames={{
-              inputWrapper: submitted !== null && submittedClassNames,
-            }}
-          />
+            isDisabled={fieldDisabled}
+          >
+            <Label>Email</Label>
+            <Input placeholder={lang === "it" ? "Inserisci la tua email" : "Enter your email"} />
+            <FieldError>
+              {lang === "it" ? "Per favore inserisci una email valida" : "Please enter a valid email address"}
+            </FieldError>
+          </TextField>
 
-          <Input
-            label={lang === "it" ? "Telefono" : "Phone"}
-            labelPlacement="outside"
+          <TextField
             name="phone"
-            placeholder={lang === "it" ? "Inserisci il tuo numero di telefono" : "Enter your phone number"}
             type="tel"
-            disabled={submitted !== null}
-            classNames={{
-              inputWrapper: submitted !== null && submittedClassNames,
-            }}
-          />
+            isDisabled={fieldDisabled}
+          >
+            <Label>{lang === "it" ? "Telefono" : "Phone"}</Label>
+            <Input placeholder={lang === "it" ? "Inserisci il tuo numero di telefono" : "Enter your phone number"} />
+          </TextField>
 
           <div className="grid grid-cols-2">
-            <TimeInput
-              label={lang === "it" ? "Orario di arrivo" : "Arrival Time"}
-              labelPlacement="outside"
-              name="arrivalTime"
-              defaultValue={new Time(14, 0)}
+            <TimeField
               isRequired
-              isDisabled={submitted !== null}
-              classNames={{
-                inputWrapper: submitted !== null && submittedClassNames,
-              }}
-            />
+              isDisabled={fieldDisabled}
+              value={arrivalTime}
+              onChange={(value) => value && setArrivalTime(value)}
+            >
+              <Label>{lang === "it" ? "Orario di arrivo" : "Arrival Time"}</Label>
+              <TimeField.Group>
+                <TimeField.Input>
+                  {(segment) => <TimeField.Segment segment={segment} />}
+                </TimeField.Input>
+              </TimeField.Group>
+            </TimeField>
+            <input type="hidden" name="arrivalTime" value={arrivalTime.toString().substring(0, 5)} />
           </div>
 
-          <Textarea
-            isDisabled={submitted !== null}
-            name="notice"
-            label={lang === "it" ? "Note" : "Notes"}
-            labelPlacement="outside"
-            classNames={{
-                inputWrapper: submitted !== null && submittedClassNames,
-              }}
-            placeholder={lang === "it" ? "Inserisci qui eventuali richieste particolari o informazioni che pensi siano utili per il tuo soggiorno." : "Enter any special requests or information you think would be useful for your stay."}
-          />
+          <TextField name="notice" isDisabled={fieldDisabled}>
+            <Label>{lang === "it" ? "Note" : "Notes"}</Label>
+            <TextArea
+              placeholder={lang === "it" ? "Inserisci qui eventuali richieste particolari o informazioni che pensi siano utili per il tuo soggiorno." : "Enter any special requests or information you think would be useful for your stay."}
+            />
+          </TextField>
 
-          <div>
+          <div className="flex flex-wrap items-center gap-1 text-black">
             <Checkbox
               isRequired
-              color="primary"
               isInvalid={!!errors.terms}
               name="terms"
-              validationBehavior="aria"
               value="true"
-              onValueChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
-              isDisabled={submitted !== null}
+              isDisabled={fieldDisabled}
+              onChange={() => setErrors((prev) => ({...prev, terms: undefined}))}
+            >
+              <Checkbox.Content>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+                {lang === "it" ? "Accetto" : "I accept"}
+              </Checkbox.Content>
+            </Checkbox>
+            <TermsAndConditionModal
+              lang={lang}
+              trigger={
+                <Button
+                  variant="ghost"
+                  className="underline text-background p-0 h-auto min-w-0 hover:bg-transparent"
+                >
+                  {lang === "it" ? "termini e condizioni" : "terms and conditions"}
+                </Button>
+              }
             />
-            <span className="text-black">
-              {lang === "it" ? "Accetto " : "I accept "} <Button variant="light" onPress={onOpen} className="underline text-background p-0 hover:bg-white!"> {lang === "it" ? "termini e condizioni" : "terms and conditions"}</Button>
-            </span>
           </div>
 
-          <TermsAndConditionModal lang={lang} isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} />
           {errors.terms && <span className="text-danger text-small">{errors.terms}</span>}
 
           <div className="flex gap-4">
             {
               submitted === null &&
-              <Button className="w-full" color="primary" type="submit" disabled={submitted !== null}>
+              <Button className="w-full" variant="primary" type="submit" fullWidth isDisabled={fieldDisabled}>
                 {lang === "it" ? "Continua al pagamento" : "Continue to payment"}
               </Button>
             }
             {
               submitted !== null &&
-              <Button className="w-full" type="button" onPress={() => setSubmitted(null)} variant="ghost">
+              <Button className="w-full" type="button" onPress={() => setSubmitted(null)} variant="ghost" fullWidth>
                 {lang === "it" ? "Modifica i dati" : "Edit data"}
               </Button>
             }
 
           </div>
 
-          <Divider className="my-4"></Divider>
+          <Separator className="my-4" />
 
             <div className="text-black space-y-1">
               <p>

@@ -9,7 +9,7 @@ import {
   practicalTips,
   touristPageCopy,
 } from "@/data/touristInfo";
-import { Accordion, AccordionItem } from "@heroui/react";
+import { Accordion } from "@heroui/react";
 
 function mapsUrl(query: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
@@ -26,16 +26,24 @@ export default function TouristInfoSections({ lang }: { lang: Locale }) {
           {copy.arrivalTitle[lang]}
         </h2>
         <Accordion className='p-0! mb-8'>
-        {/* <ul className="space-y-5"> */}
           {arrivalTips.map((tip) => (
-            <AccordionItem key={tip.title[lang]} className='bg-gray-100 px-4' startContent={<tip.icon className="text-background"></tip.icon>} title={tip.title[lang]}>
-            {/* <li key={tip.title.en}> */}
-              {/* <h3 className="font-semibold text-black mb-1">{tip.title[lang]}</h3> */}
-              <p className="text-gray-700 md:ms-1">{tip.body[lang]}</p>
-            {/* </li> */}
-            </AccordionItem>
+            <Accordion.Item key={tip.title[lang]} id={tip.title.en} className='bg-gray-100 px-4'>
+              <Accordion.Heading>
+                <Accordion.Trigger>
+                  <span className="me-2 inline-flex text-background">
+                    <tip.icon />
+                  </span>
+                  {tip.title[lang]}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <p className="text-gray-700 md:ms-1">{tip.body[lang]}</p>
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
           ))}
-       {/*  </ul> */}
         </Accordion>
       </section>
 
@@ -43,7 +51,6 @@ export default function TouristInfoSections({ lang }: { lang: Locale }) {
         <h2 id="nearby-heading" className="text-2xl font-bold text-background mb-1">
           {copy.nearbyTitle[lang]}
         </h2>
-        {/* <p className="text-gray-600 mb-6">{copy.nearbyLead[lang]}</p> */}
         <ul className="divide-y divide-gray-200 border-t border-b border-gray-200">
           {nearbyPlaces.map((place) => (
             <li key={place.mapsQuery} className="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
