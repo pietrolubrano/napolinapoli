@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import type { Locale } from "@/i18n-config";
 import {
@@ -7,6 +9,7 @@ import {
   practicalTips,
   touristPageCopy,
 } from "@/data/touristInfo";
+import { Accordion, AccordionItem } from "@heroui/react";
 
 function mapsUrl(query: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
@@ -17,11 +20,30 @@ export default function TouristInfoSections({ lang }: { lang: Locale }) {
 
   return (
     <div className="space-y-12">
+
+      <section aria-labelledby="arrival-heading">
+        <h2 id="arrival-heading" className="text-2xl font-bold text-background mb-4">
+          {copy.arrivalTitle[lang]}
+        </h2>
+        <Accordion className='p-0! mb-8'>
+        {/* <ul className="space-y-5"> */}
+          {arrivalTips.map((tip) => (
+            <AccordionItem key={tip.title[lang]} className='bg-gray-100 px-4' startContent={<tip.icon className="text-background"></tip.icon>} title={tip.title[lang]}>
+            {/* <li key={tip.title.en}> */}
+              {/* <h3 className="font-semibold text-black mb-1">{tip.title[lang]}</h3> */}
+              <p className="text-gray-700 md:ms-1">{tip.body[lang]}</p>
+            {/* </li> */}
+            </AccordionItem>
+          ))}
+       {/*  </ul> */}
+        </Accordion>
+      </section>
+
       <section aria-labelledby="nearby-heading">
         <h2 id="nearby-heading" className="text-2xl font-bold text-background mb-1">
           {copy.nearbyTitle[lang]}
         </h2>
-        <p className="text-gray-600 mb-6">{copy.nearbyLead[lang]}</p>
+        {/* <p className="text-gray-600 mb-6">{copy.nearbyLead[lang]}</p> */}
         <ul className="divide-y divide-gray-200 border-t border-b border-gray-200">
           {nearbyPlaces.map((place) => (
             <li key={place.mapsQuery} className="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
@@ -47,15 +69,16 @@ export default function TouristInfoSections({ lang }: { lang: Locale }) {
         </ul>
       </section>
 
-      <section aria-labelledby="arrival-heading">
-        <h2 id="arrival-heading" className="text-2xl font-bold text-background mb-4">
-          {copy.arrivalTitle[lang]}
+      <section aria-labelledby="daytrips-heading">
+        <h2 id="daytrips-heading" className="text-2xl font-bold text-background mb-1">
+          {copy.dayTripsTitle[lang]}
         </h2>
+        <p className="text-gray-600 mb-4">{copy.dayTripsLead[lang]}</p>
         <ul className="space-y-5">
-          {arrivalTips.map((tip) => (
-            <li key={tip.title.en}>
-              <h3 className="font-semibold text-black mb-1">{tip.title[lang]}</h3>
-              <p className="text-gray-700 md:ms-1">{tip.body[lang]}</p>
+          {dayTrips.map((trip) => (
+            <li key={trip.name.en}>
+              <h3 className="font-semibold text-black mb-1">{trip.name[lang]}</h3>
+              <p className="text-gray-700 md:ms-1">{trip.body[lang]}</p>
             </li>
           ))}
         </ul>
@@ -75,20 +98,6 @@ export default function TouristInfoSections({ lang }: { lang: Locale }) {
         </ul>
       </section>
 
-      <section aria-labelledby="daytrips-heading">
-        <h2 id="daytrips-heading" className="text-2xl font-bold text-background mb-1">
-          {copy.dayTripsTitle[lang]}
-        </h2>
-        <p className="text-gray-600 mb-4">{copy.dayTripsLead[lang]}</p>
-        <ul className="space-y-5">
-          {dayTrips.map((trip) => (
-            <li key={trip.name.en}>
-              <h3 className="font-semibold text-black mb-1">{trip.name[lang]}</h3>
-              <p className="text-gray-700 md:ms-1">{trip.body[lang]}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
     </div>
   );
 }

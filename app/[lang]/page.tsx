@@ -3,9 +3,12 @@ import { rooms } from "@/data/roomsData";
 import Image from "next/image";
 
 import GoogleMapsIFrame from "./components/GoogleMapsIFrame";
-import TouristInfoTeaser from "./components/TouristInfoTeaser";
 import { Locale } from "@/i18n-config";
 import RoomCard from "./components/RoomCard";
+import TouristInfoSections from "./reservation/components/TouristInfoSections";
+
+import Link from "next/link";
+import TripAdvisor from "./components/TripAdvisor";
 
 export default async function Page({
   params,
@@ -76,8 +79,6 @@ export default async function Page({
         }
       </div>
 
-      <TouristInfoTeaser lang={lang as Locale} />
-
       <div className="bg-background">
         <div className="p-8 font-birthstone bg-background text-3xl font-bold upper">
           <h3>
@@ -89,6 +90,21 @@ export default async function Page({
           </h3>
         </div>
         <GoogleMapsIFrame></GoogleMapsIFrame>
+        
+        <div className="container mx-auto bg-white p-8">
+          <TouristInfoSections lang={lang as Locale}></TouristInfoSections>
+        </div>
+
+        <div className="container mx-auto p-8 flex flex-col md:flex-row gap-8 items-center md:items-start justify-center">
+            <Link href={'https://www.booking.com/hotel/it/palepolib-amp-b.it.html'} target="_blank" className="flex items-center">
+                <Image loading="eager" src="https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/booking-award/Print-Award-Blue_TRA-2026.jpg" alt="Logo" width={200} height={200}></Image>
+            </Link>
+            <TripAdvisor></TripAdvisor>
+            <Link href={'https://www.google.com/travel/hotels/entity/ChgI1Y7V-9WC4sT6ARoLL2cvMXRkMF94eXEQAQ/reviews'} target="_blank" className="bg-white p-3 border-2 border-blue-500 inline-block">
+                <Image width={200} height={100} alt="google reviews" src={'https://ubixbfsaksemukbx.public.blob.vercel-storage.com/images/google-reviews.png'} />
+            </Link>
+        </div>
+
       </div>
 
     </main>

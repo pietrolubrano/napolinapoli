@@ -6,6 +6,7 @@ import { clearReservationCookie } from "@/app/actions/cookieActions";
 import { IoIosCloseCircle } from "react-icons/io";
 import TripadvisorLeaveReview from './TripadvisorLeaveReview';
 import { touristPageCopy } from "@/data/touristInfo";
+import TouristInfoSections from "./TouristInfoSections";
 
 export default function ReservationHome({
     reservation,
@@ -40,6 +41,7 @@ export default function ReservationHome({
             </p>
 
             <ReservationDetails reservation={reservation} lang={lang} />
+            <TouristInfoSections lang={lang}/>
             <TripadvisorLeaveReview />
         </div>
     )

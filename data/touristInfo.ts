@@ -1,4 +1,6 @@
 import type { Locale } from "@/i18n-config";
+import { IconType } from "react-icons";
+import { FaTrain, FaShip, FaCar, FaPlane } from "react-icons/fa6";
 
 export type LocalizedString = Record<Locale, string>;
 
@@ -12,6 +14,7 @@ export type TouristPlace = {
 export type ArrivalTip = {
   title: LocalizedString;
   body: LocalizedString;
+  icon: IconType
 };
 
 export type PracticalTip = {
@@ -92,6 +95,7 @@ export const nearbyPlaces: TouristPlace[] = [
 
 export const arrivalTips: ArrivalTip[] = [
   {
+    icon: FaPlane,
     title: { it: "Aeroporto Capodichino (NAP)", en: "Capodichino Airport (NAP)" },
     body: {
       it: "Alibus fino a Piazza Garibaldi (~20–30 min), poi 20–25 min a piedi verso Spaccanapoli oppure Metro Linea 1 (Dante / Università) + breve passeggiata. In taxi il centro storico è circa 20–30 min a seconda del traffico.",
@@ -99,6 +103,7 @@ export const arrivalTips: ArrivalTip[] = [
     },
   },
   {
+     icon: FaTrain,
     title: { it: "Stazione Centrale / Piazza Garibaldi", en: "Central Station / Piazza Garibaldi" },
     body: {
       it: "A piedi lungo Corso Umberto I e poi nel centro antico (~20–25 min). In alternativa Metro Linea 1: scendi a Dante (~8 min a piedi) o Università (~10 min).",
@@ -106,6 +111,7 @@ export const arrivalTips: ArrivalTip[] = [
     },
   },
   {
+     icon: FaShip,
     title: { it: "Porto (Molo Beverello)", en: "Port (Molo Beverello)" },
     body: {
       it: "Taxi o autobus verso il centro; a piedi sono circa 25–30 minuti. Ideale se arrivi da Capri, Ischia o dalla Costiera.",
@@ -113,6 +119,7 @@ export const arrivalTips: ArrivalTip[] = [
     },
   },
   {
+     icon: FaCar,
     title: { it: "In auto", en: "By car" },
     body: {
       it: "Il centro storico è in gran parte ZTL / pedonale. Lascia l'auto in un parcheggio vicino (Garibaldi, porto o garage convenzionati) e completa a piedi gli ultimi metri.",
@@ -137,26 +144,12 @@ export const practicalTips: PracticalTip[] = [
     },
   },
   {
-    title: { it: "Pagamenti e contanti", en: "Payments & cash" },
-    body: {
-      it: "Carte accettate ovunque nei locali moderni; tieni un po' di contanti per caffe, fritti e piccole botteghe.",
-      en: "Cards work in most modern spots; keep some cash for coffee, street food, and small shops.",
-    },
-  },
-  {
     title: { it: "Quando visitare San Gregorio Armeno", en: "When to visit San Gregorio Armeno" },
     body: {
       it: "Mattina presto o giorni feriali: la via si riempie soprattutto nel weekend e da ottobre a dicembre.",
       en: "Go early or on weekdays — the street gets crowded on weekends and from October through December.",
     },
-  },
-  {
-    title: { it: "Sicurezza e ritmo", en: "Safety & pace" },
-    body: {
-      it: "Il centro è vivace fino a tarda sera. Come in ogni grande città: occhio a borse e telefoni nei tratti più affollati, e goditi il ritmo napoletano.",
-      en: "The centre stays lively late. As in any big city, mind bags and phones in crowded stretches — and enjoy Naples' pace.",
-    },
-  },
+  }
 ];
 
 export const dayTrips: DayTrip[] = [
@@ -196,7 +189,7 @@ export const touristPageCopy = {
   },
   walkLabel: { it: "min a piedi", en: "min walk" },
   mapsLabel: { it: "Apri in Maps", en: "Open in Maps" },
-  arrivalTitle: { it: "Come arrivare", en: "How to get here" },
+  arrivalTitle: { it: "Come arrivare da:", en: "How to get here from:" },
   tipsTitle: { it: "Consigli pratici", en: "Practical tips" },
   dayTripsTitle: { it: "Fuori Napoli", en: "Beyond Naples" },
   dayTripsLead: {

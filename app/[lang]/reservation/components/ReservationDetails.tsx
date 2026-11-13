@@ -53,8 +53,8 @@ export default function ReservationDetails({
                     Nome rete wifi: <br />
                     Password: <br />
                     Cosa visitare <br /> */}
-            <div className='p-8'>
+            {/* <div className='p-8'>
                 {lang === 'it' ? 'Per qualsiasi informazione o richiesta non esitare a contattarci!' : 'For any information or request do not hesitate to contact us!'}
-            </div>
+            </div> */}
     </>)
 }
